@@ -1,0 +1,15 @@
+.root {
+  div {
+    box-shadow: inset 2px 5px 5px rgb(140, 17, 197);
+  }
+  display: flex;
+  margin: 0;
+  width: 220px;
+  height: 63px;
+
+  background: #956d84;
+  border-radius: 7px;
+  :hover {
+    box-shadow: inset 0px 5px 5px rgba(156, 13, 13, 0.15);
+  }
+}

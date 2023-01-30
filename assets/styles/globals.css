@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  font-family: 'Poppins', sans-serif;
+}
+svg {
+  cursor: pointer;
+}
+.wrapper {
+  margin-right: auto;
+  margin-left: auto;
+
+  max-width: 1120px;
+}
+body {
+  font-family: 'DM_Sans', sans-serif;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@layer components {
+  .input-profile {
+    @apply block outline-gray outline-2 outline focus:outline-primary w-full mt-1 border-gray rounded-md  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50;
+  }
+}
