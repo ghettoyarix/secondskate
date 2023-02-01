@@ -7,7 +7,7 @@ export default async (req, res) => {
     const { limit, page, category, type, owner, condition } = req.query;
     const filterProps = {
       condition,
-      owner,
+      ownedBy: owner,
     };
 
     Object.keys(filterProps).forEach((key) => {
@@ -22,7 +22,6 @@ export default async (req, res) => {
       .toArray();
 
     res.json(products);
-    console.log(filterProps);
   } catch (e) {
     console.error(e);
   }

@@ -1,10 +1,13 @@
 import React from 'react';
-import addURL from '../utils/addURL';
+import checkEmail from '../utils/checkEmail';
 const test = () => {
+  const check = async () => {
+    const x = await checkEmail('kappa322@test.test');
+    console.log(x);
+  };
   return (
     <div className="wrapper">
-      <button onClick={() => addURL('okxz', 6)}>x</button>
-      {process.env.NEXT_PUBLIC_FIREBASE_API_KEY}
+      <button onClick={check}>x</button>
     </div>
   );
 };

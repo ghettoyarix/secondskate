@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import { createAccount } from '../../utils/createAccount';
 import { useRouter } from 'next/router';
 import { checkUsername } from '../../utils/checkUsername';
+import checkEmail from '../../utils/checkEmail';
 import { debounce } from 'lodash';
 import Image from 'next/image';
 import CircleLoader from '../../components/widgets/CircleLoader';
@@ -22,11 +23,12 @@ export default function Registration() {
   const [mod, setMod] = useState('signUp');
   const [error, setError] = useState('');
   const [usernameFlag, setUsernameFlag] = useState(true);
-  const [usernameChecking, setUsernameChecking] = useState(false);
+  const [emailFlag, setEmailFlag] = useState(true);
 
   const changeMod = (e) => {
     setError('');
     e.preventDefault();
+    setUsernameFlag(true);
     mod === 'signIn' ? setMod('signUp') : setMod('signIn');
   };
 
@@ -75,19 +77,21 @@ export default function Registration() {
 
   const checkUsernameDebounce = React.useCallback(
     debounce(async () => {
-      setUsernameChecking(true);
-      const res = await checkUsername(usernameRef.current.value);
-      setUsernameFlag(res);
-      setUsernameChecking(false);
+      if (usernameRef.current.value.length >= 5) {
+        const res = await checkUsername(usernameRef.current.value); //returns true if such username exists
+        setUsernameFlag(!res);
+      }
+    }, 500),
+    [],
+  );
+  const checkEmailDebounce = React.useCallback(
+    debounce(async () => {
+      const res = await checkEmail(emailRef.current.value); //returns true if such email exists
+      setEmailFlag(!res);
     }, 500),
     [],
   );
 
-  const checkUsernameCall = () => {
-    if (usernameRef.current.value.length >= 5) {
-      checkUsernameDebounce();
-    }
-  };
   return (
     <div className="wrapper">
       <div className="flex flex-col   items-center">
@@ -108,25 +112,14 @@ export default function Registration() {
                       className="block text-sm font-medium text-gray-700 undefined">
                       Userame
                     </label>
-                    {!usernameChecking ? (
-                      <div>
-                        {usernameFlag ? (
-                          <p className="text-error text-small"> is already in use</p>
-                        ) : (
-                          <Image
-                            alt="checkmark"
-                            src="/svg/greenCheckmark.svg"
-                            width={15}
-                            height={15}></Image>
-                        )}
-                      </div>
-                    ) : (
-                      'check'
-                    )}
+
+                    <div>
+                      {!usernameFlag && <p className="text-error text-small"> is already used </p>}
+                    </div>
                   </div>
                   <div className="flex flex-col items-start">
                     <input
-                      onChange={checkUsernameCall}
+                      onChange={checkUsernameDebounce}
                       ref={usernameRef}
                       type="text"
                       name="name"
@@ -136,14 +129,15 @@ export default function Registration() {
                 </div>
               )}
 
-              <div className="mt-4">
+              <div className="mt-4  ">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 undefined">
-                  Email
-                </label>
+                  className="  flex items-center gap-2 text-sm font-medium text-gray-700 undefined">
+                  Email {!emailFlag && <p className="text-error text-small"> is already used </p>}
+                </label>{' '}
                 <div className="flex flex-col items-start">
                   <input
+                    onChange={checkEmailDebounce}
                     ref={emailRef}
                     type="email"
                     name="email"

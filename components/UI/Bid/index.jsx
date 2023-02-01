@@ -61,8 +61,8 @@ const Bid = (props) => {
 
         <div className="flex justify-between mt-3">
           <div className="flex text-[12px] gap-2">
-            <p className="text-gray ">{langParser[`${category}`].eng}</p>
-            <p className="font-semibold">{langParser[`${type}`].eng}</p>
+            <p className="text-gray ">{langParser[`${category}`]?.eng || '--'}</p>
+            <p className="font-semibold">{langParser[`${type}`]?.eng || '--'}</p>
           </div>
           <p className="text-reg font-medium">{condition}</p>
         </div>

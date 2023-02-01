@@ -50,8 +50,8 @@ const d2 = ({ options, pickOption, chosenOption, searchable }) => {
           <input
             disabled={!searchable}
             ref={inputRef}
-            defaultValue={chosenOption}
-            value={searchedValue}
+            defaultValue={chosenOption?.title || chosenOption}
+            value={searchedValue?.title || searchedValue}
             onChange={(e) => {
               setSearchedValue(e.target.value);
               pickOption(e.target.value);
@@ -93,7 +93,7 @@ const d2 = ({ options, pickOption, chosenOption, searchable }) => {
                 <p
                   onClick={() => onOptionClick(obj)}
                   className="w-full  text-center py-2   text-reg overflow-hidden text-black hover:bg-lightGray">
-                  {obj}
+                  {obj.title || obj}
                 </p>
               ))}
           </div>

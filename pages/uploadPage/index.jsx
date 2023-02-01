@@ -124,7 +124,11 @@ const uploadPage = () => {
     'Vans',
     'Volcom',
   ];
-  const conditions = ['New', 'Barely used', 'Roughly used'];
+  const conditions = [
+    { title: 'New', value: 'new' },
+    { title: 'Barely used', value: 'barely' },
+    { title: 'Barely used', value: 'barely' },
+  ];
   const [chosenBrand, setChosenBrand] = useState();
   const [chosenCondition, setChosenCondition] = useState(conditions[0]);
   const [loading, setLoading] = useState(true);
@@ -235,10 +239,7 @@ const uploadPage = () => {
             <h2 className="Upload file">Drag or choose your file to upload</h2>
             <p className="text-reg text-gray">Drag or choose your file to upload</p>
           </div>
-          <Dropzone
-            accept="image/png"
-            maxFiles={4}
-            onDrop={(acceptedFiles) => handleChange(acceptedFiles)}>
+          <Dropzone maxFiles={4} onDrop={(acceptedFiles) => handleChange(acceptedFiles)}>
             {({ getRootProps, getInputProps }) => (
               <section>
                 <div {...getRootProps()}>
@@ -362,23 +363,22 @@ const uploadPage = () => {
           <Button onClick={uploadCall} className="mt-8 w-[168px]" primary>
             Create item {uploading && <CircleLoader></CircleLoader>}
           </Button>
-          <button>uload</button>
         </div>
         <div className="max-w-[304px]">
           <p className="text-mid font-bold mb-8">Preview</p>
-          <Bid
-            brand={chosenBrand}
-            description={description}
-            size={size}
-            condition={chosenCondition}
-            price={price}
-            category={category?.title}
-            type={type?.title}
-            owner={currentUser.displayName}
-            previewImage={mainPhoto}
-            title={title}
-            still></Bid>
         </div>
+        <Bid
+          brand={chosenBrand}
+          description={description}
+          size={size}
+          condition={chosenCondition.title}
+          price={price}
+          category={category?.title}
+          type={type?.title}
+          owner={currentUser.displayName}
+          previewImage={mainPhoto}
+          title={title}
+          still></Bid>
       </div>
     )
   );
