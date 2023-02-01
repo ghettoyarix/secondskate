@@ -4,7 +4,7 @@ import cn from 'classnames';
 const Footer = () => {
   const menu = [
     [
-      { title: 'Crypter.' },
+      { title: 'secondskate.' },
       { title: 'Disover', href: 'discover' },
       { title: 'Connect Wallet', href: 'discover' },
       { title: 'Create item', href: 'createItem' },
@@ -22,7 +22,7 @@ const Footer = () => {
         <div className="flex flex-col  justify-center">
           <div className="flex justify-start mob:justify-center gap-2 mb-8">
             <Image alt="logo" src="/logo.png" height={32} width={32}></Image>
-            <p className="text-mid font-bold">crypter</p>
+            <p className="text-mid font-bold">secondskate</p>
           </div>
           <p className="text-mid">
             The New Creative <br /> Economy.

@@ -14,6 +14,7 @@ const Uploader = () => {
         { title: 'Trucks', value: 'trucks' },
         { title: 'Wheels', value: 'wheels' },
         { title: 'Other', value: 'other' },
+        { title: 'Completes', value: 'completes' },
       ],
     },
     {

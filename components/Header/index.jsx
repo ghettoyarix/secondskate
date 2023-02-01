@@ -15,7 +15,7 @@ const Header = () => {
           <div className="flex   items-centerpb-1  border-lightGray border-0  tab:border-r-2">
             <Image alt="logo" height={32} width={32} src="/logo.png"></Image>
 
-            <p className=" mr-8 text-mid ">crypter </p>
+            <p className=" mr-8 text-mid ">secondskate </p>
           </div>
         </Link>
         <div className="  gap-8 hidden tab:flex   ">

@@ -187,7 +187,7 @@ const uploadPage = () => {
       description,
       brand: chosenBrand,
       size: sizeRef.current.value,
-      condition: chosenCondition,
+      condition: chosenCondition.value,
       fileNames,
       category: category.value,
       type: type.value,

@@ -3,7 +3,6 @@ import cn from 'classnames';
 import DropDown from '../UI/DropDown/';
 import Bid from '../UI/Bid';
 import RangeSlider from '../UI/RangeSlider/';
-import { getProducts } from '../../utils/getProducts';
 import { useAuth } from '../../context/AuthContext';
 import Button from '../UI/Button';
 
@@ -20,8 +19,19 @@ const Discover = ({ products }) => {
   } // skip 1st render hook
   const { loading, currentUser } = useAuth();
 
-  const categories = ['All items', 'Art', 'Game', 'Photography', 'Music', 'Video'];
-  const priceSortOptions = ['Highest price', 'Lowest price'];
+  const categories = [
+    { title: 'All items', value: 'any' },
+    { title: 'Completes', value: 'completes' },
+    { title: 'Decks', value: 'decks' },
+    { title: 'Trucks', value: 'trucks' },
+    { title: 'Wheels', value: 'wheels' },
+    { title: 'Other', value: 'other' },
+    { title: 'Shoes', value: 'shoes' },
+  ];
+  const priceSortOptions = [
+    { title: 'Highest price', value: -1 },
+    { title: 'Lowest price', value: 1 },
+  ];
   const likesSortOptions = ['Most liked', 'Least liked'];
   const creatorSortOptions = ['Verified only', 'Any verification'];
   const discoverSortOptions = ['Recently added', 'Asnything'];
@@ -33,18 +43,22 @@ const Discover = ({ products }) => {
   const [chosenCategory, setChosenCategory] = useState(categories[0]);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const filterProps = {
-    chosenCategory,
-    chosenPriceSorter,
+    category: chosenCategory.value,
+    priceSorter: chosenPriceSorter.value,
     chosenLikesSorter,
   };
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?limit=10`);
+      console.log(1, chosenPriceSorter);
+      const res = await fetch(
+        `http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
+          new URLSearchParams({ ...filterProps }),
+      );
       const json = await res.json();
       setFilteredProducts(json);
     };
     fetchProducts();
-  }, []);
+  }, [chosenCategory, chosenPriceSorter]);
 
   return (
     <div className="wrapper py-32 ">
@@ -55,17 +69,18 @@ const Discover = ({ products }) => {
         <div className="flex gap-3 content-center  items-center">
           {categories.map((obj) => (
             <p
-              key={obj}
+              key={obj.title}
               onClick={() => setChosenCategory(obj)}
               className={cn(
-                '  rounded-2xl cursor-pointer  py-[6px] px-3  my-auto   font-bold text-reg text-gray',
+                '  rounded-2xl cursor-pointer  py-[6px] px-3  my-auto   font-bold text-reg ',
                 {
-                  'bg-black text-white': obj === chosenCategory,
+                  'bg-black text-white': obj.value === chosenCategory.value,
                 },
               )}>
-              {obj}
+              {obj.title}
             </p>
           ))}
+          <br />
         </div>
         <div className="max-w-[180px]">
           <DropDown
