@@ -4,6 +4,7 @@ import Label from '../../components/UI/Label';
 import cn from 'classnames';
 import Button from '../../components/UI/Button';
 import getThumb from '../../utils/getThumb';
+import { parseBidTitle } from '../../utils/parseTittle';
 import { useRouter } from 'next/router';
 export async function getServerSideProps(context) {
   const { productId } = context.query;
@@ -38,15 +39,11 @@ const productPage = ({ product }) => {
         </div>
         <div className="w-[375px]  items-stretch h-fit	tab:h-full flex flex-col justify-between  ">
           <div>
-            <p
-              onClick={() => console.log(photos)}
-              className=" text-[40px] text-center mb-6  font-bold">
-              {title}
-            </p>
+            <p className=" text-[40px] text-center mb-6  font-bold">{title}</p>
             <div className="flex  justify-between mx-3 mb-12">
               <Label big>{price} UAH</Label>
 
-              <p className="text-lable text-gray font-bold">{condition}</p>
+              <p className="text-lable text-gray font-bold">{parseBidTitle(condition)}</p>
             </div>
             <div className="flex  justify-between mx-3 mb-12">
               <div className="flex gap-2">

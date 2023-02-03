@@ -14,116 +14,14 @@ import Image from 'next/image';
 import CategoryPicker from '../../components/UI/CategoryPicker';
 import CircleLoader from '../../components/widgets/CircleLoader';
 import addURL from '../../utils/addURL';
+import { BRANDS } from '../../constants';
 const uploadPage = () => {
   const { category, type } = useSelector((state) => state.upload);
 
   const [error, setError] = useState('');
 
   const [mainPhoto, setMainPhoto] = useState();
-  const brands = [
-    'Baker',
-    '5Boro',
-    'Alien Workshop',
-    'Alltimers',
-    'Almost',
-    'Anti Hero',
-    'April',
-    'Bacon',
-    'Birdhouse',
-    'Blueprint',
-    'Chocolate',
-    'Creature',
-    'Darkroom',
-    'Darkstar',
-    'Deathwish',
-    'DGK',
-    'Dogtown',
-    'Element',
-    'Enjoi',
-    'Flip',
-    'Foundation',
-    'Frog',
-    'Girl',
-    'Globe',
-    'Habitat',
-    'Heroin',
-    'HUF',
-    'Killing Floor',
-    'Krooked',
-    'Lovesick',
-    'Madness',
-    'Magenta',
-    'Meow',
-    'Metal',
-    'Mini Logo',
-    'Monarch Project',
-    'Piss Drunx',
-    'Plan B',
-    'Polar',
-    'Powell',
-    'Primitive',
-    'Quasi',
-    'Real',
-    'Santa Cruz',
-    "Shorty's",
-    'Sk8 Mafia',
-    'Skate Warehouse',
-    'StrangeLove',
-    'Suicidal Skates',
-    'Thank You',
-    'The Heart Supply',
-    'The Heated Wheel',
-    'Theories',
-    'There',
-    'Toy Machine',
-    'Transportation Unit',
-    'Uma Landsleds',
-    'Unity',
-    'Verb',
-    'Welcome',
-    'WKND',
-    'Zero',
-    'Ace',
-    'Bullet',
-    'Independent',
-    'Krux',
-    'Royal',
-    'Slappy',
-    'Tensor',
-    'Thunder',
-    'Venture',
-    'Bones Wheels',
-    'Blind',
-    'OJ',
-    'Portland Wheel Company',
-    'Ricta',
-    'Satori',
-    'Slime Balls',
-    'Snot',
-    'Spitfire',
-    'Vol. 1',
-    'Bones Bearings',
-    'Andale',
-    'Black Panther',
-    'Bronson Speed Co.',
-    'Cortina Bearing Co.',
-    'Modus',
-    'Shake Junt',
-    'SKF',
-    'Speed Demons',
-    'Adidas',
-    'Converse Skateboarding',
-    'DC',
-    'Emerica',
-    'eS',
-    'Fallen',
-    'Lakai',
-    'Last Resort AB',
-    'New Balance Numeric',
-    'Nike SB',
-    'Vans',
-    'Volcom',
-  ];
+
   const conditions = [
     { title: 'New', value: 'new' },
     { title: 'Barely used', value: 'barely' },
@@ -324,7 +222,7 @@ const uploadPage = () => {
                 <DropDown
                   searchable
                   pickOption={setChosenBrand}
-                  options={brands.sort()}
+                  options={BRANDS.sort()}
                   chosenOption={chosenBrand}
                 />
               </div>
@@ -371,10 +269,10 @@ const uploadPage = () => {
           brand={chosenBrand}
           description={description}
           size={size}
-          condition={chosenCondition.title}
+          condition={chosenCondition.value}
           price={price}
-          category={category?.title}
-          type={type?.title}
+          category={category?.value}
+          type={type?.value}
           owner={currentUser.displayName}
           previewImage={mainPhoto}
           title={title}

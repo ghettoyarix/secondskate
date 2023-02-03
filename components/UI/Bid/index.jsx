@@ -4,12 +4,9 @@ import Image from 'next/image';
 import cn from 'classnames';
 import NoPhoto from '../NoPhoto';
 import { CATEGORIES_PARSER } from '.././../../constants';
+import { parseBidTitle } from '../../../utils/parseTittle';
 import Router, { useRouter } from 'next/router';
 const Bid = (props) => {
-  const parseTitle = (value) => {
-    const temp = CATEGORIES_PARSER?.find((category) => category.value === value);
-    return temp?.title;
-  };
   const {
     productId,
     title,
@@ -67,10 +64,10 @@ const Bid = (props) => {
 
         <div className="flex justify-between mt-3">
           <div className="flex text-[12px] gap-2">
-            <p className="text-gray ">{parseTitle(category) || '--'}</p>
-            <p className="font-semibold">{parseTitle(type) || '--'}</p>
+            <p className="text-gray ">{parseBidTitle(category) || '--'}</p>
+            <p className="font-semibold">{parseBidTitle(type) || '--'}</p>
           </div>
-          <p className="text-reg font-medium">{condition}</p>
+          <p className="text-reg font-medium">{parseBidTitle(condition)}</p>
         </div>
         <div className="flex justify-between mt-3">
           <p className="text-gray ">{brand || '--'}</p>

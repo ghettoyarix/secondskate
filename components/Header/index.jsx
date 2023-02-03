@@ -62,8 +62,6 @@ const Header = () => {
         </Link>
 
         <button onClick={logout}>logout</button>
-        <button onClick={() => console.log(currentUser)}>see</button>
-        <button onClick={() => console.log(profile)}>see2</button>
       </div>
       <svg
         className="block mob:hidden"
