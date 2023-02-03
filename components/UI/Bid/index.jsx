@@ -3,9 +3,13 @@ import Label from '../Label';
 import Image from 'next/image';
 import cn from 'classnames';
 import NoPhoto from '../NoPhoto';
-
+import { CATEGORIES_PARSER } from '.././../../constants';
 import Router, { useRouter } from 'next/router';
 const Bid = (props) => {
+  const parseTitle = (value) => {
+    const temp = CATEGORIES_PARSER?.find((category) => category.value === value);
+    return temp?.title;
+  };
   const {
     productId,
     title,
@@ -53,7 +57,9 @@ const Bid = (props) => {
       </div>
       <div className="px-2">
         <div className="flex justify-between  w-full mb-3">
-          <p className="text-title font-bold">{title || 'Your title'}</p>
+          <p onClick={() => console.log(categoryTitle('shoes'))} className="text-title font-bold">
+            {title || 'Your title'}
+          </p>
           <Label>{price || '--'} UAH</Label>
         </div>
 
@@ -61,8 +67,8 @@ const Bid = (props) => {
 
         <div className="flex justify-between mt-3">
           <div className="flex text-[12px] gap-2">
-            <p className="text-gray ">{langParser[`${category}`]?.eng || '--'}</p>
-            <p className="font-semibold">{langParser[`${type}`]?.eng || '--'}</p>
+            <p className="text-gray ">{parseTitle(category) || '--'}</p>
+            <p className="font-semibold">{parseTitle(type) || '--'}</p>
           </div>
           <p className="text-reg font-medium">{condition}</p>
         </div>

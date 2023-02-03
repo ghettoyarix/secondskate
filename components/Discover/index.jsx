@@ -20,13 +20,13 @@ const Discover = ({ products }) => {
   const { loading, currentUser } = useAuth();
 
   const categories = [
-    { title: 'All items', value: 'any' },
-    { title: 'Completes', value: 'completes' },
-    { title: 'Decks', value: 'decks' },
-    { title: 'Trucks', value: 'trucks' },
-    { title: 'Wheels', value: 'wheels' },
-    { title: 'Other', value: 'other' },
-    { title: 'Shoes', value: 'shoes' },
+    { title: 'All items', category: 'any' },
+    { title: 'Completes', type: 'completes' },
+    { title: 'Decks', type: 'decks' },
+    { title: 'Trucks', type: 'trucks' },
+    { title: 'Wheels', type: 'wheels' },
+    { title: 'Other', type: 'other' },
+    { title: 'Shoes', category: 'shoes' },
   ];
   const priceSortOptions = [
     { title: 'Highest price', value: -1 },
@@ -42,17 +42,18 @@ const Discover = ({ products }) => {
   const [discoverSorter, setDiscoverSorter] = useState(discoverSortOptions[0]);
   const [chosenCategory, setChosenCategory] = useState(categories[0]);
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const filterProps = {
-    category: chosenCategory.value,
+
+  const queryProps = {
+    type: chosenCategory.type,
+    category: chosenCategory.category,
     priceSorter: chosenPriceSorter.value,
     chosenLikesSorter,
   };
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log(1, chosenPriceSorter);
       const res = await fetch(
         `http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
-          new URLSearchParams({ ...filterProps }),
+          new URLSearchParams({ ...queryProps }),
       );
       const json = await res.json();
       setFilteredProducts(json);
@@ -62,7 +63,7 @@ const Discover = ({ products }) => {
 
   return (
     <div className="wrapper py-32 ">
-      <h1 onClick={() => console.log(filteredProducts)} className="text-giant pb-20  font-bold">
+      <h1 onClick={() => console.log(chosenCategory)} className="text-giant pb-20  font-bold">
         Discover
       </h1>
       <div className="flex items-center  justify-between border-b-2 pb-8 border-lightGray">
@@ -74,7 +75,7 @@ const Discover = ({ products }) => {
               className={cn(
                 '  rounded-2xl cursor-pointer  py-[6px] px-3  my-auto   font-bold text-reg ',
                 {
-                  'bg-black text-white': obj.value === chosenCategory.value,
+                  'bg-black text-white': obj.title === chosenCategory.title,
                 },
               )}>
               {obj.title}

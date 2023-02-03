@@ -6,16 +6,19 @@ export default async (req, res) => {
     const db = client.db('secondskate');
     const { limit, page, category, type, owner, condition, priceSorter } = req.query;
     const filterProps = {
-      condition,
       category,
-      ownedBy: owner,
+      type,
     };
     const sorterProps = {
       price: priceSorter,
     };
 
     Object.keys(filterProps).forEach((key) => {
-      if (filterProps[key] === undefined || filterProps[key] == 'any') {
+      if (
+        filterProps[key] == 'undefined' ||
+        filterProps[key] == 'any' ||
+        filterProps[key] === null
+      ) {
         delete filterProps[key];
       }
     });
@@ -30,9 +33,10 @@ export default async (req, res) => {
       .sort({ ...sorterProps })
       .limit(parseInt(limit))
       .toArray();
+    console.log(type);
+    console.log(category);
 
     res.json(products);
-    console.log(sorterProps);
   } catch (e) {
     console.error(e);
   }

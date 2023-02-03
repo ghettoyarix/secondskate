@@ -37,7 +37,6 @@ const Home: NextPage = ({ products }) => {
       <HotBid></HotBid>
       <HotCollections></HotCollections> */}
       <Discover products={products}></Discover>
-      <Earn></Earn>
     </div>
   );
 };
