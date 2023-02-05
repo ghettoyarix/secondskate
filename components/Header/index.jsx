@@ -20,7 +20,7 @@ const Header = () => {
         </Link>
         <div className="  gap-8 hidden tab:flex   ">
           <p>Discover</p>
-          <p onClick={() => alert(currentUser.uid)} className="text-gray">
+          <p onClick={() => console.log(currentUser)} className="text-gray">
             {' '}
             How it works
           </p>

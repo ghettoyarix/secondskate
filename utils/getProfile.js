@@ -1,10 +1,8 @@
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db, auth } from '../firebase';
-const profilesRef = collection(db, 'usernames');
 
-export const getProfile = async () => {
-  const currentProfile = auth.currentUser.uid;
-  const q = query(collection(db, 'accounts'), where('uid', '==', currentProfile));
+export const getProfile = async (username) => {
+  const q = query(collection(db, 'accounts'), where('username', '==', username));
 
   const querySnapshot = await getDocs(q);
   const res = [];
@@ -13,5 +11,7 @@ export const getProfile = async () => {
     // doc.data() is never undefined for query doc snapshots
     res.push(doc.data());
   });
-  return res[0];
+  if (res.length) {
+    return res[0];
+  } else return 'nothing';
 };

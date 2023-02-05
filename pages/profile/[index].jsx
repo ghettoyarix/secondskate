@@ -7,10 +7,33 @@ import { createAccount } from '../../utils/createAccount';
 import Bid from '../../components/UI/Bid';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const index = () => {
+export const getServerSideProps = async (context) => {
+  const { index } = context.query;
+
+  const isYourOwnAccount = index === 'you';
+
+  const anotherAccount = await getProfile(index);
+
+  if (anotherAccount === 'nothing' && index !== 'you') {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: { isYourOwnAccount, anotherAccount }, // will be passed to the page component as props
+  };
+};
+
+const index = ({ check, isYourOwnAccount, anotherAccount }) => {
+  const router = useRouter();
+  const { index } = router.query;
   const { currentUser, setUsername, profile } = useAuth();
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [info, setInfo] = useState(null);
+
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(
@@ -19,49 +42,66 @@ const index = () => {
       const json = await res.json();
       setProducts(json);
     };
-    if (currentUser) {
+
+    if (currentUser && profile) {
       fetchProducts();
+      setLoading(false);
     }
-  }, [currentUser]);
+
+    if (isYourOwnAccount) {
+      setInfo(profile);
+    } else {
+      setInfo(anotherAccount);
+    }
+  }, [currentUser, profile]);
 
   return (
-    <div className="wrapper flex   py-16">
+    <div className="wrapper flex py-16">
       <div
         className="max-w-[256px] border  border-lightGray rounded-2xl
        shadow-xl items-center  py-8 px-9 mr-10">
         <div className="flex flex-col gap-6 border-b-2 items-center border-lightGray">
-          <Image className="rounded-full" width={160} height={160} src="/profile.png"></Image>
-          <p className="text-mid font-semibold">@{profile?.username}</p>
-          <p className="text-small text-gray">
-            A wholesome farm owner in Montana. Upcoming gallery solo show in
+          <Image
+            className="rounded-full"
+            width={160}
+            height={160}
+            alt="profilePic"
+            src={isYourOwnAccount ? currentUser?.photoURL : '/s.png'}></Image>
+          <p className="text-mid font-semibold">@{info?.username}</p>
+          <p onClick={() => getAnotherAccount(index)} className="text-small text-gray">
+            {'loading loadinglo adingloadingloadingloadingloading loadingloading loadingloading'}
           </p>
-          <div className="flex gap-2">
-            <Image
-              className="rounded-full"
-              alt="insta"
-              width={20}
-              height={20}
-              src="/svg/insta.svg"></Image>
-            <p>{profile?.instagram || 'not specified'}</p>
-          </div>
-          <div className="flex gap-2">
-            <Image
-              className="rounded-full"
-              alt="tg"
-              width={20}
-              height={20}
-              src="/svg/telegram.svg"></Image>
-            <p>{profile?.telegram || 'not specified'}</p>
+          <div className="flex flex-col gap-2 justify-start">
+            <div className="flex gap-2">
+              <Image
+                className="rounded-full"
+                alt="insta"
+                width={20}
+                height={20}
+                src="/svg/insta.svg"></Image>
+              <p>{info?.instagram || 'not specified'}</p>
+            </div>
+            <div className="flex gap-2">
+              <Image
+                className="rounded-full"
+                alt="tg"
+                width={20}
+                height={20}
+                src="/svg/telegram.svg"></Image>
+              <p>{info?.telegram || 'not specified'}</p>
+            </div>
           </div>
 
-          <Link href="/profile/edit">
-            <div>
-              <Button className="mb-4">Edit profile</Button>
-            </div>
-          </Link>
+          {isYourOwnAccount && (
+            <Link href="/profile/edit">
+              <div>
+                <Button className="mb-4">Edit profile</Button>
+              </div>
+            </Link>
+          )}
           <button
             onClick={() => {
-              setUsername('sukaccc');
+              console.log(check);
             }}>
             check
           </button>
@@ -69,12 +109,12 @@ const index = () => {
         <p className="mt-4 text-gray text-small">Member since Mar 15, 2021</p>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {products?.map((obj) => (
+        {/* {products?.map((obj) => (
           <Bid key={obj._id} {...obj}></Bid>
         ))}
         {products?.map((obj) => (
           <Bid key={obj._id} {...obj}></Bid>
-        ))}
+        ))} */}
       </div>
     </div>
   );

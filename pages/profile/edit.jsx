@@ -4,8 +4,18 @@ import Button from '../../components/UI/Button';
 import InputBlock from '../../components/UI/InputBlock';
 import { updateProfile } from '../../utils/updateProfile';
 import { useAuth } from '../../context/AuthContext';
+import Dropzone from 'react-dropzone';
+import updateProfilePhoto from '../../utils/updateProfilePhoto';
+
 const update = ({}) => {
-  const { profile } = useAuth();
+  const [profilePhoto, setProfilePhoto] = useState([]);
+  const handleChange = (acceptedFiles) => {
+    const photoFile = acceptedFiles[0];
+    setProfilePhoto(photoFile);
+    updateProfilePhoto(photoFile);
+  };
+  const { profile, currentUser } = useAuth();
+  URL.createObjectURL(files[0]);
 
   const usernameRef = useRef();
   const titleRef = useRef();
@@ -40,6 +50,7 @@ const update = ({}) => {
       defaultValue: profile?.telegram,
     },
   ];
+
   const callUpdate = () => {
     const data = {
       username: usernameRef.current.value,
@@ -53,7 +64,7 @@ const update = ({}) => {
   return (
     <div className="wrapper flex flex-col gap-[76px]">
       <div className="">
-        <button onClick={() => updateProfile(data)}>cec</button>
+        <button onClick={() => console.log(profilePhoto)}>cec</button>
         <h1 className="text-giant font-bold">Edit profile</h1>
         <p className="text-reg max-w-[376px] text-gray">
           You can set preferred display name, create your profile URL and manage other personal
@@ -61,15 +72,28 @@ const update = ({}) => {
         </p>
       </div>
       <div className="flex gap-12">
-        <Image height={128} width={128} className="rounded-full" src="/profile.png"></Image>
+        <Image
+          alt="profilepic"
+          height={128}
+          width={128}
+          className="rounded-full"
+          src={currentUser?.photoURL}></Image>
         <div className="text-lable max-w-[256px] flex flex-col justify-between  ">
           <p>Profile photo</p>
           <p className="text-gray  text-small">
             We recommend an image of at least 400x400. Gifs work too 🙌
           </p>
-          <div onClick={() => alert(profile)}>
-            <Button>Upload</Button>
-          </div>
+
+          <Dropzone maxFiles={1} onDrop={(acceptedFiles) => handleChange(acceptedFiles)}>
+            {({ getRootProps, getInputProps }) => (
+              <section>
+                <div {...getRootProps()}>
+                  <input onSelect={(e) => e.target.value} {...getInputProps()} />
+                  <Button>Upload</Button>
+                </div>
+              </section>
+            )}
+          </Dropzone>
         </div>
       </div>
       <div className="grid grid-cols-2 border-b-2 pb-8 border-lightGray mb-8">
@@ -78,6 +102,7 @@ const update = ({}) => {
           <div className="flex flex-col gap-4">
             {accountInfoInputs.map((obj) => (
               <InputBlock
+                key={obj.title}
                 defaultValue={obj.defaultValue}
                 placeholder={obj.placeholder}
                 forwardedRef={obj.ref}
@@ -100,6 +125,7 @@ const update = ({}) => {
           <div className="flex flex-col gap-4">
             {socialsInfoInputs.map((obj) => (
               <InputBlock
+                key={obj.title}
                 defaultValue={obj.defaultValue}
                 placeholder={obj.placeholder}
                 forwardedRef={obj.ref}
