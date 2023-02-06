@@ -15,7 +15,7 @@ import CategoryPicker from '../../components/UI/CategoryPicker';
 import CircleLoader from '../../components/widgets/CircleLoader';
 import addURL from '../../utils/addURL';
 import { BRANDS } from '../../constants';
-const uploadPage = () => {
+const UploadPage = () => {
   const { category, type } = useSelector((state) => state.upload);
 
   const [error, setError] = useState('');
@@ -32,7 +32,7 @@ const uploadPage = () => {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
-  const { currentUser } = useAuth();
+  const { currentUser, profile } = useAuth();
 
   useEffect(() => {
     setLoading(false);
@@ -89,6 +89,7 @@ const uploadPage = () => {
       fileNames,
       category: category.value,
       type: type.value,
+      username: profile.username,
     };
     if (title && price && description && files.length) {
       try {
@@ -282,4 +283,4 @@ const uploadPage = () => {
   );
 };
 
-export default uploadPage;
+export default UploadPage;

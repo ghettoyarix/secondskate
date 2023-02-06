@@ -57,11 +57,11 @@ const Header = () => {
         <Link href={currentUser ? '/uploadPage' : '/login'}>
           <Button primary title="Upload"></Button>
         </Link>
-        <Link replace={true} href={currentUser ? `profile/you` : `/login`}>
+        <Link replace={true} href={currentUser ? `/profile/you` : `/login`}>
           <Button>{currentUser ? profile?.username || 'Profile' : 'Log in'}</Button>
         </Link>
 
-        <button onClick={logout}>logout</button>
+        {currentUser && <button onClick={logout}>Log out</button>}
       </div>
       <svg
         className="block mob:hidden"

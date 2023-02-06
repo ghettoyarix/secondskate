@@ -3,11 +3,12 @@ import Label from '../Label';
 import Image from 'next/image';
 import cn from 'classnames';
 import NoPhoto from '../NoPhoto';
-import { CATEGORIES_PARSER } from '.././../../constants';
+import HyperLink from '../../widgets/HyperLink';
 import { parseBidTitle } from '../../../utils/parseTittle';
 import Router, { useRouter } from 'next/router';
 const Bid = (props) => {
   const {
+    username,
     productId,
     title,
     still,
@@ -32,11 +33,13 @@ const Bid = (props) => {
   const goToProduct = () => {
     router.push(`/product/${productId}`);
   };
-
+  const goToUser = () => {
+    router.push(`/profile/${username}`);
+  };
   return (
     <div
       className={cn(
-        ' duration-150 outline-1 outline  rounded-[12px] outline-lightGray max-h-[434px] bg-white w-[256px] mb-8	',
+        ' duration-150 outline-1 outline  rounded-[12px] outline-lightGray   bg-white w-[256px] mb-8	',
         {
           'hover:scale-[1.1]': !still,
         },
@@ -47,6 +50,8 @@ const Bid = (props) => {
             className="rounded-[12px] object-cover"
             alt="mainpic"
             fill
+            sizes="(max-width: 256px) 100vw,50vw,
+            33vw"
             src={previewImage || (photoURLs && photoURLs[0])}></Image>
         ) : (
           <NoPhoto still={still}></NoPhoto>
@@ -73,14 +78,15 @@ const Bid = (props) => {
           <p className="text-gray ">{brand || '--'}</p>
           <p className="font-semibold">{size}</p>
         </div>
-        <div className="flex justify-center mt-3  gap-2">
+        <div className="flex justify-center  my-3  gap-2">
           <Image
             className={cn('rounded-full    border-white border-4  ')}
             alt="1"
             height={24}
             width={24}
             src={`/profile.png`}></Image>
-          <p>{owner}</p>
+
+          <HyperLink path={`/profile/${username}`}>{username}</HyperLink>
         </div>
       </div>
     </div>

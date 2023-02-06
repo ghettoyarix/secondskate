@@ -26,7 +26,7 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-const index = ({ check, isYourOwnAccount, anotherAccount }) => {
+const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
   const router = useRouter();
   const { index } = router.query;
   const { currentUser, setUsername, profile } = useAuth();
@@ -54,7 +54,7 @@ const index = ({ check, isYourOwnAccount, anotherAccount }) => {
     } else {
       setInfo(anotherAccount);
     }
-  }, [currentUser, profile]);
+  }, [anotherAccount, currentUser, isYourOwnAccount, profile]);
 
   return (
     <div className="wrapper flex py-16">
@@ -67,7 +67,7 @@ const index = ({ check, isYourOwnAccount, anotherAccount }) => {
             width={160}
             height={160}
             alt="profilePic"
-            src={isYourOwnAccount ? currentUser?.photoURL : '/s.png'}></Image>
+            src={isYourOwnAccount ? currentUser?.photoURL : info?.profilePhoto}></Image>
           <p className="text-mid font-semibold">@{info?.username}</p>
           <p onClick={() => getAnotherAccount(index)} className="text-small text-gray">
             {'loading loadinglo adingloadingloadingloadingloading loadingloading loadingloading'}
@@ -121,4 +121,4 @@ const index = ({ check, isYourOwnAccount, anotherAccount }) => {
   );
 };
 
-export default index;
+export default Profile;

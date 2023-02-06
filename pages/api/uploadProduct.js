@@ -15,6 +15,7 @@ export default async (req, res) => {
     const post = await db.collection('products').insertOne({
       ...req.body,
       productId: newId,
+      price: parseInt(req.body.price),
     });
 
     res.json(newId);

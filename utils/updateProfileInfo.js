@@ -1,7 +1,7 @@
 import { collection, query, updateDoc, doc, getDocs, getDoc, where } from 'firebase/firestore';
 import { db, auth } from '../firebase';
 
-export const updateProfile = async ({ instagram, telegram, title }) => {
+export const updateProfileInfo = async (data) => {
   const acc = auth.currentUser.uid;
   const q = query(collection(db, 'accounts'), where('uid', '==', acc));
   try {
@@ -13,9 +13,7 @@ export const updateProfile = async ({ instagram, telegram, title }) => {
     console.log(accountRef[0]);
     const docRef = doc(db, 'accounts', accountRef[0]);
     await updateDoc(docRef, {
-      instagram,
-      telegram,
-      title,
+      ...data,
     });
   } catch (e) {
     console.error(e);

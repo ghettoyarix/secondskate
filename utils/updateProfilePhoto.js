@@ -1,8 +1,13 @@
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
-
+import { updateProfileInfo } from './updateProfileInfo';
 import { auth } from '../firebase';
-
+const setPhoto = async (downloadURL) => {
+  await updateProfile(auth.currentUser, {
+    photoURL: downloadURL,
+  });
+  updateProfileInfo({ profilePhoto: downloadURL });
+};
 const updateProfilePhoto = async (file) => {
   return new Promise((resolve, reject) => {
     const storage = getStorage();
@@ -33,9 +38,7 @@ const updateProfilePhoto = async (file) => {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          updateProfile(auth.currentUser, {
-            photoURL: downloadURL,
-          })
+          setPhoto(downloadURL)
             .then(() => {
               resolve(true);
             })

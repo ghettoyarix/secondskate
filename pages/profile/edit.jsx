@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Button from '../../components/UI/Button';
 import InputBlock from '../../components/UI/InputBlock';
-import { updateProfile } from '../../utils/updateProfile';
+import { updateProfileInfo } from '../../utils/updateProfileInfo';
 import { useAuth } from '../../context/AuthContext';
 import Dropzone from 'react-dropzone';
 import updateProfilePhoto from '../../utils/updateProfilePhoto';
@@ -15,7 +15,7 @@ const Edit = ({}) => {
     updateProfilePhoto(photoFile);
   };
   const { profile, currentUser } = useAuth();
- 
+
   const usernameRef = useRef();
   const titleRef = useRef();
   const instaRef = useRef();
@@ -57,7 +57,7 @@ const Edit = ({}) => {
       telegram: telegramRef.current.value,
       title: titleRef.current.value,
     };
-    updateProfile(data);
+    updateProfileInfo(data);
   };
 
   return (

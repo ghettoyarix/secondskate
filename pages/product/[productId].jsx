@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Label from '../../components/UI/Label';
 import cn from 'classnames';
 import Button from '../../components/UI/Button';
-import getThumb from '../../utils/getThumb';
+
+import HyperLink from '../../components/widgets/HyperLink';
 import { parseBidTitle } from '../../utils/parseTittle';
 import { useRouter } from 'next/router';
 export async function getServerSideProps(context) {
@@ -15,10 +16,10 @@ export async function getServerSideProps(context) {
   return { props: { product } };
 }
 const productPage = ({ product }) => {
-  const { price, description, condition, title, fileNames, size, brand, photoURLs } = product;
+  const { price, description, condition, title, fileNames, size, brand, photoURLs, username } =
+    product;
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
-  const { productId } = router.query;
   const shareItem = () => {};
   const addToFav = () => {};
   const exit = () => {};
@@ -60,7 +61,8 @@ const productPage = ({ product }) => {
             <p className="text-gray">{description}</p>
             <div className=" flex gap-3 justify-center p-1 rounded-full border-lightGray border-2 my-8">
               {menu.map((obj, index) => (
-                <p key={obj}
+                <p
+                  key={obj}
                   onClick={() => setChosenMenu(obj)}
                   className={cn(
                     'text-reg text-gray cursor-pointer font-bold px-3 py-[6px] rounded-full',
@@ -75,17 +77,22 @@ const productPage = ({ product }) => {
             <div>
               <div className="flex gap-4 border-b-2  border-lightGray py-4">
                 <div className=" relative">
-                  <Image className="rounded-full" height={50} width={50} alt="creator" src="/creator.png"></Image>
+                  <Image
+                    className="rounded-full"
+                    height={50}
+                    width={50}
+                    alt="creator"
+                    src="/creator.png"></Image>
                   <Image
                     className="absolute left-[30px] top-[30px]"
                     height={24}
-                    width={24}  
-                    alt={"/svg/creator.svg"}
+                    width={24}
+                    alt={'/svg/creator.svg'}
                     src="/svg/creator.svg"></Image>
                 </div>
                 <div className="flex flex-col justify-between">
                   <p className="text-gray">Owner</p>
-                  <p className="">Raquel Will</p>
+                  <HyperLink path={`/profile/${username}`}>{username}</HyperLink>
                 </div>
               </div>
               <div className="flex gap-4 border-b-2    border-lightGray py-4">
@@ -145,7 +152,6 @@ const productPage = ({ product }) => {
               height={48}
               alt={obj.icon}
               key={obj.icon}
-             
               src={`/svg/${obj.icon}`}></Image>
           </div>
         ))}
