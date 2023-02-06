@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Label from '../../components/UI/Label';
@@ -15,6 +16,7 @@ export async function getServerSideProps(context) {
 }
 const productPage = ({ product }) => {
   const { price, description, condition, title, fileNames, size, brand, photoURLs } = product;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const { productId } = router.query;
   const shareItem = () => {};
@@ -58,7 +60,7 @@ const productPage = ({ product }) => {
             <p className="text-gray">{description}</p>
             <div className=" flex gap-3 justify-center p-1 rounded-full border-lightGray border-2 my-8">
               {menu.map((obj, index) => (
-                <p
+                <p key={obj}
                   onClick={() => setChosenMenu(obj)}
                   className={cn(
                     'text-reg text-gray cursor-pointer font-bold px-3 py-[6px] rounded-full',
@@ -73,11 +75,12 @@ const productPage = ({ product }) => {
             <div>
               <div className="flex gap-4 border-b-2  border-lightGray py-4">
                 <div className=" relative">
-                  <Image className="rounded-full" height={50} width={50} src="/creator.png"></Image>
+                  <Image className="rounded-full" height={50} width={50} alt="creator" src="/creator.png"></Image>
                   <Image
                     className="absolute left-[30px] top-[30px]"
                     height={24}
-                    width={24}
+                    width={24}  
+                    alt={"/svg/creator.svg"}
                     src="/svg/creator.svg"></Image>
                 </div>
                 <div className="flex flex-col justify-between">
@@ -91,6 +94,7 @@ const productPage = ({ product }) => {
                     className="rounded-full"
                     height={50}
                     width={50}
+                    alt="profile"
                     src={'/profile.png'}></Image>
                 </div>
                 <div className="flex flex-col justify-between">
@@ -106,6 +110,7 @@ const productPage = ({ product }) => {
                 className="object-contain rounded-full"
                 height={50}
                 width={50}
+                alt="profile"
                 src="/profile.png"></Image>
 
               <div>
@@ -132,12 +137,15 @@ const productPage = ({ product }) => {
       </div>
       <div className=" product:flex hidden flex-col gap-3 pr-12 pt-24  ">
         {actions.map((obj) => (
+          // eslint-disable-next-line react/jsx-key
           <div className="w-12 cursor-pointer hover:scale-90 h-12">
             <Image
               className="object-fill"
               width={48}
               height={48}
               alt={obj.icon}
+              key={obj.icon}
+             
               src={`/svg/${obj.icon}`}></Image>
           </div>
         ))}

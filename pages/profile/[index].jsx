@@ -34,6 +34,7 @@ const index = ({ check, isYourOwnAccount, anotherAccount }) => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(null);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(

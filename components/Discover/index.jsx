@@ -62,8 +62,8 @@ const Discover = ({ products }) => {
   }, [chosenCategory, chosenPriceSorter]);
 
   return (
-    <div className="wrapper py-32 ">
-      <h1 onClick={() => console.log(chosenCategory)} className="text-giant pb-20  font-bold">
+    <div className="wrapper py-12 ">
+      <h1 onClick={() => console.log(filteredProducts)} className="text-giant pb-10  font-bold">
         Discover
       </h1>
       <div className="flex items-center  justify-between border-b-2 pb-8 border-lightGray">

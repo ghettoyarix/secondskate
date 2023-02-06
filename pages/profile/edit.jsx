@@ -7,7 +7,7 @@ import { useAuth } from '../../context/AuthContext';
 import Dropzone from 'react-dropzone';
 import updateProfilePhoto from '../../utils/updateProfilePhoto';
 
-const update = ({}) => {
+const Edit = ({}) => {
   const [profilePhoto, setProfilePhoto] = useState([]);
   const handleChange = (acceptedFiles) => {
     const photoFile = acceptedFiles[0];
@@ -15,8 +15,7 @@ const update = ({}) => {
     updateProfilePhoto(photoFile);
   };
   const { profile, currentUser } = useAuth();
-  URL.createObjectURL(files[0]);
-
+ 
   const usernameRef = useRef();
   const titleRef = useRef();
   const instaRef = useRef();
@@ -144,4 +143,4 @@ const update = ({}) => {
   );
 };
 
-export default update;
+export default Edit;
