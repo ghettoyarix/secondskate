@@ -1,6 +1,6 @@
 import clientPromise from '../../../lib/mongodb';
 
-export default async (req, res) => {
+const getProducts = async (req, res) => {
   try {
     const client = await clientPromise;
     const db = client.db('secondskate');
@@ -16,6 +16,7 @@ export default async (req, res) => {
     Object.keys(filterProps).forEach((key) => {
       if (
         filterProps[key] == 'undefined' ||
+        filterProps[key] === undefined ||
         filterProps[key] == 'any' ||
         filterProps[key] === null
       ) {
@@ -33,7 +34,7 @@ export default async (req, res) => {
       .sort({ ...sorterProps })
       .limit(parseInt(limit))
       .toArray();
-    console.log(type);
+    console.log(filterProps);
     console.log(category);
 
     res.json(products);
@@ -41,3 +42,4 @@ export default async (req, res) => {
     console.error(e);
   }
 };
+export default getProducts;

@@ -6,14 +6,9 @@ import { updateProfileInfo } from '../../utils/updateProfileInfo';
 import { useAuth } from '../../context/AuthContext';
 import Dropzone from 'react-dropzone';
 import updateProfilePhoto from '../../utils/updateProfilePhoto';
-
+import ProfilePhotoUploader from '../../components/ProfilePhotoUploader';
+import { useRouter } from 'next/router';
 const Edit = ({}) => {
-  const [profilePhoto, setProfilePhoto] = useState([]);
-  const handleChange = (acceptedFiles) => {
-    const photoFile = acceptedFiles[0];
-    setProfilePhoto(photoFile);
-    updateProfilePhoto(photoFile);
-  };
   const { profile, currentUser } = useAuth();
 
   const usernameRef = useRef();
@@ -70,31 +65,7 @@ const Edit = ({}) => {
           settings.
         </p>
       </div>
-      <div className="flex gap-12">
-        <Image
-          alt="profilepic"
-          height={128}
-          width={128}
-          className="rounded-full"
-          src={currentUser?.photoURL}></Image>
-        <div className="text-lable max-w-[256px] flex flex-col justify-between  ">
-          <p>Profile photo</p>
-          <p className="text-gray  text-small">
-            We recommend an image of at least 400x400. Gifs work too 🙌
-          </p>
-
-          <Dropzone maxFiles={1} onDrop={(acceptedFiles) => handleChange(acceptedFiles)}>
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input onSelect={(e) => e.target.value} {...getInputProps()} />
-                  <Button>Upload</Button>
-                </div>
-              </section>
-            )}
-          </Dropzone>
-        </div>
-      </div>
+      <ProfilePhotoUploader></ProfilePhotoUploader>
       <div className="grid grid-cols-2 border-b-2 pb-8 border-lightGray mb-8">
         <div className="max-w-[412px]">
           <p className="mb-4">Account info</p>

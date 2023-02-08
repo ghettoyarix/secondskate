@@ -62,6 +62,7 @@ const Uploader = () => {
           {categories.map((obj, index) => (
             <label className="flex radio p-2 justify-around items-center cursor-pointer">
               <input
+                key={obj.title}
                 id={obj.title}
                 defaultChecked={index === 0}
                 onClick={() => pickCategory(obj)}

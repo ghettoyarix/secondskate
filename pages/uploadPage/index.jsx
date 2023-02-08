@@ -25,7 +25,7 @@ const UploadPage = () => {
   const conditions = [
     { title: 'New', value: 'new' },
     { title: 'Barely used', value: 'barely' },
-    { title: 'Barely used', value: 'barely' },
+    { title: 'Roughly used', value: 'roughly' },
   ];
   const [chosenBrand, setChosenBrand] = useState();
   const [chosenCondition, setChosenCondition] = useState(conditions[0]);

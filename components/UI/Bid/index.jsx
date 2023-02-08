@@ -5,7 +5,10 @@ import cn from 'classnames';
 import NoPhoto from '../NoPhoto';
 import HyperLink from '../../widgets/HyperLink';
 import { parseBidTitle } from '../../../utils/parseTittle';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { editBid } from '../../../redux/slices/modalSlice';
 const Bid = (props) => {
   const {
     username,
@@ -23,15 +26,17 @@ const Bid = (props) => {
     fileNames,
     previewImage,
     photoURLs,
+    editable,
   } = props;
-  const langParser = {
-    shoes: { eng: 'Shoes', ukr: 'Взуття' },
-    seude: { eng: 'Seude', ukr: 'Замша' },
-  };
+  const dispatch = useDispatch();
   const router = useRouter();
-
+  const editCall = () => {
+    dispatch(editBid());
+  };
   const goToProduct = () => {
-    router.push(`/product/${productId}`);
+    if (!editable) {
+      router.push(`/product/${productId}`);
+    }
   };
   const goToUser = () => {
     router.push(`/profile/${username}`);
@@ -39,12 +44,14 @@ const Bid = (props) => {
   return (
     <div
       className={cn(
-        ' duration-150 outline-1 outline  rounded-[12px] outline-lightGray   bg-white w-[256px] mb-8	',
+        ' duration-150 outline-1 outline  rounded-[12px] outline-lightGray   bg-white w-[256px] mb-1	',
         {
           'hover:scale-[1.1]': !still,
         },
       )}>
-      <div onClick={goToProduct} className="h-[256px]  w-[256px]	 cursor-pointer    mb-3 relative ">
+      <div
+        onClick={goToProduct}
+        className={`h-[256px]  w-[256px]	 ${!editable && 'cursor-pointer'}    mb-3 relative `}>
         {previewImage || (photoURLs && photoURLs[0]) ? (
           <Image
             className="rounded-[12px] object-cover"
@@ -56,12 +63,19 @@ const Bid = (props) => {
         ) : (
           <NoPhoto still={still}></NoPhoto>
         )}
+        {editable && (
+          <Image
+            onClick={editCall}
+            className="absolute cursor-pointer top-3 left-3"
+            width={34}
+            height={34}
+            alt={'pencil'}
+            src={'/svg/pencil.svg'}></Image>
+        )}
       </div>
       <div className="px-2">
         <div className="flex justify-between  w-full mb-3">
-          <p onClick={() => console.log(categoryTitle('shoes'))} className="text-title font-bold">
-            {title || 'Your title'}
-          </p>
+          <HyperLink path={`/product/${productId}`}>{title}</HyperLink>
           <Label>{price || '--'} UAH</Label>
         </div>
 

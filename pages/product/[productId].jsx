@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Label from '../../components/UI/Label';
 import cn from 'classnames';
 import Button from '../../components/UI/Button';
-
 import HyperLink from '../../components/widgets/HyperLink';
 import { parseBidTitle } from '../../utils/parseTittle';
 import { useRouter } from 'next/router';

@@ -8,7 +8,7 @@ import Bid from '../../components/UI/Bid';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import EditBidModal from '../../components/UI/EditBidModal';
 export const getServerSideProps = async (context) => {
   const { index } = context.query;
 
@@ -34,13 +34,11 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(null);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch(
-        `http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts/?limit=10&owner=${currentUser?.uid}&condition=New`,
-      );
+      const res = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts`);
       const json = await res.json();
+      console.log(json);
       setProducts(json);
     };
 
@@ -55,7 +53,6 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
       setInfo(anotherAccount);
     }
   }, [anotherAccount, currentUser, isYourOwnAccount, profile]);
-
   return (
     <div className="wrapper flex py-16">
       <div
@@ -69,7 +66,7 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
             alt="profilePic"
             src={isYourOwnAccount ? currentUser?.photoURL : info?.profilePhoto}></Image>
           <p className="text-mid font-semibold">@{info?.username}</p>
-          <p onClick={() => getAnotherAccount(index)} className="text-small text-gray">
+          <p className="text-small text-gray">
             {'loading loadinglo adingloadingloadingloadingloading loadingloading loadingloading'}
           </p>
           <div className="flex flex-col gap-2 justify-start">
@@ -102,21 +99,19 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
           )}
           <button
             onClick={() => {
-              console.log(check);
+              handleOpen();
             }}>
             check
           </button>
         </div>
         <p className="mt-4 text-gray text-small">Member since Mar 15, 2021</p>
       </div>
-      <div className="grid grid-cols-3 gap-4">
-        {/* {products?.map((obj) => (
-          <Bid key={obj._id} {...obj}></Bid>
-        ))}
+      <div className="grid  grid-cols-1 mr-12  w-full mob:grid-cols-3 gap-4">
         {products?.map((obj) => (
-          <Bid key={obj._id} {...obj}></Bid>
-        ))} */}
+          <Bid editable still key={obj._id} {...obj}></Bid>
+        ))}
       </div>
+      <EditBidModal></EditBidModal>
     </div>
   );
 };
