@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { editBid } from '../../../redux/slices/modalSlice';
 const Bid = (props) => {
   const {
+    obj,
     username,
     productId,
     title,
@@ -31,7 +32,7 @@ const Bid = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const editCall = () => {
-    dispatch(editBid());
+    dispatch(editBid(obj));
   };
   const goToProduct = () => {
     if (!editable) {

@@ -2,43 +2,16 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, setType } from '../../../redux/slices/uploadSlice';
-
+import { useUpload } from '../../../context/UploadContext';
 const Uploader = () => {
+  const { chosenCategory, setChosenCategory, chosenType, setChosenType, categories } = useUpload();
   const dispatch = useDispatch();
-  const categories = [
-    {
-      title: 'Skateboards',
-      value: 'skateboards',
-      types: [
-        { title: 'Decks', value: 'decks' },
-        { title: 'Trucks', value: 'trucks' },
-        { title: 'Wheels', value: 'wheels' },
-        { title: 'Other', value: 'other' },
-        { title: 'Completes', value: 'completes' },
-      ],
-    },
-    {
-      title: 'Shoes',
-      value: 'shoes',
-      types: [
-        { title: 'Leather', value: 'leather' },
-        { title: 'Seude', value: 'seude' },
-        { title: 'Canvas', value: 'canvas' },
-      ],
-    },
-  ];
-  const [chosenCategory, setChosenCategory] = useState(categories[0]);
-  const [chosenType, setChosenType] = useState(chosenCategory.types[0]);
 
   useEffect(() => {
     document.getElementById('type0').checked = true;
     setChosenType(chosenCategory.types[0]);
-    dispatch(setType(chosenCategory.types[0]));
   }, [chosenCategory]);
-  useEffect(() => {
-    dispatch(setCategory(chosenCategory));
-    dispatch(setType(chosenType));
-  }, [chosenCategory, chosenType]);
+
   const pickBestFor = (obj) => {
     if (choosenBestFor.some((e) => e.value === obj.value)) {
       setChoosenBestFor(choosenBestFor.filter((el) => el.value !== obj.value));
@@ -59,12 +32,13 @@ const Uploader = () => {
         </div>
 
         <div className="flex jusify-around">
-          {categories.map((obj, index) => (
-            <label className="flex radio p-2 justify-around items-center cursor-pointer">
+          {categories?.map((obj, index) => (
+            <label
+              key={obj.title}
+              className="flex radio p-2 justify-around items-center cursor-pointer">
               <input
-                key={obj.title}
                 id={obj.title}
-                defaultChecked={index === 0}
+                checked={obj.value === chosenCategory.value}
                 onClick={() => pickCategory(obj)}
                 className="my-auto   transform scale-125"
                 type="radio"
@@ -80,11 +54,11 @@ const Uploader = () => {
           Тип
         </div>
 
-        {chosenCategory.types.map((obj, index) => (
+        {chosenCategory?.types.map((obj, index) => (
           <label key={obj.title} className="flex radio p-2   items-center cursor-pointer">
             <input
               onClick={() => setChosenType(obj)}
-              defaultChecked={index === 0}
+              checked={obj.value === chosenType.value}
               id={'type' + index}
               className="my-auto transform scale-125"
               type="radio"

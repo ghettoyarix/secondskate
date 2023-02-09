@@ -1,0 +1,120 @@
+"filename", "language", "JSON with Comments", "JSON", "TypeScript", "JavaScript", "Markdown", "XML", "JavaScript React", "SCSS", "TypeScript React", "PostCSS", "comment", "blank", "total"
+"e:\marketplace\.eslintrc.json", "JSON with Comments", 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"e:\marketplace\README.md", "Markdown", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 5, 18
+"e:\marketplace\assets\styles\globals.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 4, 40
+"e:\marketplace\components\Auction\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 3, 33
+"e:\marketplace\components\BidEditor\index.js", "JavaScript", 0, 0, 0, 92, 0, 0, 0, 0, 0, 0, 171, 12, 275
+"e:\marketplace\components\Discover\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 131, 0, 0, 0, 0, 8, 139
+"e:\marketplace\components\Dragger\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 86, 0, 0, 0, 0, 8, 94
+"e:\marketplace\components\Earn\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 2, 34
+"e:\marketplace\components\Footer\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 71, 0, 0, 0, 0, 2, 73
+"e:\marketplace\components\Header\Header.module.scss", "SCSS", 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 8
+"e:\marketplace\components\Header\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 82, 0, 0, 0, 0, 5, 87
+"e:\marketplace\components\Hero\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"e:\marketplace\components\HotCollections\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 2, 46
+"e:\marketplace\components\ImageBlock.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 4, 27
+"e:\marketplace\components\Latest\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 2, 72
+"e:\marketplace\components\Layout.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 2, 26
+"e:\marketplace\components\Popular\Sellers\SellerCard.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 43, 0, 0, 0, 0, 4, 47
+"e:\marketplace\components\Popular\Sellers\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 2, 14
+"e:\marketplace\components\Popular\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 3, 40
+"e:\marketplace\components\ProfilePhotoUploader\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 3, 47
+"e:\marketplace\components\Trending\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 55, 0, 0, 0, 0, 4, 59
+"e:\marketplace\components\UI\Bid\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 105, 0, 0, 0, 0, 6, 111
+"e:\marketplace\components\UI\Button\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 45, 0, 0, 0, 0, 6, 51
+"e:\marketplace\components\UI\CategoryPicker\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 6, 102
+"e:\marketplace\components\UI\DropDown\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 1, 6, 109
+"e:\marketplace\components\UI\EditBidModal\index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 6, 29
+"e:\marketplace\components\UI\InputBlock\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 2, 22
+"e:\marketplace\components\UI\Label\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 3, 20
+"e:\marketplace\components\UI\NavArrows\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 2, 21
+"e:\marketplace\components\UI\NoPhoto\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"e:\marketplace\components\UI\RangeSlider\RangeSlider.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 3, 14, 95
+"e:\marketplace\components\UI\RangeSlider\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 8, 64
+"e:\marketplace\components\UI\ToggleBlock\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 2, 31
+"e:\marketplace\components\UI\loaders\ProfileLoader.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 3, 23
+"e:\marketplace\components\widgets\CircleLoader\CircleLoader.module.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 2, 18
+"e:\marketplace\components\widgets\CircleLoader\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 2, 8
+"e:\marketplace\components\widgets\Counter.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 6, 42
+"e:\marketplace\components\widgets\DropDown\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 3, 68
+"e:\marketplace\components\widgets\Favourite\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"e:\marketplace\components\widgets\HyperLink\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"e:\marketplace\components\widgets\PurchaseButton\PurchaseButton.module.scss", "SCSS", 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 2, 16
+"e:\marketplace\components\widgets\PurchaseButton\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"e:\marketplace\components\widgets\SearchBar\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 2, 26
+"e:\marketplace\components\widgets\StarRating\StarRating.js", "JavaScript", 0, 0, 0, 76, 0, 0, 0, 0, 0, 0, 0, 11, 87
+"e:\marketplace\components\widgets\StarRating\components\Star.js", "JavaScript", 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 0, 5, 41
+"e:\marketplace\components\widgets\StarRating\components\StarRatingLabel.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 5, 14
+"e:\marketplace\components\widgets\StarRating\components\StarsList.js", "JavaScript", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 7, 22
+"e:\marketplace\constants.js", "JavaScript", 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 1, 121
+"e:\marketplace\context\AuthContext.js", "JavaScript", 0, 0, 0, 99, 0, 0, 0, 0, 0, 0, 5, 16, 120
+"e:\marketplace\context\UploadContext.js", "JavaScript", 0, 0, 0, 44, 0, 0, 0, 0, 0, 0, 0, 7, 51
+"e:\marketplace\firebase.js", "JavaScript", 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 5, 24
+"e:\marketplace\firebase.json", "JSON", 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10
+"e:\marketplace\functions\.eslintrc.js", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"e:\marketplace\functions\index.js", "JavaScript", 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 4, 3, 15
+"e:\marketplace\functions\package-lock.json", "JSON", 0, 5863, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5864
+"e:\marketplace\functions\package.json", "JSON", 0, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 27
+"e:\marketplace\lib\mongodb.ts", "TypeScript", 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 5, 6, 30
+"e:\marketplace\next.config.js", "JavaScript", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 1, 1, 13
+"e:\marketplace\package-lock.json", "JSON", 0, 15729, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15730
+"e:\marketplace\package.json", "JSON", 0, 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 45
+"e:\marketplace\pages\_app.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 1, 18
+"e:\marketplace\pages\api\addURL\[productId].js", "JavaScript", 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 5, 21
+"e:\marketplace\pages\api\getProducts\[productId].js", "JavaScript", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 6, 21
+"e:\marketplace\pages\api\getProducts\index.js", "JavaScript", 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 4, 46
+"e:\marketplace\pages\api\hello.ts", "TypeScript", 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 1, 3, 13
+"e:\marketplace\pages\api\movies.js", "JavaScript", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 4, 15
+"e:\marketplace\pages\api\uploadProduct.js", "JavaScript", 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 5, 29
+"e:\marketplace\pages\index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 5, 4, 44
+"e:\marketplace\pages\login\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 11, 202
+"e:\marketplace\pages\login\utils\createUsername.js", "JavaScript", 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"e:\marketplace\pages\product\[productId].jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 151, 0, 0, 0, 3, 9, 163
+"e:\marketplace\pages\profile\[index].jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 110, 0, 0, 0, 0, 10, 120
+"e:\marketplace\pages\profile\edit.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 111, 0, 0, 0, 0, 7, 118
+"e:\marketplace\pages\test.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 3, 42
+"e:\marketplace\pages\uploadPage\index.jsx", "JavaScript React", 0, 0, 0, 0, 0, 0, 92, 0, 0, 0, 186, 9, 287
+"e:\marketplace\postcss.config.js", "JavaScript", 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"e:\marketplace\public\exit.svg", "XML", 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"e:\marketplace\public\svg\bids.svg", "XML", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 1, 23
+"e:\marketplace\public\svg\champ.svg", "XML", 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 7
+"e:\marketplace\public\svg\creator.svg", "XML", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 1, 12
+"e:\marketplace\public\svg\exit.svg", "XML", 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"e:\marketplace\public\svg\greenCheckmark.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"e:\marketplace\public\svg\insta.svg", "XML", 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 6
+"e:\marketplace\public\svg\leftArrow.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"e:\marketplace\public\svg\lightning.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"e:\marketplace\public\svg\love.svg", "XML", 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"e:\marketplace\public\svg\no-photo.svg", "XML", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 1, 0, 23
+"e:\marketplace\public\svg\others.svg", "XML", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 1, 12
+"e:\marketplace\public\svg\pencil.svg", "XML", 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 1, 0, 7
+"e:\marketplace\public\svg\plus.svg", "XML", 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"e:\marketplace\public\svg\pro.svg", "XML", 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"e:\marketplace\public\svg\remove.svg", "XML", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 1, 0, 15
+"e:\marketplace\public\svg\rightArrow.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"e:\marketplace\public\svg\search.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"e:\marketplace\public\svg\share.svg", "XML", 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 6
+"e:\marketplace\public\svg\telegram.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"e:\marketplace\public\svg\top.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"e:\marketplace\public\svg\upArrow.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"e:\marketplace\redux\slices\headerSlice.js", "JavaScript", 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 5, 23
+"e:\marketplace\redux\slices\modalSlice.ts", "TypeScript", 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 4, 25
+"e:\marketplace\redux\slices\ss.js", "JavaScript", 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 5, 28
+"e:\marketplace\redux\slices\uploadSlice.js", "JavaScript", 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 5, 46
+"e:\marketplace\redux\store.js", "JavaScript", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 2, 13
+"e:\marketplace\tailwind.config.js", "JavaScript", 0, 0, 0, 43, 0, 0, 0, 0, 0, 0, 1, 2, 46
+"e:\marketplace\tsconfig.json", "JSON with Comments", 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 21
+"e:\marketplace\types\mongodb.d.ts", "TypeScript", 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6
+"e:\marketplace\utils\addURL.js", "JavaScript", 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6, 0, 12
+"e:\marketplace\utils\checkEmail.js", "JavaScript", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 3, 18
+"e:\marketplace\utils\checkUsername.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"e:\marketplace\utils\createAccount.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 2, 11
+"e:\marketplace\utils\getProfile.js", "JavaScript", 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 1, 4, 18
+"e:\marketplace\utils\getThumb.js", "JavaScript", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 2, 17
+"e:\marketplace\utils\parseTittle.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 3, 13
+"e:\marketplace\utils\updateProfileInfo.js", "JavaScript", 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 2, 22
+"e:\marketplace\utils\updateProfilePhoto.js", "JavaScript", 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 4, 3, 54
+"e:\marketplace\utils\uploadItem.js", "JavaScript", 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"e:\marketplace\utils\uploadPhotos.js", "JavaScript", 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 8, 4, 44
+"e:\marketplace\webpack.config.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"Total", "-", 23, 21671, 53, 991, 13, 142, 2180, 21, 75, 130, 408, 396, 26103

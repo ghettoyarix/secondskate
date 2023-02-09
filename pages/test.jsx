@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import checkEmail from '../utils/checkEmail';
-import { getProfile } from '../utils/getProfile';
-import ProfileLoader from '../components/UI/loaders/ProfileLoader';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { UploadProvider, useUpload } from '../context/UploadContext';
+import BidEditor from '../components/BidEditor';
+import Inner from '../components/inner';
+import Preview from '../components/Preview';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -31,15 +28,13 @@ const Test = () => {
     setfirst((prev) => prev + 2);
   };
   return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-        <div>112</div>
-      </Modal>
+    <div className="wrapper py-32">
+      <UploadProvider>
+        <div className="flex justify-between">
+          <BidEditor></BidEditor>
+          <Preview></Preview>
+        </div>
+      </UploadProvider>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import clientPromise from '../../lib/mongodb';
 
-export default async (req, res) => {
+const uploadUproduct = async (req, res) => {
   try {
     const client = await clientPromise;
     const db = client.db('secondskate');
@@ -12,6 +12,7 @@ export default async (req, res) => {
       .limit(1)
       .toArray();
     const newId = lastDoc[0].productId + 1;
+
     const post = await db.collection('products').insertOne({
       ...req.body,
       productId: newId,
@@ -24,3 +25,4 @@ export default async (req, res) => {
     throw new Error(e).message;
   }
 };
+export default uploadUproduct;

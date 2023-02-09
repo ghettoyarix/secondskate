@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-const AuthContext = React.createContext();
+const UploadContext = React.createContext();
 
-export function useAuth() {
-  return useContext(AuthContext);
+export function useUpload() {
+  return useContext(UploadContext);
 }
 
 export function UploadProvider({ children }) {
@@ -16,6 +16,7 @@ export function UploadProvider({ children }) {
         { title: 'Trucks', value: 'trucks' },
         { title: 'Wheels', value: 'wheels' },
         { title: 'Other', value: 'other' },
+        { title: 'Completes', value: 'completes' },
       ],
     },
     {
@@ -28,23 +29,55 @@ export function UploadProvider({ children }) {
       ],
     },
   ];
+  const conditions = [
+    { title: 'New', value: 'new' },
+    { title: 'Barely used', value: 'barely' },
+    { title: 'Roughly used', value: 'roughly' },
+  ];
+  const [mainPhoto, setMainPhoto] = useState();
 
-  const [chosenType, setChosenType] = useState();
+  const [chosenCondition, setChosenCondition] = useState(conditions[0]);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState();
+  const [price, setPrice] = useState('');
+  const [size, setSize] = useState('');
+  const [files, setFiles] = useState([]);
+  const [chosenBrand, setChosenBrand] = useState();
+
+  const [test, setTest] = useState(0);
+
   const [chosenCategory, setChosenCategory] = useState(categories[0]);
+  const [chosenType, setChosenType] = useState(chosenCategory.types[0]);
 
+  const change = () => {
+    setTest((prev) => prev + 2);
+  };
   const value = {
+    conditions,
+    title,
+    setTitle,
+    description,
+    setDescription,
+    price,
+    setPrice,
+    size,
+    setSize,
+    files,
+    setFiles,
     chosenType,
     setChosenType,
     chosenCategory,
-    test: 'test2',
+    chosenBrand,
+    setChosenBrand,
+    chosenCondition,
+    setChosenCondition,
+    setMainPhoto,
+    mainPhoto,
     setChosenCategory,
-    login,
-    signup,
-    logout,
-    resetPassword,
-    updateEmail,
-    updatePassword,
+    chosenType,
+    setChosenType,
+    categories,
   };
 
-  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
+  return <UploadContext.Provider value={value}>{children}</UploadContext.Provider>;
 }

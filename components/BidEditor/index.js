@@ -15,24 +15,44 @@ import CategoryPicker from '../../components/UI/CategoryPicker';
 import CircleLoader from '../../components/widgets/CircleLoader';
 import addURL from '../../utils/addURL';
 import { BRANDS } from '../../constants';
-const UploadPage = () => {
+import { useUpload } from '../../context/UploadContext';
+const BidEditor = ({ defaultValues }) => {
+  const {
+    test,
+    defaultTitle,
+    defaultPrice,
+    defaultDescription,
+    defaultCategory,
+    defaultType,
+    defaultBrand,
+    defaultSize,
+    defaultCondition,
+  } = defaultValues;
   const { category, type } = useSelector((state) => state.upload);
 
   const [error, setError] = useState('');
 
-  const [mainPhoto, setMainPhoto] = useState();
-
-  const conditions = [
-    { title: 'New', value: 'new' },
-    { title: 'Barely used', value: 'barely' },
-    { title: 'Roughly used', value: 'roughly' },
-  ];
-  const [chosenBrand, setChosenBrand] = useState();
-  const [chosenCondition, setChosenCondition] = useState(conditions[0]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
   const { currentUser, profile } = useAuth();
+  const {
+    setMainPhoto,
+    chosenCondition,
+    setChosenCondition,
+    chosenBrand,
+    setChosenBrand,
+    title,
+    setTitle,
+    description,
+    setDescription,
+    price,
+    setPrice,
+    setSize,
+    files,
+    setFiles,
+    conditions,
+  } = useUpload();
 
   useEffect(() => {
     setLoading(false);
@@ -41,13 +61,17 @@ const UploadPage = () => {
     }
   }, [currentUser]);
 
+  useEffect(() => {
+    setPrice(defaultPrice);
+    setChosenBrand(defaultBrand);
+    setDescription(defaultDescription);
+    setTitle(defaultTitle);
+    setChosenCondition(defaultCondition);
+  }, []);
+
   const router = useRouter();
   const [auctionFlag, setAuctionFlag] = useState(false);
   const [instantPriceFlag, setInstantPriceFlag] = useState(false);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState();
-  const [price, setPrice] = useState('');
-  const [size, setSize] = useState('');
 
   const titleRef = useRef();
   const sizeRef = useRef();
@@ -55,7 +79,6 @@ const UploadPage = () => {
   const descriptionRef = useRef();
   const fileTypes = ['JPG', 'PNG', 'GIF'];
 
-  const [files, setFiles] = useState([]);
   const handleChange = (acceptedFiles) => {
     if (files.length < 4) {
       setFiles([...files, ...acceptedFiles]);
@@ -124,7 +147,7 @@ const UploadPage = () => {
 
   return (
     currentUser && (
-      <div className="wrapper  py-32 flex justify-between">
+      <div className="   flex justify-between">
         <div className="max-w-[640px]">
           <div>
             <h1
@@ -263,24 +286,9 @@ const UploadPage = () => {
             Create item {uploading && <CircleLoader></CircleLoader>}
           </Button>
         </div>
-        <div className="max-w-[304px]">
-          <p className="text-mid font-bold mb-8">Preview</p>
-          <Bid
-            brand={chosenBrand}
-            description={description}
-            size={size}
-            condition={chosenCondition.value}
-            price={price}
-            category={category?.value}
-            type={type?.value}
-            owner={currentUser.displayName}
-            previewImage={mainPhoto}
-            title={title}
-            still></Bid>
-        </div>
       </div>
     )
   );
 };
 
-export default UploadPage;
+export default BidEditor;

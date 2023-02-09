@@ -108,7 +108,7 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
       </div>
       <div className="grid  grid-cols-1 mr-12  w-full mob:grid-cols-3 gap-4">
         {products?.map((obj) => (
-          <Bid editable still key={obj._id} {...obj}></Bid>
+          <Bid editable obj={obj} still key={obj._id} {...obj}></Bid>
         ))}
       </div>
       <EditBidModal></EditBidModal>
