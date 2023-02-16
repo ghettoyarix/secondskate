@@ -54,7 +54,7 @@ const Header = () => {
             </svg>
           )}
         </div>
-        <Link href={currentUser ? '/uploadPage' : '/login'}>
+        <Link href={currentUser ? '/upload' : '/login'}>
           <Button primary title="Upload"></Button>
         </Link>
         <Link replace={true} href={currentUser ? `/profile/you` : `/login`}>

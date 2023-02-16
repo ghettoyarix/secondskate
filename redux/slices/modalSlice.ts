@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 interface IState {
   editModalFlag: boolean;
   defaultValues: Partial<IDefaultValues>;
+  removeModalFlag: boolean;
 }
 interface IDefaultValues {
   title: string;
@@ -17,22 +18,29 @@ interface IDefaultValues {
 const initialState: IState = {
   editModalFlag: false,
   defaultValues: {},
+  removeModalFlag: false,
 };
 
 export const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
+    removeBid: (state, action) => {
+      state.removeModalFlag = true;
+      state.defaultValues = action.payload;
+    },
     editBid: (state, action) => {
-      state.editModalFlag = false;
+      state.editModalFlag = true;
+      console.log(action.payload);
       state.defaultValues = action.payload;
     },
     hide: (state) => {
       state.editModalFlag = false;
+      state.removeModalFlag = false;
     },
   },
 });
 
-export const { editBid, hide } = modalSlice.actions;
+export const { editBid, hide, removeBid } = modalSlice.actions;
 
 export default modalSlice.reducer;

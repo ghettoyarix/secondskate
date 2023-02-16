@@ -8,7 +8,8 @@ import Bid from '../../components/UI/Bid';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import EditBidModal from '../../components/UI/EditBidModal';
+import EditBidModal from '../../components/modals/EditBidModal';
+import RemoveBidModal from '../../components/modals/RemoveBidModal';
 export const getServerSideProps = async (context) => {
   const { index } = context.query;
 
@@ -54,10 +55,10 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
     }
   }, [anotherAccount, currentUser, isYourOwnAccount, profile]);
   return (
-    <div className="wrapper flex py-16">
+    <div className="wrapper  xs:items-start items-center first-letter:   xs:flex-row flex-col flex py-16">
       <div
         className="max-w-[256px] border  border-lightGray rounded-2xl
-       shadow-xl items-center  py-8 px-9 mr-10">
+       shadow-xl items-center  py-8 px-9 xs:mr-10">
         <div className="flex flex-col gap-6 border-b-2 items-center border-lightGray">
           <Image
             className="rounded-full"
@@ -106,12 +107,15 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
         </div>
         <p className="mt-4 text-gray text-small">Member since Mar 15, 2021</p>
       </div>
-      <div className="grid  grid-cols-1 mr-12  w-full mob:grid-cols-3 gap-4">
-        {products?.map((obj) => (
-          <Bid editable obj={obj} still key={obj._id} {...obj}></Bid>
-        ))}
+      <div className="flex justify-center">
+        <div className="grid items-center  grid-cols-1 mob:mr-12  w-full mob:grid-cols-3 gap-4">
+          {products?.map((obj) => (
+            <Bid editable obj={obj} still key={obj._id} {...obj}></Bid>
+          ))}
+        </div>
       </div>
       <EditBidModal></EditBidModal>
+      <RemoveBidModal></RemoveBidModal>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { UploadProvider } from '../context/UploadContext';
-import BidEditor from '../components/BidEditor';
-import Preview from '../components/Preview';
+import { UploadProvider } from '../../context/UploadContext';
+import BidEditor from '../../components/BidEditor';
+import Preview from '../../components/Preview';
 
-const Test = () => {
+const UploadPage = () => {
   return (
     <div className="wrapper py-32">
       <UploadProvider>
@@ -16,4 +16,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default UploadPage;

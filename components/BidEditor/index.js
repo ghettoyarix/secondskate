@@ -16,18 +16,9 @@ import CircleLoader from '../../components/widgets/CircleLoader';
 import addURL from '../../utils/addURL';
 import { BRANDS } from '../../constants';
 import { useUpload } from '../../context/UploadContext';
-const BidEditor = ({ defaultValues }) => {
-  const {
-    test,
-    defaultTitle,
-    defaultPrice,
-    defaultDescription,
-    defaultCategory,
-    defaultType,
-    defaultBrand,
-    defaultSize,
-    defaultCondition,
-  } = defaultValues;
+const BidEditor = (props) => {
+  const { defaultValues, editMod } = props;
+
   const { category, type } = useSelector((state) => state.upload);
 
   const [error, setError] = useState('');
@@ -52,6 +43,8 @@ const BidEditor = ({ defaultValues }) => {
     files,
     setFiles,
     conditions,
+    chosenCategory,
+    chosenType,
   } = useUpload();
 
   useEffect(() => {
@@ -62,11 +55,13 @@ const BidEditor = ({ defaultValues }) => {
   }, [currentUser]);
 
   useEffect(() => {
-    setPrice(defaultPrice);
-    setChosenBrand(defaultBrand);
-    setDescription(defaultDescription);
-    setTitle(defaultTitle);
-    setChosenCondition(defaultCondition);
+    if (editMod) {
+      setPrice(defaultValues.price);
+      setChosenBrand(defaultValues.brand);
+      setDescription(defaultValues.description);
+      setTitle(defaultValues.title);
+      setChosenCondition(defaultValues.condition);
+    }
   }, []);
 
   const router = useRouter();
@@ -89,6 +84,7 @@ const BidEditor = ({ defaultValues }) => {
       setMainPhoto(URL.createObjectURL(files[0]));
     }
   }, [files]);
+
   const uploadCall = async () => {
     const fileNames = [];
     const photosCall = async (productId) => {
@@ -110,8 +106,8 @@ const BidEditor = ({ defaultValues }) => {
       size: sizeRef.current.value,
       condition: chosenCondition.value,
       fileNames,
-      category: category.value,
-      type: type.value,
+      category: chosenCategory.value,
+      type: chosenType.value,
       username: profile.username,
     };
     if (title && price && description && files.length) {
@@ -152,7 +148,7 @@ const BidEditor = ({ defaultValues }) => {
           <div>
             <h1
               onClick={() => {
-                console.log(files);
+                console.log(defaultValues);
               }}
               className="text-giant font-bold">
               Upload your bulshit!!
@@ -290,5 +286,8 @@ const BidEditor = ({ defaultValues }) => {
     )
   );
 };
-
+BidEditor.defaultProps = {
+  defaultValues: {},
+  editMod: false,
+};
 export default BidEditor;

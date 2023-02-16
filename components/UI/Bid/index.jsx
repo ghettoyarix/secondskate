@@ -8,7 +8,7 @@ import { parseBidTitle } from '../../../utils/parseTittle';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { editBid } from '../../../redux/slices/modalSlice';
+import { editBid, removeBid } from '../../../redux/slices/modalSlice';
 const Bid = (props) => {
   const {
     obj,
@@ -34,6 +34,9 @@ const Bid = (props) => {
   const editCall = () => {
     dispatch(editBid(obj));
   };
+  const removeCall = () => {
+    dispatch(removeBid(obj));
+  };
   const goToProduct = () => {
     if (!editable) {
       router.push(`/product/${productId}`);
@@ -47,15 +50,17 @@ const Bid = (props) => {
       className={cn(
         ' duration-150 outline-1 outline  rounded-[12px] outline-lightGray   bg-white w-[256px] mb-1	',
         {
-          'hover:scale-[1.1]': !still,
+          'hover:scale-[1.07]': !still,
         },
       )}>
       <div
         onClick={goToProduct}
-        className={`h-[256px]  w-[256px]	 ${!editable && 'cursor-pointer'}    mb-3 relative `}>
+        className={`h-[256px]  w-[256px]	 ${
+          !editable && !still && 'cursor-pointer'
+        }    mb-3 relative `}>
         {previewImage || (photoURLs && photoURLs[0]) ? (
           <Image
-            className="rounded-[12px] object-cover"
+            className=" 0 rounded-[12px] object-cover "
             alt="mainpic"
             fill
             sizes="(max-width: 256px) 100vw,50vw,
@@ -67,11 +72,21 @@ const Bid = (props) => {
         {editable && (
           <Image
             onClick={editCall}
-            className="absolute cursor-pointer top-3 left-3"
+            className="absolute rounded-full bg-white border-2 border-white cursor-pointer top-3 left-3"
             width={34}
             height={34}
             alt={'pencil'}
             src={'/svg/pencil.svg'}></Image>
+        )}
+        {editable && (
+          <Image
+            onClick={removeCall}
+            className="absolute rounded-full bg-white border-2 border-white 
+            cursor-pointer top-3 left-[210px]  "
+            width={34}
+            height={34}
+            alt={'trash'}
+            src={'/svg/trash.svg'}></Image>
         )}
       </div>
       <div className="px-2">

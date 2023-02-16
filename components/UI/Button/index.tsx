@@ -1,7 +1,17 @@
 import cn from 'classnames';
 import React, { useState, useEffect } from 'react';
-
-const Button = ({ onClick, primary, title, expansive, className, fontSize, children, arrow }) => {
+type ButtonProps = {
+  onClick: () => void;
+  primary?: boolean;
+  title?: string;
+  expansive?: boolean;
+  className?: string;
+  fontSize?: number;
+  children: React.ReactNode;
+  arrow?: boolean;
+};
+const Button = (props: ButtonProps): JSX.Element => {
+  const { onClick, primary, title, expansive, className, fontSize, children, arrow } = props;
   const [baseFontSize, setBaseFontSize] = useState('text-[14px]');
 
   const checkText = () => {
@@ -22,7 +32,7 @@ const Button = ({ onClick, primary, title, expansive, className, fontSize, child
             primary,
         },
         { 'w-full': expansive },
-        { [className]: className },
+        { className: className },
         { [baseFontSize]: true },
       )}>
       {title}

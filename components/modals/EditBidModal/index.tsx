@@ -24,7 +24,7 @@ const EditBidModal = () => {
       <div className=" rounded-xl overflow-scroll max-h-[800px] bg-white w-[60%] h-[80%]   absolute mx-auto top-[10%] right-0 left-0  ">
         <UploadProvider>
           <div className="flex justify-center ">
-            <BidEditor defaultValues={defaultValues}></BidEditor>
+            <BidEditor editMod defaultValues={defaultValues}></BidEditor>
           </div>
         </UploadProvider>
       </div>
