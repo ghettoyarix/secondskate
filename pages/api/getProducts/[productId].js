@@ -1,6 +1,5 @@
 import clientPromise from '../../../lib/mongodb';
-
-export default async (req, res) => {
+const getProducts = async (req, res) => {
   const { productId } = req.query;
 
   try {
@@ -8,13 +7,12 @@ export default async (req, res) => {
 
     const db = client.db('secondskate');
 
-    const products = await db
-      .collection('products')
-      .find({ productId: parseInt(productId) })
-      .toArray();
+    const products = await db.collection('products').findOne({ productId: parseInt(productId) });
 
-    res.json(products[0]);
+    res.json(products);
   } catch (e) {
     console.error(e);
   }
 };
+
+export default getProducts;

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BidEditor from '../../BidEditor';
 import { UploadProvider } from '../../../context/UploadContext';
 const EditBidModal = () => {
-  const { editModalFlag, defaultValues } = useSelector((state) => state.modal);
+  const { editModalFlag, defaultValues } = useSelector((state: any) => state.modal);
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);

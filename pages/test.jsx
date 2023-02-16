@@ -2,16 +2,14 @@ import React, { useEffect } from 'react';
 import { UploadProvider } from '../context/UploadContext';
 import BidEditor from '../components/BidEditor';
 import Preview from '../components/Preview';
-
+import deleteProduct from '../utils/deleteProduct';
 const Test = () => {
+  const click = async () => {
+    await deleteProduct(6);
+  };
   return (
     <div className="wrapper py-32">
-      <UploadProvider>
-        <div className="flex justify-between">
-          <BidEditor></BidEditor>
-          <Preview></Preview>
-        </div>
-      </UploadProvider>
+      <button onClick={click}>xx</button>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import Button from '../../UI/Button';
 import Bid from '../../UI/Bid';
 import { UploadProvider } from '../../../context/UploadContext';
 const RemoveBidModal = () => {
-  const { removeModalFlag, defaultValues } = useSelector((state) => state.modal);
+  const { removeModalFlag, defaultValues } = useSelector((state: any) => state.modal);
 
   const dispatch = useDispatch();
 
