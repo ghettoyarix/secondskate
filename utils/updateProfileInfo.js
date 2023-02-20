@@ -1,5 +1,5 @@
 import { collection, query, updateDoc, doc, getDocs, getDoc, where } from 'firebase/firestore';
-import { db, auth } from '../firebase';
+import { db, auth } from 'lib/firebase';
 
 export const updateProfileInfo = async (data) => {
   const acc = auth.currentUser.uid;

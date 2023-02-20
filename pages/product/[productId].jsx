@@ -1,16 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Label from '../../components/UI/Label';
+import Label from 'components/UI/Label';
 import cn from 'classnames';
-import Button from '../../components/UI/Button';
-import HyperLink from '../../components/widgets/HyperLink';
-import { parseBidTitle } from '../../utils/parseTittle';
+import Button from 'components/UI/Button';
+import HyperLink from 'components/widgets/HyperLink';
+import { parseBidTitle } from 'utils/parseTittle';
 import { useRouter } from 'next/router';
 export async function getServerSideProps(context) {
   const { productId } = context.query;
   const res = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts/${productId}`);
   const product = await res.json();
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
 
   return { props: { product } };
 }

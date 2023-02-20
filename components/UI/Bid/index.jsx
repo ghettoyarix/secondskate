@@ -95,8 +95,6 @@ const Bid = (props) => {
           <Label>{price || '--'} UAH</Label>
         </div>
 
-        <p className="text-gray text-lable truncate   ">{description}</p>
-
         <div className="flex justify-between mt-3">
           <div className="flex text-[12px] gap-2">
             <p className="text-gray ">{parseBidTitle(category) || '--'}</p>

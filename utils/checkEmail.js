@@ -1,4 +1,4 @@
-import { auth } from '../firebase';
+import { auth } from 'lib/firebase';
 import { fetchSignInMethodsForEmail } from 'firebase/auth';
 
 const checkEmail = async (email) => {

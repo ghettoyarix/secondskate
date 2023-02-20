@@ -9,11 +9,11 @@ const Header = () => {
   const { currentUser, test, logout, profile } = useAuth();
 
   return (
-    <div className=" wrapper flex  px-4  justify-between items-center text-reg font-bold  ">
+    <div className=" wrapper flex   px-4  justify-between items-center text-reg font-bold  ">
       <div className="py-6 flex items-center  gap-8">
         <Link href="/">
-          <div className="flex   items-centerpb-1  border-lightGray border-0  tab:border-r-2">
-            <Image alt="logo" height={32} width={32} src="/logo.png"></Image>
+          <div className="flex gap-2  items-centerpb-1  border-lightGray border-0  tab:border-r-2">
+            <Image alt="logo" height={32} width={32} src="/svg/secondskate.svg"></Image>
 
             <p className=" mr-8 text-mid ">secondskate </p>
           </div>

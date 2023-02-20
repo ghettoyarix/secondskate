@@ -1,5 +1,5 @@
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db, auth } from '../firebase';
+import { db, auth } from 'lib/firebase';
 
 export const getProfile = async (username) => {
   const q = query(collection(db, 'accounts'), where('username', '==', username));

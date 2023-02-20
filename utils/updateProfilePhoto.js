@@ -1,7 +1,7 @@
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import { updateProfileInfo } from './updateProfileInfo';
-import { auth } from '../firebase';
+import { auth } from 'lib/firebase';
 const setPhoto = async (downloadURL) => {
   await updateProfile(auth.currentUser, {
     photoURL: downloadURL,

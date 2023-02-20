@@ -11,12 +11,12 @@ const deleteProduct = async (req, res) => {
     const permitCondition = product.uploadedBy === authId; // MUST BE IMPROVED IN FUTURE!
     if (permitCondition) {
       const result = db.collection('products').deleteOne({ productId: parseInt(productId) });
-      res.json(result);
+      res.json(true);
     } else {
       res.json(false);
     }
   } catch (e) {
-    console.error(e);
+    throw e;
   }
 };
 

@@ -1,0 +1,31 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg {
+  width: 24px;
+  height: 24px;
+  color: #10b981;
+}
+
+.line {
+  stroke: #3f3f3f;
+  stroke-width: 2;
+}
+
+.check {
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: check 0.5s ease-in-out forwards;
+}
+
+@keyframes check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

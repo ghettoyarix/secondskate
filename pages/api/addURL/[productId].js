@@ -1,12 +1,12 @@
 import clientPromise from '../../../lib/mongodb';
 
-export default async (req, res) => {
+const addURL = async (req, res) => {
   const { productId } = req.query;
   const URL = req.body;
 
   try {
     const client = await clientPromise;
-    console.log(client);
+
     const db = client.db('secondskate');
 
     const products = await db
@@ -18,3 +18,4 @@ export default async (req, res) => {
     console.error(e);
   }
 };
+export default addURL;
