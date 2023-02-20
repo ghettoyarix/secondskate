@@ -8,17 +8,24 @@ import deleteProduct from 'utils/deleteProduct';
 import { UploadProvider } from '../../../context/UploadContext';
 import CheckmarkLoader from 'components/widgets/CheckmarkLoader';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 const RemoveBidModal = () => {
+  const router = useRouter();
   const { removeModalFlag, defaultValues } = useSelector((state: any) => state.modal);
+  const [deletion, setDeletion] = useState(false);
   const [deletedSuccesfully, setDeletedSuccesfully] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleClose = () => {
     dispatch(hide());
   };
-  const handleDelete = () => {
-    //deleteProduct(defaultValues.productId);
-    setTimeout(handleClose, 700);
+  const handleDelete = async () => {
+    setDeletion(true);
+    const hasBeenDeleted = await deleteProduct(defaultValues.productId);
+    setDeletedSuccesfully(() => true);
+    setTimeout(handleClose, 400);
+    setDeletion(false);
   };
 
   return (
@@ -30,9 +37,16 @@ const RemoveBidModal = () => {
       <div
         className=" rounded-xl py-4 flex justify-center  items-center flex-col max-h-[700px]
        bg-white min-w-[256px] max-w-[25%] h-[70%]   absolute mx-auto top-[10%] right-0 left-0  ">
-        {!deletedSuccesfully ? (
+        {deletion ? (
           <div>
-            <CheckmarkLoader></CheckmarkLoader>
+            <CheckmarkLoader done={deletedSuccesfully}></CheckmarkLoader>
+            {deletedSuccesfully && (
+              <p
+                onClick={() => console.log(deletedSuccesfully)}
+                className="mt-4 text-mid text-center px-4 text-primary">
+                Your bid has been deleted
+              </p>
+            )}
           </div>
         ) : (
           <>

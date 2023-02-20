@@ -1,26 +1,29 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Checkmark from './Checkmark';
-function LoadingAnimation() {
-  const [loading, setLoading] = useState(true);
-  const [done, setDone] = useState(false);
+interface IProps<T> {
+  done: boolean;
+}
 
+function CircleLoader<T>(props: IProps<T>) {
+  const [loading, setLoading] = useState(true);
+  const { done } = props;
+
+  const startLoading = async () => {};
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (done) {
       setLoading(false);
-      setDone(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    }
+  }, [done]);
 
   return (
     <div className="  flex justify-center items-center">
       {loading ? (
         <div className="rounded-full border-t-transparent border-8 border-primary border-t-8 border-gray-200 h-24 w-24 animate-spin"></div>
       ) : done ? (
-        <Checkmark></Checkmark>
+        <Image height={70} width={70} alt="cche" src={'/svg/checkmark-borderless.svg'}></Image>
       ) : null}
     </div>
   );
 }
-export default LoadingAnimation;
+export default CircleLoader;

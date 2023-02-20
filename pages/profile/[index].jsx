@@ -65,7 +65,7 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
             width={160}
             height={160}
             alt="profilePic"
-            src={isYourOwnAccount ? currentUser?.photoURL : info?.profilePhoto}></Image>
+            src={}></Image>
           <p className="text-mid font-semibold">@{info?.username}</p>
           <p className="text-small text-gray">
             {'loading loadinglo adingloadingloadingloadingloading loadingloading loadingloading'}

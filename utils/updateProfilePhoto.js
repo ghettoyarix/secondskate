@@ -1,18 +1,33 @@
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  listAll,
+  deleteObject,
+} from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import { updateProfileInfo } from './updateProfileInfo';
-import { auth } from 'lib/firebase';
+import { auth, storage } from 'lib/firebase';
 const setPhoto = async (downloadURL) => {
   await updateProfile(auth.currentUser, {
     photoURL: downloadURL,
   });
   updateProfileInfo({ profilePhoto: downloadURL });
 };
+const deletePrevious = async () => {
+  const listRef = ref(storage, `profilePhotos/${auth.currentUser.uid}`);
+  const photos = await listAll(listRef);
+  const deleted = await Promise.all(
+    photos.items.map((itemRef) => {
+      deleteObject(itemRef);
+    }),
+  );
+};
 const updateProfilePhoto = async (file) => {
-  return new Promise((resolve, reject) => {
-    const storage = getStorage();
+  return new Promise(async (resolve, reject) => {
     const storageRef = ref(storage, `profilePhotos/${auth.currentUser.uid}/${file.name}`);
-
+    await deletePrevious();
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(

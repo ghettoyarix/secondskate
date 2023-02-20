@@ -11,7 +11,13 @@ const uploadUproduct = async (req, res) => {
       .sort({ productId: -1 })
       .limit(1)
       .toArray();
-    const newId = lastDoc[0].productId + 1;
+    console.log(lastDoc, 'last');
+    let newId;
+    if (!lastDoc.length) {
+      newId = 1;
+    } else {
+      newId = lastDoc[0]?.productId + 1;
+    }
 
     const post = await db.collection('products').insertOne({
       ...req.body,

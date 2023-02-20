@@ -5,8 +5,9 @@ import Button from '../UI/Button';
 import { useAuth } from '../../context/AuthContext';
 import updateProfilePhoto from '../../utils/updateProfilePhoto';
 import CircleLoader from '../widgets/CircleLoader';
+
 const ProfilePhotoUploader = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, profile } = useAuth();
   const [profileUploading, setProfileUploading] = useState(false);
   const handleChange = async (acceptedFiles) => {
     const photoFile = acceptedFiles[0];
@@ -21,7 +22,7 @@ const ProfilePhotoUploader = () => {
         height={128}
         width={128}
         className="rounded-full"
-        src={currentUser?.photoURL}></Image>
+        src={profile?.profilePhoto}></Image>
       <div className="text-lable max-w-[256px] flex flex-col justify-between  ">
         <p>Profile photo</p>
         <p className="text-gray  text-small">
