@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import Discover from '../components/Discover';
 import Earn from '../components/Earn';
+import { DiscoverProvider } from 'context/DiscoverContext';
 import type { NextPage, GetServerSideProps } from 'next';
 
 interface IProduct {}
@@ -36,7 +37,9 @@ const Home: NextPage = ({ products }) => {
       <Popular></Popular>
       <HotBid></HotBid>
       <HotCollections></HotCollections> */}
-      <Discover products={products}></Discover>
+      <DiscoverProvider>
+        <Discover products={products}></Discover>
+      </DiscoverProvider>
     </div>
   );
 };

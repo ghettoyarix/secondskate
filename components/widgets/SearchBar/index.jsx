@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import SearchWindow from './SearchWindow';
+import { useHeader } from 'context/HeaderContext';
+
 const SearchBar = () => {
+  const searchRef = useRef();
+  const { searchedValue, setSearchedValue } = useHeader();
+  const changeSearchValue = () => {
+    setSearchedValue(() => searchRef.current.value);
+  };
   return (
     <div
-      className=" flex items-center justify-between px-2 font-[400] text-[12px] outline
+      className=" flex items-center justify-between z-20 px-2 font-[400] text-[12px] outline
     outline-lightGray outilne-1 outkub rounded-sm h-10 w-[256px] ">
-      <input className="w-full focus:outline-none" type="text" placeholder="Search"></input>
+      <input
+        ref={searchRef}
+        value={searchedValue}
+        onChange={changeSearchValue}
+        className="w-full focus:outline-none"
+        type="text"
+        placeholder="Search"></input>
       <svg
         width="18"
         height="18"
@@ -18,6 +32,7 @@ const SearchBar = () => {
           fill="#777E91"
         />
       </svg>
+      <SearchWindow></SearchWindow>
     </div>
   );
 };

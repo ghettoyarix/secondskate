@@ -41,7 +41,7 @@ const productPage = ({ product }) => {
   return (
     <div className="flex justify-center gap-3">
       <div className="flex flex-col tab:flex-row w-[1120px] items-center tab:items-start py-24 product:wrapper justify-start   tab:justify-between">
-        <div className="relative aspect-auto h-[478px]  w-[311px] xs:w-[496px] tab:mr-4 tab:w-[640px] xs:h-[568px]">
+        <div className="relative aspect-auto h-[478px] z-1  w-[311px] xs:w-[496px] tab:mr-4 tab:w-[640px] xs:h-[568px]">
           <Image className=" rounded-xl object-cover" fill alt="1" src={photoURLs[0]}></Image>
         </div>
         <div className="w-[375px]  items-stretch h-fit	tab:h-full flex flex-col justify-between  ">

@@ -4,10 +4,11 @@ const getProducts = async (req, res) => {
   try {
     const client = await clientPromise;
     const db = client.db('secondskate');
-    const { limit, page, category, type, owner, condition, priceSorter } = req.query;
+    const { limit, page, category, type, uploadedBy, condition, priceSorter } = req.query;
     const filterProps = {
       category,
       type,
+      uploadedBy,
     };
     const sorterProps = {
       price: priceSorter,

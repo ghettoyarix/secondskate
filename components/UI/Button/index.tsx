@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import React, { useState, useEffect } from 'react';
+
 type ButtonProps = {
   onClick: () => void;
   primary?: boolean;
@@ -16,6 +17,7 @@ const Button = (props: ButtonProps): JSX.Element => {
 
   const checkText = () => {
     fontSize && setBaseFontSize('text-[' + fontSize + 'px]');
+    className;
   };
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const Button = (props: ButtonProps): JSX.Element => {
             primary,
         },
         { 'w-full': expansive },
-        { className: className },
+        { [className]: className },
         { [baseFontSize]: true },
       )}>
       {title}

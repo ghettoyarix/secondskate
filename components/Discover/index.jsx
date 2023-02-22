@@ -5,7 +5,10 @@ import Bid from '../UI/Bid';
 import RangeSlider from '../UI/RangeSlider/';
 import { useAuth } from '../../context/AuthContext';
 import Button from '../UI/Button';
+import FilterBlock from './FilterBlock';
+import NothingFound from './NothingFound';
 
+import { useDiscover } from 'context/DiscoverContext';
 const Discover = ({ products }) => {
   function useDidUpdateEffect(fn, inputs) {
     const didMountRef = useRef(false);
@@ -18,38 +21,27 @@ const Discover = ({ products }) => {
     }, inputs);
   } // skip 1st render hook
   const { loading, currentUser } = useAuth();
-
-  const categories = [
-    { title: 'All items', category: 'any' },
-    { title: 'Completes', type: 'completes' },
-    { title: 'Decks', type: 'decks' },
-    { title: 'Trucks', type: 'trucks' },
-    { title: 'Wheels', type: 'wheels' },
-    { title: 'Other', type: 'other' },
-    { title: 'Shoes', category: 'shoes' },
-  ];
-  const priceSortOptions = [
-    { title: 'Highest price', value: -1 },
-    { title: 'Lowest price', value: 1 },
-  ];
-  const likesSortOptions = ['Most liked', 'Least liked'];
-  const creatorSortOptions = ['Verified only', 'Any verification'];
-  const discoverSortOptions = ['Recently added', 'Asnything'];
-
-  const [chosenPriceSorter, setChosenPricSorter] = useState(priceSortOptions[0]);
-  const [chosenLikesSorter, setChosenLikesSorter] = useState(likesSortOptions[0]);
-  const [chosenCreatorSorter, setChosenCreatorSorter] = useState(creatorSortOptions[0]);
-  const [discoverSorter, setDiscoverSorter] = useState(discoverSortOptions[0]);
-  const [chosenCategory, setChosenCategory] = useState(categories[0]);
   const [filteredProducts, setFilteredProducts] = useState(products);
 
+  const {
+    categories,
+    chosenPriceSorter,
+    chosenLikesSorter,
+    discoverSorter,
+    setDiscoverSorter,
+    chosenCategory,
+    setChosenCategory,
+    discoverSortOptions,
+    isFilterShown,
+    setIsFilterShown,
+  } = useDiscover();
   const queryProps = {
     type: chosenCategory.type,
     category: chosenCategory.category,
     priceSorter: chosenPriceSorter.value,
     chosenLikesSorter,
   };
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(
         `http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
@@ -60,7 +52,9 @@ const Discover = ({ products }) => {
     };
     fetchProducts();
   }, [chosenCategory, chosenPriceSorter]);
-
+  const handleFilter = () => {
+    setIsFilterShown((prev) => !prev);
+  };
   return (
     <div className="wrapper py-12 ">
       <h1 onClick={() => console.log(filteredProducts)} className="text-giant pb-10  font-bold">
@@ -89,47 +83,22 @@ const Discover = ({ products }) => {
             options={discoverSortOptions}
             pickOption={(obj) => setDiscoverSorter(obj)}></DropDown>
         </div>
-        <Button primary className="text-mid">
-          Filter <span className="font-thin">X</span>
+
+        <Button onClick={handleFilter} primary className="text-mid  w-20">
+          Filter {isFilterShown && <span className="font-thin">X</span>}
         </Button>
       </div>
-      <div className="grid grid-cols-4 my-8  text-[12px] text-gray font-bold   ">
-        <div className="max-w-[256px]">
-          <p className="mb-3">PRICE</p>
-          <DropDown
-            chosenOption={chosenPriceSorter}
-            options={priceSortOptions}
-            pickOption={(obj) => setChosenPricSorter(obj)}></DropDown>
-        </div>
-        <div className="max-w-[256px]">
-          <p className="mb-3">LIKES</p>
-          <DropDown
-            chosenOption={chosenLikesSorter}
-            options={likesSortOptions}
-            pickOption={(obj) => setChosenLikesSorter(obj)}></DropDown>
-        </div>
-        <div className="max-w-[256px]">
-          <p className="mb-3">CREATOR</p>
-          <DropDown
-            chosenOption={chosenCreatorSorter}
-            options={creatorSortOptions}
-            pickOption={(obj) => setChosenCreatorSorter(obj)}></DropDown>
-        </div>
-        <div className="max-w-[256px]">
-          <RangeSlider
-            className="pb-2   "
-            min={2}
-            max={10}
-            onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
-          />
-        </div>
-      </div>
-      <div className="flex justify-center">
-        <div className="grid grid-cols-1 gap-8 xs:grid-cols-2 mob:grid-cols-3  tab:grid-cols-4">
-          {filteredProducts?.map((obj) => (
-            <Bid key={obj._id} {...obj}></Bid>
-          ))}
-        </div>
+      <FilterBlock></FilterBlock>
+      <div className="flex mt-8 justify-center">
+        {filteredProducts.length !== 0 ? (
+          <div className="grid grid-cols-1 gap-8 xs:grid-cols-2 mob:grid-cols-3  tab:grid-cols-4">
+            {filteredProducts?.map((obj) => (
+              <Bid key={obj._id} {...obj}></Bid>
+            ))}
+          </div>
+        ) : (
+          <NothingFound />
+        )}
       </div>
     </div>
   );

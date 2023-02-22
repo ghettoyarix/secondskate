@@ -30,30 +30,32 @@ export const getServerSideProps = async (context) => {
 const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
   const router = useRouter();
   const { index } = router.query;
-  const { currentUser, setUsername, profile } = useAuth();
+  const { currentUser, profile } = useAuth();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts`);
-      const json = await res.json();
-      console.log(json);
-      setProducts(json);
+      if (isYourOwnAccount) {
+        setInfo(profile);
+      } else {
+        setInfo(anotherAccount);
+      }
+      if (info) {
+        const res = await fetch(
+          `http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?uploadedBy=${info?.uid}`,
+        );
+        const json = await res.json();
+        setProducts(json);
+      }
     };
 
     if (currentUser && profile) {
       fetchProducts();
       setLoading(false);
     }
-
-    if (isYourOwnAccount) {
-      setInfo(profile);
-    } else {
-      setInfo(anotherAccount);
-    }
-  }, [anotherAccount, currentUser, isYourOwnAccount, profile]);
+  }, [anotherAccount, currentUser, isYourOwnAccount, profile, info]);
   return (
     <div className="wrapper  xs:items-start items-center first-letter:   xs:flex-row flex-col flex py-16">
       <div
@@ -65,7 +67,7 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
             width={160}
             height={160}
             alt="profilePic"
-            src={}></Image>
+            src={info?.profilePhoto || '/svg/no-photo.svg'}></Image>
           <p className="text-mid font-semibold">@{info?.username}</p>
           <p className="text-small text-gray">
             {'loading loadinglo adingloadingloadingloadingloading loadingloading loadingloading'}
@@ -105,12 +107,14 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
             check
           </button>
         </div>
-        <p className="mt-4 text-gray text-small">Member since Mar 15, 2021</p>
+        <p onClick={() => console.log(info)} className="mt-4 text-gray text-small">
+          Member since Mar 15, 2021
+        </p>
       </div>
       <div className="flex justify-center">
         <div className="grid items-center  grid-cols-1 mob:mr-12  w-full mob:grid-cols-3 gap-4">
           {products?.map((obj) => (
-            <Bid editable obj={obj} still key={obj._id} {...obj}></Bid>
+            <Bid editable={isYourOwnAccount} obj={obj} still key={obj._id} {...obj}></Bid>
           ))}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const d2 = ({ options, pickOption, chosenOption, searchable }) => {
+const DropDown = ({ options, pickOption, chosenOption, searchable }) => {
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -91,6 +91,7 @@ const d2 = ({ options, pickOption, chosenOption, searchable }) => {
               )
               .map((obj) => (
                 <p
+                  key={obj}
                   onClick={() => onOptionClick(obj)}
                   className="w-full  text-center py-2   text-reg overflow-hidden text-black hover:bg-lightGray">
                   {obj.title || obj}
@@ -102,7 +103,7 @@ const d2 = ({ options, pickOption, chosenOption, searchable }) => {
     </div>
   );
 };
-d2.defaultProps = {
+DropDown.defaultProps = {
   options: ['Today2', 'Last week', 'Last month', 'Last year'],
 };
-export default d2;
+export default DropDown;
