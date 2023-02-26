@@ -11,7 +11,7 @@ interface IProducts {
   products: IProduct[];
 }
 export async function getServerSideProps() {
-  const res = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/getProducts`);
   const products: IProducts = await res.json();
   return {
     props: { products }, // will be passed to the page component as props

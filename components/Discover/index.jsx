@@ -44,7 +44,7 @@ const Discover = ({ products }) => {
   useDidUpdateEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(
-        `http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
+        `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
           new URLSearchParams({ ...queryProps }),
       );
       const json = await res.json();

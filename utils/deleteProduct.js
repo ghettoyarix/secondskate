@@ -7,7 +7,7 @@ const deleteProduct = async (productId) => {
     productId,
   };
   const recordDeleted = await fetch(
-    `http://${process.env.NEXT_PUBLIC_API_URL}/api/deleteProduct?` +
+    `${process.env.NEXT_PUBLIC_API_URL}/api/deleteProduct?` +
       new URLSearchParams({ ...queryProps }),
   );
   const fileDeletePermit = await recordDeleted.json();

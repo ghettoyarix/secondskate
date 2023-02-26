@@ -9,7 +9,7 @@ import { parseBidTitle } from 'utils/parseTittle';
 import { useRouter } from 'next/router';
 export async function getServerSideProps(context) {
   const { productId } = context.query;
-  const res = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts/${productId}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/getProducts/${productId}`);
   const product = await res.json();
   if (!product) {
     return {

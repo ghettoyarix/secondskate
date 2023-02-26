@@ -44,7 +44,7 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
       }
       if (info) {
         const res = await fetch(
-          `http://${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?uploadedBy=${info?.uid}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?uploadedBy=${info?.uid}`,
         );
         const json = await res.json();
         setProducts(json);
