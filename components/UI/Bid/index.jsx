@@ -7,7 +7,7 @@ import HyperLink from '../../widgets/HyperLink';
 import { parseBidTitle } from '../../../utils/parseTittle';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-
+import Link from 'next/link';
 import { editBid, removeBid } from '../../../redux/slices/modalSlice';
 const Bid = (props) => {
   const {
@@ -37,14 +37,7 @@ const Bid = (props) => {
   const removeCall = () => {
     dispatch(removeBid(obj));
   };
-  const goToProduct = () => {
-    if (!editable) {
-      router.push(`/product/${productId}`);
-    }
-  };
-  const goToUser = () => {
-    router.push(`/profile/${username}`);
-  };
+
   return (
     <div
       className={cn(
@@ -53,42 +46,44 @@ const Bid = (props) => {
           'hover:scale-[1.07]': !still,
         },
       )}>
-      <div
-        onClick={goToProduct}
-        className={`h-[256px]  w-[256px]	 ${
-          !editable && !still && 'cursor-pointer'
-        }    mb-3 relative `}>
-        {previewImage || (photoURLs && photoURLs[0]) ? (
-          <Image
-            className=" 0 rounded-[12px] object-cover "
-            alt="mainpic"
-            fill
-            sizes="(max-width: 256px) 100vw,50vw,
+      <Link href={!editable && `/product/${productId}`}>
+        <div
+          onClick={goToProduct}
+          className={`h-[256px]  w-[256px]	 ${
+            !editable && !still && 'cursor-pointer'
+          }    mb-3 relative `}>
+          {previewImage || (photoURLs && photoURLs[0]) ? (
+            <Image
+              className=" 0 rounded-[12px] object-cover "
+              alt="mainpic"
+              fill
+              sizes="(max-width: 256px) 100vw,50vw,
             33vw"
-            src={previewImage || (photoURLs && photoURLs[0])}></Image>
-        ) : (
-          <NoPhoto still={still}></NoPhoto>
-        )}
-        {editable && (
-          <Image
-            onClick={editCall}
-            className="absolute rounded-full bg-white border-2 border-white cursor-pointer top-3 left-3"
-            width={34}
-            height={34}
-            alt={'pencil'}
-            src={'/svg/pencil.svg'}></Image>
-        )}
-        {editable && (
-          <Image
-            onClick={removeCall}
-            className="absolute rounded-full bg-white border-2 border-white 
+              src={previewImage || (photoURLs && photoURLs[0])}></Image>
+          ) : (
+            <NoPhoto still={still}></NoPhoto>
+          )}
+          {editable && (
+            <Image
+              onClick={editCall}
+              className="absolute rounded-full bg-white border-2 border-white cursor-pointer top-3 left-3"
+              width={34}
+              height={34}
+              alt={'pencil'}
+              src={'/svg/pencil.svg'}></Image>
+          )}
+          {editable && (
+            <Image
+              onClick={removeCall}
+              className="absolute rounded-full bg-white border-2 border-white 
             cursor-pointer top-3 left-[210px]  "
-            width={34}
-            height={34}
-            alt={'trash'}
-            src={'/svg/trash.svg'}></Image>
-        )}
-      </div>
+              width={34}
+              height={34}
+              alt={'trash'}
+              src={'/svg/trash.svg'}></Image>
+          )}
+        </div>
+      </Link>
       <div className="px-2">
         <div className="flex justify-between  w-full mb-3">
           <HyperLink path={`/product/${productId}`}>{title}</HyperLink>

@@ -16,6 +16,7 @@ export const getServerSideProps = async (context) => {
   const isYourOwnAccount = index === 'you';
 
   const anotherAccount = await getProfile(index);
+  console.log(anotherAccount);
 
   if (anotherAccount === 'nothing' && index !== 'you') {
     return {
@@ -51,10 +52,8 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
       }
     };
 
-    if (currentUser && profile) {
-      fetchProducts();
-      setLoading(false);
-    }
+    fetchProducts();
+    setLoading(false);
   }, [anotherAccount, currentUser, isYourOwnAccount, profile, info]);
   return (
     <div className="wrapper  xs:items-start items-center first-letter:   xs:flex-row flex-col flex py-16">
