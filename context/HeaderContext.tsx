@@ -51,7 +51,7 @@ export function HeaderProvider({ children }: HeaderProviderProps) {
   ]);
   const [productsFound, setProductsFound] = useState<Product[]>([]);
 
-  const [searchedValue, setSearchedValue] = useState('ss');
+  const [searchedValue, setSearchedValue] = useState('');
   const value: HeaderContextType = {
     searchedValue,
     setSearchedValue,

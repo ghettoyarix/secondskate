@@ -5,7 +5,7 @@ import Button from '../../components/UI/Button/';
 import Bid from '../../components/UI/Bid';
 import { useSelector, useDispatch } from 'react-redux';
 import Dropzone from 'react-dropzone';
-import Dragger from '../../components/Dragger';
+import Dragger from 'components/widgets/Dragger';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../context/AuthContext';
 import InputBlock from '../../components/UI/InputBlock';
