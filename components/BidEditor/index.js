@@ -113,7 +113,7 @@ const BidEditor = (props) => {
     if (title && price && description && files.length) {
       try {
         setUploading(true);
-        let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/uploadProduct`, {
+        let response = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/uploadProduct`, {
           method: 'POST',
           body: JSON.stringify(data),
           headers: {
