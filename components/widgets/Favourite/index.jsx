@@ -4,9 +4,9 @@ const index = () => {
   return (
     <>
       {true ? (
-        <Image className="m-auto" height={33} width={29} src="/heartOff.svg"></Image>
+        <Image alt="heartOff" className="m-auto" height={33} width={29} src="/heartOff.svg"></Image>
       ) : (
-        <Image className="m-auto" height={33} width={29} src="/heartOn.svg"></Image>
+        <Image alt="heartOn" className="m-auto" height={33} width={29} src="/heartOn.svg"></Image>
       )}
     </>
   );

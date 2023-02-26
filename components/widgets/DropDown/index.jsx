@@ -37,7 +37,7 @@ const index = () => {
     <div class="group left-[-120px]  top-4 pb-12  inline-block relative z-10">
       <ul class="absolute outline outline-2   outline-purple top-[30px] min-w-[240px] hidden text-gray-700  group-hover:block">
         {options.map((obj) => (
-          <li class="">
+          <li class="" key={obj.title}>
             <a
               class="  group bg-white w-full text-black hover:bg-purple hover:text-white  py-2 px-4 inline-block whitespace-no-wrap"
               href="#">
@@ -47,7 +47,7 @@ const index = () => {
               class="absolute left-[240px] outline outline-2   outline-purple  
              min-w-[240px] hidden text-gray-700 group-hover:block">
               {obj.subOptions.map((obj) => (
-                <li class="">
+                <li class="" key={obj.title}>
                   <a
                     class="   bg-white w-full text-black hover:bg-purple
                      hover:text-white  py-2 px-4 inline-block whitespace-no-wrap"

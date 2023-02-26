@@ -6,7 +6,7 @@ type ButtonProps = {
   primary?: boolean;
   title?: string;
   expansive?: boolean;
-  className?: string;
+  className?: any; // NEED TO BE SORTED OUT
   fontSize?: number;
   children: React.ReactNode;
   arrow?: boolean;
