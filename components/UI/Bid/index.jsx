@@ -46,9 +46,8 @@ const Bid = (props) => {
           'hover:scale-[1.07]': !still,
         },
       )}>
-      <Link href={!editable && `/product/${productId}`}>
+      <Link href={`/product/${productId}`}>
         <div
-          onClick={goToProduct}
           className={`h-[256px]  w-[256px]	 ${
             !editable && !still && 'cursor-pointer'
           }    mb-3 relative `}>
