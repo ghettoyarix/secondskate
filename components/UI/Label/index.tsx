@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 import cn from 'classnames';
 
-const Label = ({ children, secondary }) => {
+type LabelProps = {
+  children: ReactNode;
+  secondary?: boolean;
+};
+
+const Label = ({ children, secondary }: LabelProps): ReactElement => {
   return (
     <p
       className={cn(

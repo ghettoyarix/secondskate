@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Button from '../../components/UI/Button';
 import { useAuth } from '../../context/AuthContext';
-import { getProfile } from '../../utils/getProfile';
+import getProfile from '../../utils/getProfile';
 import { createAccount } from '../../utils/createAccount';
 import Bid from '../../components/UI/Bid';
 import { useState } from 'react';
@@ -28,7 +28,7 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
+const Profile = ({ isYourOwnAccount, anotherAccount }) => {
   const router = useRouter();
   const { index } = router.query;
   const { currentUser, profile } = useAuth();
@@ -99,12 +99,6 @@ const Profile = ({ check, isYourOwnAccount, anotherAccount }) => {
               </div>
             </Link>
           )}
-          <button
-            onClick={() => {
-              handleOpen();
-            }}>
-            check
-          </button>
         </div>
         <p onClick={() => console.log(info)} className="mt-4 text-gray text-small">
           Member since Mar 15, 2021

@@ -37,7 +37,6 @@ export function AuthProvider({ children }) {
             .catch((error) => {
               console.log(error);
             });
-          console.log('Document written  ');
         } catch (e) {
           console.error('Error adding document: ', e);
         }

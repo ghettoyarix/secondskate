@@ -20,7 +20,7 @@ const deleteProduct = async (productId) => {
         deleteObject(itemRef);
       }),
     );
-    console.log('files deleted');
+
     return true;
   }
   return false;

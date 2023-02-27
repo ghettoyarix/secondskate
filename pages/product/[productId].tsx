@@ -7,22 +7,29 @@ import Button from 'components/UI/Button';
 import HyperLink from 'components/widgets/HyperLink';
 import { parseBidTitle } from 'utils/parseTittle';
 import { useRouter } from 'next/router';
-export async function getServerSideProps(context) {
+import getProfile from 'utils/getProfile';
+import { GetServerSidePropsContext } from 'next';
+import Product from 'types/product';
+import type Profile from 'types/profile';
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { productId } = context.query;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/getProducts/${productId}`);
-  const product = await res.json();
+  const product: Product = await res.json();
   if (!product) {
     return {
       notFound: true,
     };
   }
-
-  return { props: { product } };
+  const info = await getProfile(product.username);
+  return { props: { product, info } };
 }
-const productPage = ({ product }) => {
-  const { price, description, condition, title, fileNames, size, brand, photoURLs, username } =
-    product;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+type ProductPageProps = {
+  product: Product;
+  info: Profile;
+};
+const productPage = ({ product, info }: ProductPageProps) => {
+  const { price, description, condition, title, size, brand, photoURLs, username } = product;
+
   const router = useRouter();
   const shareItem = () => {};
   const addToFav = () => {};
@@ -48,16 +55,14 @@ const productPage = ({ product }) => {
           <div>
             <p className=" text-[40px] text-center mb-6  font-bold">{title}</p>
             <div className="flex  justify-between mx-3 mb-12">
-              <Label big>{price} UAH</Label>
+              <Label>{price} UAH</Label>
 
               <p className="text-lable text-gray font-bold">{parseBidTitle(condition)}</p>
             </div>
             <div className="flex  justify-between mx-3 mb-12">
               <div className="flex gap-2">
                 <p className="text-mid text-gray">Size:</p>
-                <Label secondary big>
-                  {size}
-                </Label>
+                <Label secondary>{size}</Label>
               </div>
 
               <p className="text-lable text-gray font-bold">{brand}</p>
@@ -82,35 +87,17 @@ const productPage = ({ product }) => {
               <div className="flex gap-4 border-b-2  border-lightGray py-4">
                 <div className=" relative">
                   <Image
-                    className="rounded-full"
+                    className="rounded-full aspect-square "
                     height={50}
                     width={50}
                     alt="creator"
-                    src="/creator.png"></Image>
-                  <Image
-                    className="absolute left-[30px] top-[30px]"
-                    height={24}
-                    width={24}
-                    alt={'/svg/creator.svg'}
-                    src="/svg/creator.svg"></Image>
+                    src={
+                      info?.profilePhoto ? info.profilePhoto : '/svg/no-profile-picture.svg'
+                    }></Image>
                 </div>
                 <div className="flex flex-col justify-between">
                   <p className="text-gray">Owner</p>
                   <HyperLink path={`/profile/${username}`}>{username}</HyperLink>
-                </div>
-              </div>
-              <div className="flex gap-4 border-b-2    border-lightGray py-4">
-                <div className=" relative">
-                  <Image
-                    className="rounded-full"
-                    height={50}
-                    width={50}
-                    alt="profile"
-                    src={'/profile.png'}></Image>
-                </div>
-                <div className="flex flex-col justify-between">
-                  <p className="text-gray">Creator</p>
-                  <p className="font-[500]">Selina Mayert</p>
                 </div>
               </div>
             </div>
@@ -118,11 +105,11 @@ const productPage = ({ product }) => {
           <div className="p-6 mt-8   border-2 rounded-xl   shadow-2xl  border-lightGray">
             <div className="flex gap-4 mb-8">
               <Image
-                className="object-contain rounded-full"
+                className="object-contain rounded-full aspect-square"
                 height={50}
                 width={50}
                 alt="profile"
-                src="/profile.png"></Image>
+                src={info?.profilePhoto}></Image>
 
               <div>
                 <p className="text-gray">
@@ -135,10 +122,12 @@ const productPage = ({ product }) => {
               </div>
             </div>
             <div className="flex gap-2 mb-8">
-              <Button expansive primary>
+              <Button onClick={() => null} expansive primary>
                 Purchase now
               </Button>
-              <Button expansive>Place a bid</Button>
+              <Button onClick={() => null} expansive>
+                Place a bid
+              </Button>
             </div>
             <p className="text-reg text-gray">
               Service fee <span className="text-black">1.5%</span> 2.563 ETH $4,540.62
@@ -148,8 +137,7 @@ const productPage = ({ product }) => {
       </div>
       <div className=" product:flex hidden flex-col gap-3 pr-12 pt-24  ">
         {actions.map((obj) => (
-          // eslint-disable-next-line react/jsx-key
-          <div className="w-12 cursor-pointer hover:scale-90 h-12">
+          <div key={obj.icon} className="w-12 cursor-pointer hover:scale-90 h-12">
             <Image
               className="object-fill"
               width={48}

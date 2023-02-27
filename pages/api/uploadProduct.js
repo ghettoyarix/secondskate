@@ -11,7 +11,7 @@ const uploadUproduct = async (req, res) => {
       .sort({ productId: -1 })
       .limit(1)
       .toArray();
-    console.log(lastDoc, 'last');
+
     let newId;
     if (!lastDoc.length) {
       newId = 1;
