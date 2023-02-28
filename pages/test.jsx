@@ -4,9 +4,17 @@ import BidEditor from '../components/BidEditor';
 import Preview from '../components/Preview';
 import deleteProduct from '../utils/deleteProduct';
 import CheckmarkLoader from 'components/widgets/CheckmarkLoader';
+import getDate from '../helpers/getDate';
+import { updateDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 const Test = () => {
   const click = async () => {
-    await deleteProduct(3);
+    const docRef = doc(db, 'objects', 'some-id');
+
+    // Update the timestamp field with the value from the server
+    const updateTimestamp = await setDoc(docRef, {
+      timestamp: serverTimestamp(),
+    });
   };
   return (
     <div className="wrapper py-32">

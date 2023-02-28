@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../../context/AuthContext';
 import InputBlock from '../../components/UI/InputBlock';
 import uploadPhotos from '../../utils/uploadPhotos';
-import Image from 'next/image';
+
 import CategoryPicker from '../../components/UI/CategoryPicker';
 import CircleLoader from '../../components/widgets/CircleLoader';
 import addURL from '../../utils/addURL';

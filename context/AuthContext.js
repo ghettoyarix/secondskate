@@ -1,6 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, db } from '../lib/firebase';
-import { collection, addDoc, setDoc, doc, query, where, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  query,
+  where,
+  getDocs,
+  serverTimestamp,
+} from 'firebase/firestore';
 
 import {
   updateProfile,
@@ -26,7 +35,12 @@ export function AuthProvider({ children }) {
     return onAuthStateChanged(auth, (user) => {
       if (user) {
         try {
-          setDoc(doc(db, 'accounts', username), { username: username, uid: auth.currentUser.uid });
+          const accountData = {
+            username: username,
+            uid: auth.currentUser.uid,
+            memberSince: serverTimestamp(),
+          };
+          setDoc(doc(db, 'accounts', username), { ...accountData });
           updateProfile(user, {
             displayName: username,
           })

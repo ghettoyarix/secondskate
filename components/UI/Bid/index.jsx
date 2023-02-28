@@ -4,7 +4,7 @@ import Image from 'next/image';
 import cn from 'classnames';
 import NoPhoto from '../NoPhoto';
 import HyperLink from '../../widgets/HyperLink';
-import { parseBidTitle } from '../../../utils/parseTittle';
+import { parseBidTitle } from 'helpers/parseTittle';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
