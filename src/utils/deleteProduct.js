@@ -1,4 +1,4 @@
-import { auth, storage } from 'src/lib/firebase';
+import { auth, storage } from 'lib/firebase';
 import { ref, listAll, deleteObject } from 'firebase/storage';
 
 const deleteProduct = async (productId) => {

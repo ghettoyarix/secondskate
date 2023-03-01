@@ -3,7 +3,7 @@ import cn from 'classnames';
 import DropDown from '../UI/DropDown/';
 import Bid from '../UI/Bid';
 import RangeSlider from '../UI/RangeSlider/';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from 'context/AuthContext';
 import Button from '../UI/Button';
 import FilterBlock from './FilterBlock';
 import NothingFound from './NothingFound';

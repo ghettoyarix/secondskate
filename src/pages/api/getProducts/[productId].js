@@ -1,4 +1,4 @@
-import clientPromise from '../../../lib/mongodb';
+import clientPromise from 'lib/mongodb';
 const getProducts = async (req, res) => {
   const { productId } = req.query;
 

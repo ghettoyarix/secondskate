@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Button from 'components/UI/Button';
 import { useAuth } from 'context/AuthContext';
 import getProfile from 'utils/getProfile';
-import { createAccount } from 'utils/createAccount';
-import Bid from '../../../../components/UI/Bid';
+
+import Bid from 'components/UI/Bid';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -47,7 +47,7 @@ const Profile = ({ isYourOwnAccount, anotherAccount }) => {
           `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?uploadedBy=${info?.uid}`,
         );
         const json = await res.json();
-        setProducts(json);
+        setProducts(json.products);
       }
     };
 

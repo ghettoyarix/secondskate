@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import Image from 'next/image';
-import SearchBar from '../widgets/SearchBar';
+import SearchBar from 'components/widgets/SearchBar';
 import Button from '../UI/Button';
 import Link from 'next/link';
-import { useAuth } from '../../context/AuthContext';
-import { HeaderProvider } from '../../context/HeaderContext';
+import { useAuth } from 'context/AuthContext';
+import { HeaderProvider } from 'context/HeaderContext';
 
 import Router from 'next/router';
 const Header = () => {

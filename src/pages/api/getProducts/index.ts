@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import clientPromise from 'src/lib/mongodb';
+import clientPromise from 'lib/mongodb';
 import clearProps from 'helpers/clearProps';
 
 const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {

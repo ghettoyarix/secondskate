@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
-import { hide } from '../../../redux/slices/modalSlice';
+import { hide } from 'redux/slices/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '../../UI/Button';
-import Bid from '../../UI/Bid';
+import Button from 'components/UI/Button';
+import Bid from 'components/UI/Bid';
 import deleteProduct from 'utils/deleteProduct';
-import { UploadProvider } from '../../../context/UploadContext';
+import { UploadProvider } from 'context/UploadContext';
 import CheckmarkLoader from 'components/widgets/CheckmarkLoader';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
