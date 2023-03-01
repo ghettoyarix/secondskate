@@ -1,5 +1,5 @@
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db, auth } from 'lib/firebase';
+import { db, auth } from 'src/lib/firebase';
 import type Profile from 'types/product';
 
 const getProfile = async (username: string): Promise<Profile | 'nothing'> => {

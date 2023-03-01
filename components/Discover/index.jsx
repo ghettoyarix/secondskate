@@ -7,19 +7,9 @@ import { useAuth } from '../../context/AuthContext';
 import Button from '../UI/Button';
 import FilterBlock from './FilterBlock';
 import NothingFound from './NothingFound';
-
 import { useDiscover } from 'context/DiscoverContext';
+import useUpdateEffect from 'hooks/useUpdateEffect';
 const Discover = ({ products }) => {
-  function useDidUpdateEffect(fn, inputs) {
-    const didMountRef = useRef(false);
-
-    useEffect(() => {
-      if (didMountRef.current) {
-        return fn();
-      }
-      didMountRef.current = true;
-    }, inputs);
-  } // skip 1st render hook
   const { loading, currentUser } = useAuth();
   const [filteredProducts, setFilteredProducts] = useState(products);
 
@@ -35,20 +25,21 @@ const Discover = ({ products }) => {
     isFilterShown,
     setIsFilterShown,
   } = useDiscover();
+
   const queryProps = {
     type: chosenCategory.type,
     category: chosenCategory.category,
     priceSorter: chosenPriceSorter.value,
     chosenLikesSorter,
   };
-  useDidUpdateEffect(() => {
+  useUpdateEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
           new URLSearchParams({ ...queryProps }),
       );
       const json = await res.json();
-      setFilteredProducts(json);
+      setFilteredProducts(json.products);
     };
     fetchProducts();
   }, [chosenCategory, chosenPriceSorter]);
@@ -58,7 +49,7 @@ const Discover = ({ products }) => {
   return (
     <div className="wrapper py-12 ">
       <h1 onClick={() => console.log(filteredProducts)} className="text-giant pb-10  font-bold">
-        Discover
+        Discover {}
       </h1>
       <div className="flex items-center  justify-between border-b-2 pb-8 border-lightGray">
         <div className="flex gap-3 content-center  items-center">

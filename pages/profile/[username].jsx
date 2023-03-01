@@ -1,24 +1,23 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
-import Button from '../../components/UI/Button';
-import { useAuth } from '../../context/AuthContext';
-import getProfile from '../../utils/getProfile';
-import { createAccount } from '../../utils/createAccount';
-import Bid from '../../components/UI/Bid';
+import Button from 'components/UI/Button';
+import { useAuth } from 'context/AuthContext';
+import getProfile from 'utils/getProfile';
+import { createAccount } from 'utils/createAccount';
+import Bid from '../../../../components/UI/Bid';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import EditBidModal from '../../components/modals/EditBidModal';
-import RemoveBidModal from '../../components/modals/RemoveBidModal';
+import EditBidModal from 'components/modals/EditBidModal';
+import RemoveBidModal from 'components/modals/RemoveBidModal';
 export const getServerSideProps = async (context) => {
-  const { index } = context.query;
+  const { username } = context.query;
 
-  const isYourOwnAccount = index === 'you';
+  const isYourOwnAccount = username === 'you';
 
-  const anotherAccount = await getProfile(index);
-  console.log(anotherAccount);
+  const anotherAccount = await getProfile(username);
 
-  if (anotherAccount === 'nothing' && index !== 'you') {
+  if (anotherAccount === 'nothing' && username !== 'you') {
     return {
       notFound: true,
     };
@@ -30,7 +29,7 @@ export const getServerSideProps = async (context) => {
 
 const Profile = ({ isYourOwnAccount, anotherAccount }) => {
   const router = useRouter();
-  const { index } = router.query;
+  const { username } = router.query;
   const { currentUser, profile } = useAuth();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +61,7 @@ const Profile = ({ isYourOwnAccount, anotherAccount }) => {
        shadow-xl items-center  py-8 px-9 xs:mr-10">
         <div className="flex flex-col gap-6 border-b-2 items-center border-lightGray">
           <Image
-            className="rounded-full"
+            className="rounded-full aspect-square"
             width={160}
             height={160}
             alt="profilePic"

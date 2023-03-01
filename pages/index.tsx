@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 
-import Discover from '../components/Discover';
+import Discover from 'components/Discover';
 
 import { DiscoverProvider } from 'context/DiscoverContext';
 import type { NextPage, GetServerSideProps } from 'next';
@@ -15,7 +15,8 @@ export async function getServerSideProps() {
 
   const res = await fetch(url);
 
-  const products: IProducts = await res.json();
+  const json = await res.json();
+  const products = json.products;
   return {
     props: { products }, // will be passed to the page component as props
   };
