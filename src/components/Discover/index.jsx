@@ -9,10 +9,16 @@ import FilterBlock from './FilterBlock';
 import NothingFound from './NothingFound';
 import { useDiscover } from 'context/DiscoverContext';
 import useUpdateEffect from 'hooks/useUpdateEffect';
+import BidsGrid from './BidsGrid';
+import { useAppDispatch } from 'hooks/redux';
+import { useAppSelector } from 'hooks/redux';
 const Discover = ({ products }) => {
+  const dispatch = useAppDispatch();
+  const {} = useAppSelector((state) => state.upload);
+
   const { loading, currentUser } = useAuth();
   const [filteredProducts, setFilteredProducts] = useState(products);
-
+  const [productsLoading, setProductsLoading] = useState(false);
   const {
     categories,
     chosenPriceSorter,
@@ -41,7 +47,9 @@ const Discover = ({ products }) => {
       const json = await res.json();
       setFilteredProducts(json.products);
     };
+    setProductsLoading(true);
     fetchProducts();
+    setProductsLoading(false);
   }, [chosenCategory, chosenPriceSorter]);
   const handleFilter = () => {
     setIsFilterShown((prev) => !prev);
@@ -80,17 +88,7 @@ const Discover = ({ products }) => {
         </Button>
       </div>
       <FilterBlock></FilterBlock>
-      <div className="flex mt-8 justify-center">
-        {filteredProducts.length !== 0 ? (
-          <div className="grid grid-cols-1 gap-8 xs:grid-cols-2 mob:grid-cols-3  tab:grid-cols-4">
-            {filteredProducts?.map((obj) => (
-              <Bid key={obj._id} {...obj}></Bid>
-            ))}
-          </div>
-        ) : (
-          <NothingFound />
-        )}
-      </div>
+      {/* <BidsGrid></BidsGrid> */}
     </div>
   );
 };
