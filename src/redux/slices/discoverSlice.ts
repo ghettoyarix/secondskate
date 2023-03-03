@@ -53,7 +53,7 @@ const initialState: DiscoverState = {
   isFilterShown: false,
 };
 
-const discoverSlice = createSlice({
+export const discoverSlice = createSlice({
   name: 'discover',
   initialState,
   reducers: {

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
-import { hide } from '../../../redux/slices/modalSlice';
+import { hide, modalSlice } from '../../../redux/slices/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import BidEditor from '../../BidEditor';
 import { UploadProvider } from '../../../context/UploadContext';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 const EditBidModal = () => {
-  const { editModalFlag, defaultValues } = useSelector((state: any) => state.modal);
-
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { editModalFlag, defaultValues } = useAppSelector((state) => state.modal);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {};

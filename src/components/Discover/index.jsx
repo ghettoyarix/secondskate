@@ -12,7 +12,10 @@ import useUpdateEffect from 'hooks/useUpdateEffect';
 import BidsGrid from './BidsGrid';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
+
+import { discoverSlice } from 'redux/slices/discoverSlice';
 const Discover = ({ products }) => {
+  const {} = discoverSlice.actions;
   const dispatch = useAppDispatch();
   const {} = useAppSelector((state) => state.upload);
 
