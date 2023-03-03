@@ -3,8 +3,9 @@ import headerSlice from './slices/headerSlice';
 import modalSlice from './slices/modalSlice';
 import discoverSlice from './slices/discoverSlice';
 import uploadSlice from './slices/uploadSlice';
-
+import productsSlice from './slices/productsSlice';
 const rootReducer = combineReducers({
+  products : productsSlice,
   header: headerSlice,
   upload: uploadSlice,
   modal: modalSlice,

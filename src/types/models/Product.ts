@@ -13,4 +13,8 @@ type Product = {
   photoURLs: string[];
 };
 
-export default Product;
+ export default  Product;
+export type ProductsResponse = {
+  products : Product[];
+  totalProducts : number;
+}

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Checkmark from './Checkmark';
-interface IProps<T> {
+interface IProps {
   done: boolean;
 }
 
-function CircleLoader<T>(props: IProps<T>) {
+function CircleLoader (props: IProps ) {
   const [loading, setLoading] = useState(true);
   const { done } = props;
 

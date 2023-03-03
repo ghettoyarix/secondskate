@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode , useEffect } from 'react';
 import Bid from 'components/UI/Bid';
 import BidLoader from 'components/UI/loaders/BidLoader';
 import NothingFound from './NothingFound';
@@ -7,9 +7,20 @@ type BidsGridProps = {
   productsLoading: boolean;
   filteredProducts: any[];
 };
+import { useAppSelector, useAppDispatch } from 'hooks/redux';
+import { fetchProducts } from 'redux/actionCreators/fetchProducts';
 
 const BidsGrid = ({ children, productsLoading, filteredProducts }: BidsGridProps) => {
-  if (productsLoading) {
+
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+     
+   dispatch(fetchProducts());
+    }
+  , [])
+  
+  const {error, isLoading, products, totalProducts} = useAppSelector(state => state.products)
+  if (isLoading) {
     return (
       <div className="grid grid-cols-1 gap-8 xs:grid-cols-2 mob:grid-cols-3 tab:grid-cols-4">
         <BidLoader />
@@ -22,7 +33,7 @@ const BidsGrid = ({ children, productsLoading, filteredProducts }: BidsGridProps
 
   return (
     <div className="grid grid-cols-1 gap-8 xs:grid-cols-2 mob:grid-cols-3 tab:grid-cols-4">
-      {filteredProducts.length !== 0 ? children : <NothingFound />}
+      {totalProducts !== 0 ? children : <NothingFound />}
     </div>
   );
 };
