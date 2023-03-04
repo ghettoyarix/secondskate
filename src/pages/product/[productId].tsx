@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import getProfile from 'utils/getProfile';
 import { GetServerSidePropsContext } from 'next';
 import Product from 'types/models/Product';
-import type Profile from 'types/models/profile';
+import type Profile from 'types/models/Profile';
 import moveToStart from 'helpers/moveToStart';
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { productId } = context.query;

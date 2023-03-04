@@ -12,15 +12,15 @@ import useUpdateEffect from 'hooks/useUpdateEffect';
 import BidsGrid from './BidsGrid';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
- 
+
 import { discoverSlice } from 'redux/slices/discoverSlice';
-const Discover = ({ products }) => {
+import { fetchProducts } from 'redux/actionCreators/fetchProducts';
+const Discover = () => {
   const {} = discoverSlice.actions;
   const dispatch = useAppDispatch();
-  const {} = useAppSelector((state) => state.upload);
+  const { products } = useAppSelector((state) => state.products);
 
   const { loading, currentUser } = useAuth();
-  const [filteredProducts, setFilteredProducts] = useState(products);
   const [productsLoading, setProductsLoading] = useState(false);
   const {
     categories,
@@ -41,18 +41,8 @@ const Discover = ({ products }) => {
     priceSorter: chosenPriceSorter.value,
     chosenLikesSorter,
   };
-  useUpdateEffect(() => {
-    const fetchProducts = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
-          new URLSearchParams({ ...queryProps }),
-      );
-      const json = await res.json();
-      setFilteredProducts(json.products);
-    };
-    setProductsLoading(true);
-    fetchProducts();
-    setProductsLoading(false);
+  useEffect(() => {
+    dispatch(fetchProducts());
   }, [chosenCategory, chosenPriceSorter]);
   const handleFilter = () => {
     setIsFilterShown((prev) => !prev);
@@ -91,7 +81,11 @@ const Discover = ({ products }) => {
         </Button>
       </div>
       <FilterBlock></FilterBlock>
-       <BidsGrid>32</BidsGrid>  
+      <BidsGrid>
+        {products.map((obj) => (
+          <Bid {...obj} key={obj._id}></Bid>
+        ))}
+      </BidsGrid>
     </div>
   );
 };

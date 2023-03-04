@@ -1,6 +1,6 @@
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db, auth } from 'lib/firebase';
-import type Profile from 'types/product';
+import type Profile from 'types/models/Product';
 
 const getProfile = async (username: string): Promise<Profile | 'nothing'> => {
   const q = query(collection(db, 'accounts'), where('username', '==', username));
