@@ -1,23 +1,23 @@
 import React from 'react';
 import DropDown from 'components/UI/DropDown';
 import RangeSlider from 'components/UI/RangeSlider';
-
+import { CONDITIONS } from 'constants/index';
 import { useDiscover } from 'context/DiscoverContext';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
+import { setChosenCondition } from 'redux/slices/discoverSlice';
 const FilterBlock = () => {
   const { chosenDateOption, chosenCondition, chosenPriceSorter } = useAppSelector(
     (state) => state.discover,
   );
-
+  const dispatch = useAppDispatch();
   const {
     priceSortOptions,
-    chosenLikesSorter,
     setChosenPricSorter,
-    setChosenLikesSorter,
+
     chosenCreatorSorter,
     setChosenCreatorSorter,
-    likesSortOptions,
+
     creatorSortOptions,
     isFilterShown,
   } = useDiscover();
@@ -33,11 +33,11 @@ const FilterBlock = () => {
             pickOption={(obj) => setChosenPricSorter(obj)}></DropDown>
         </div>
         <div className="max-w-[256px]">
-          <p className="mb-3">Condition</p>
+          <p className="mb-3">CONDITION</p>
           <DropDown
-            chosenOption={chosenLikesSorter}
-            options={likesSortOptions}
-            pickOption={(obj) => setChosenLikesSorter(obj)}></DropDown>
+            chosenOption={chosenCondition}
+            options={CONDITIONS}
+            pickOption={(obj) => dispatch(setChosenCondition(obj))}></DropDown>
         </div>
         <div className="max-w-[256px]">
           <p className="mb-3">CREATOR</p>

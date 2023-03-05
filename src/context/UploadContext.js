@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { conditions } from 'constants';
+import { CONDITIONS } from 'constants';
 const UploadContext = React.createContext();
 
 export function useUpload() {
@@ -32,7 +32,7 @@ export function UploadProvider({ children }) {
 
   const [mainPhoto, setMainPhoto] = useState();
 
-  const [chosenCondition, setChosenCondition] = useState(conditions[0]);
+  const [chosenCondition, setChosenCondition] = useState(CONDITIONS[0]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState();
   const [price, setPrice] = useState('');
@@ -49,7 +49,7 @@ export function UploadProvider({ children }) {
     setTest((prev) => prev + 2);
   };
   const value = {
-    conditions,
+    CONDITIONS,
     title,
     setTitle,
     description,

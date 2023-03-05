@@ -24,4 +24,12 @@ type SortOption = {
   value: number;
 };
 
-export type { DiscoverOption, Option, SortOption, TranslatedTitle };
+export type {
+  DiscoverOption,
+  Option,
+  SortOption,
+  TranslatedTitle,
+  Title,
+  DiscoverType,
+  DiscoverCategory,
+};

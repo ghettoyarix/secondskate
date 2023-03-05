@@ -42,7 +42,7 @@ const BidEditor = (props) => {
     setSize,
     files,
     setFiles,
-    conditions,
+    CONDITIONS,
     chosenCategory,
     chosenType,
   } = useUpload();
@@ -256,7 +256,7 @@ const BidEditor = (props) => {
                 </p>
                 <DropDown
                   pickOption={setChosenCondition}
-                  options={conditions}
+                  options={CONDITIONS}
                   chosenOption={chosenCondition}
                 />
               </div>

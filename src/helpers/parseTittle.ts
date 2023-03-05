@@ -1,11 +1,15 @@
+import { Option , TranslatedTitle} from 'types/models/FilterOptions';
 import { CATEGORIES_PARSER } from '../constants';
 const chosenLanguage: 'ua' | 'eng' = 'ua';
-const parseTitle = (value: string, parsingArray) => {
+const parseTitle = (value: string, parsingArray : Option[]) => {
   const temp = parsingArray?.find((category) => category.value === value);
-  return temp?.title[`${chosenLanguage}`] || temp?.title;
+  if (typeof temp?.title === 'string') {
+    return temp.title
+  }
+  else return temp?.title[chosenLanguage]
 };
 
-const parseBidTitle = (value) => {
+const parseBidTitle = (value : string)  => {
   return parseTitle(value, CATEGORIES_PARSER);
 };
 

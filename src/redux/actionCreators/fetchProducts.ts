@@ -1,12 +1,12 @@
-import { AppDispatch } from "../store";
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import Product, { ProductsResponse } from "types/models/Product";
-type querryProps = { dsds: string };
+import { AppDispatch } from '../store';
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import Product, { ProductsResponse } from 'types/models/Product';
+import type { queryProps } from 'types/models/Query';
 export const fetchProducts = createAsyncThunk(
-  "prod/fetchAll",
+  'prod/fetchAll',
 
-  async (queryProps: querryProps, thunkAPI) => {
+  async (queryProps: queryProps, thunkAPI) => {
     try {
       const url =
         `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?` +
@@ -15,7 +15,7 @@ export const fetchProducts = createAsyncThunk(
       const data = response.data;
       return data;
     } catch (e) {
-      return thunkAPI.rejectWithValue("Error accured");
+      return thunkAPI.rejectWithValue('Error accured');
     }
-  }
+  },
 );

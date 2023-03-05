@@ -119,7 +119,7 @@ const BRANDS = [
   'Volcom',
 ];
 
-const conditions: Option[] = [
+const CONDITIONS: Option[] = [
   { title: 'New', value: 'new' },
   { title: 'Barely used', value: 'barely' },
   { title: 'Roughly used', value: 'roughly' },
@@ -128,4 +128,4 @@ const priceSortOptions: SortOption[] = [
   { title: 'Highest price', value: -1 },
   { title: 'Lowest price', value: 1 },
 ];
-export { CATEGORIES_PARSER, BRANDS, conditions, priceSortOptions };
+export { CATEGORIES_PARSER, BRANDS, CONDITIONS, priceSortOptions };
