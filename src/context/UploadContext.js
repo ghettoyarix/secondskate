@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-
+import { conditions } from 'constants';
 const UploadContext = React.createContext();
 
 export function useUpload() {
@@ -29,11 +29,7 @@ export function UploadProvider({ children }) {
       ],
     },
   ];
-  const conditions = [
-    { title: 'New', value: 'new' },
-    { title: 'Barely used', value: 'barely' },
-    { title: 'Roughly used', value: 'roughly' },
-  ];
+
   const [mainPhoto, setMainPhoto] = useState();
 
   const [chosenCondition, setChosenCondition] = useState(conditions[0]);

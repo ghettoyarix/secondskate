@@ -16,7 +16,7 @@ import { useAppSelector } from 'hooks/redux';
 import { discoverSlice } from 'redux/slices/discoverSlice';
 import { fetchProducts } from 'redux/actionCreators/fetchProducts';
 const Discover = () => {
-  const { } = discoverSlice.actions;
+  const {} = discoverSlice.actions;
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.products);
 
@@ -49,9 +49,7 @@ const Discover = () => {
   };
   return (
     <div className="wrapper py-12 ">
-      <h1 className="text-giant pb-10  font-bold">
-        Discover { }
-      </h1>
+      <h1 className="text-giant pb-10  font-bold">Discover {}</h1>
       <div className="flex items-center  justify-between border-b-2 pb-8 border-lightGray">
         <div className="flex gap-3 content-center  items-center">
           {categories.map((obj) => (
@@ -82,7 +80,6 @@ const Discover = () => {
       </div>
       <FilterBlock></FilterBlock>
       <BidsGrid />
-
     </div>
   );
 };

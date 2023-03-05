@@ -3,13 +3,17 @@ import DropDown from 'components/UI/DropDown';
 import RangeSlider from 'components/UI/RangeSlider';
 
 import { useDiscover } from 'context/DiscoverContext';
-
+import { useAppDispatch } from 'hooks/redux';
+import { useAppSelector } from 'hooks/redux';
 const FilterBlock = () => {
+  const { chosenDateOption, chosenCondition, chosenPriceSorter } = useAppSelector(
+    (state) => state.discover,
+  );
+
   const {
     priceSortOptions,
     chosenLikesSorter,
     setChosenPricSorter,
-    chosenPriceSorter,
     setChosenLikesSorter,
     chosenCreatorSorter,
     setChosenCreatorSorter,
@@ -17,6 +21,7 @@ const FilterBlock = () => {
     creatorSortOptions,
     isFilterShown,
   } = useDiscover();
+
   return (
     isFilterShown && (
       <div className="grid grid-cols-4 my-8 transition-all  h-fit x text-[12px] text-gray font-bold   ">
@@ -28,7 +33,7 @@ const FilterBlock = () => {
             pickOption={(obj) => setChosenPricSorter(obj)}></DropDown>
         </div>
         <div className="max-w-[256px]">
-          <p className="mb-3">LIKES</p>
+          <p className="mb-3">Condition</p>
           <DropDown
             chosenOption={chosenLikesSorter}
             options={likesSortOptions}

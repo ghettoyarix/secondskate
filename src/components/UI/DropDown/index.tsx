@@ -1,6 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
-
-const DropDown = ({ options, pickOption, chosenOption, searchable }) => {
+import React, { useState, useRef, useEffect, FC } from 'react';
+import { Option } from 'types/models/FilterOptions';
+import { chosenLanguage } from 'helpers/parseTittle';
+type DropDownProps = {
+  options: Option[];
+  chosenOption: Option;
+  pickOption: (option: Option) => void;
+  searchable?: boolean;
+};
+const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, searchable }) => {
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -21,7 +28,7 @@ const DropDown = ({ options, pickOption, chosenOption, searchable }) => {
   const inputRef = useRef(null);
   const [searchedValue, setSearchedValue] = useState();
 
-  const onOptionClick = (obj) => {
+  const onOptionClick = (obj: Option) => {
     pickOption(obj);
     setSearchedValue(obj);
     setOpenFlag(false);
@@ -94,7 +101,7 @@ const DropDown = ({ options, pickOption, chosenOption, searchable }) => {
                   key={obj}
                   onClick={() => onOptionClick(obj)}
                   className="w-full  text-center py-2   text-reg overflow-hidden text-black hover:bg-lightGray">
-                  {obj.title || obj}
+                  {typeof obj.title === 'string' ? obj.title : obj.title?.eng}
                 </p>
               ))}
           </div>
@@ -103,7 +110,5 @@ const DropDown = ({ options, pickOption, chosenOption, searchable }) => {
     </div>
   );
 };
-DropDown.defaultProps = {
-  options: ['Today2', 'Last week', 'Last month', 'Last year'],
-};
+
 export default DropDown;

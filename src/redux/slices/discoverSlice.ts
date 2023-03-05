@@ -1,52 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import type { SortOption, DiscoverOption, Option } from 'types/models/FilterOptions';
+import { conditions, priceSortOptions } from 'constants/index';
 export interface DiscoverState {
-  categories: {
-    title: string;
-    category?: string;
-    type?: string;
-  }[];
-  priceSortOptions: {
-    title: string;
-    value: number;
-  }[];
-  chosenPriceSorter: {
-    title: string;
-    value: number;
-  };
-  chosenLikesSorter: string;
-  chosenCreatorSorter: string;
+  chosenPriceSorter: SortOption;
+  chosenDateOption: SortOption;
+  chosenCondition: Option;
   discoverSorter: string;
-  chosenCategory: {
-    title: string;
-    category?: string;
-    type?: string;
-  };
+  chosenCategory: DiscoverOption;
   creatorSortOptions: string[];
   discoverSortOptions: string[];
   likesSortOptions: string[];
   isFilterShown: boolean;
 }
 
+const discoverCategories: DiscoverOption[] = [
+  { title: 'All items', category: 'any' },
+  { title: 'Completes', type: 'completes' },
+  { title: 'Decks', type: 'decks' },
+  { title: 'Trucks', type: 'trucks' },
+  { title: 'Wheels', type: 'wheels' },
+  { title: 'Other', type: 'other' },
+  { title: 'Shoes', category: 'shoes' },
+];
+
 const initialState: DiscoverState = {
-  categories: [
-    { title: 'All items', category: 'any' },
-    { title: 'Completes', type: 'completes' },
-    { title: 'Decks', type: 'decks' },
-    { title: 'Trucks', type: 'trucks' },
-    { title: 'Wheels', type: 'wheels' },
-    { title: 'Other', type: 'other' },
-    { title: 'Shoes', category: 'shoes' },
-  ],
-  priceSortOptions: [
-    { title: 'Highest price', value: -1 },
-    { title: 'Lowest price', value: 1 },
-  ],
-  chosenPriceSorter: { title: 'Highest price', value: -1 },
-  chosenLikesSorter: 'Most liked',
-  chosenCreatorSorter: 'Verified only',
+  chosenPriceSorter: priceSortOptions[0],
+  chosenDateOption: {} as SortOption,
+  chosenCondition: conditions[0],
   discoverSorter: 'Recently added',
-  chosenCategory: { title: 'All items', category: 'any' },
+  chosenCategory: discoverCategories[0],
   creatorSortOptions: ['Verified only', 'Any verification'],
   discoverSortOptions: ['Recently added', 'Asnything'],
   likesSortOptions: ['Most liked', 'Least liked'],
@@ -57,22 +39,17 @@ export const discoverSlice = createSlice({
   name: 'discover',
   initialState,
   reducers: {
-    setChosenPriceSorter: (state, action: PayloadAction<{ title: string; value: number }>) => {
+    setChosenPriceSorter: (state, action: PayloadAction<SortOption>) => {
       state.chosenPriceSorter = action.payload;
     },
-    setChosenLikesSorter: (state, action: PayloadAction<string>) => {
-      state.chosenLikesSorter = action.payload;
-    },
-    setChosenCreatorSorter: (state, action: PayloadAction<string>) => {
-      state.chosenCreatorSorter = action.payload;
+
+    setChosenCondition: (state, action: PayloadAction<Option>) => {
+      state.chosenCondition = action.payload;
     },
     setDiscoverSorter: (state, action: PayloadAction<string>) => {
       state.discoverSorter = action.payload;
     },
-    setChosenCategory: (
-      state,
-      action: PayloadAction<{ title: string; category?: string; type?: string }>,
-    ) => {
+    setChosenCategory: (state, action: PayloadAction<DiscoverOption>) => {
       state.chosenCategory = action.payload;
     },
     setIsFilterShown: (state, action: PayloadAction<boolean>) => {
@@ -81,13 +58,7 @@ export const discoverSlice = createSlice({
   },
 });
 
-export const {
-  setChosenPriceSorter,
-  setChosenLikesSorter,
-  setChosenCreatorSorter,
-  setDiscoverSorter,
-  setChosenCategory,
-  setIsFilterShown,
-} = discoverSlice.actions;
+export const { setChosenPriceSorter, setDiscoverSorter, setChosenCategory, setIsFilterShown } =
+  discoverSlice.actions;
 
 export default discoverSlice.reducer;

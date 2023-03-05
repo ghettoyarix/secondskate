@@ -1,17 +1,18 @@
-const CATEGORIES_PARSER = [
+import type { Option, SortOption } from 'types/models/FilterOptions';
+const CATEGORIES_PARSER: Option[] = [
   { title: { eng: 'Decks', ua: 'Дошки' }, value: 'decks' },
-  { title: 'Trucks', value: 'trucks' },
-  { title: 'Wheels', value: 'wheels' },
-  { title: 'Other', value: 'other' },
-  { title: 'Completes', value: 'completes' },
-  { title: 'Leather', value: 'leather' },
-  { title: 'Seude', value: 'seude' },
-  { title: 'Canvas', value: 'canvas' },
-  { title: 'Shoes', value: 'shoes' },
-  { title: 'Barely used', value: 'barely' },
-  { title: 'New', value: 'new' },
-  { title: 'Roughly', value: 'roughly' },
-  { title: 'Skates', value: 'skateboards' },
+  { title: { eng: 'Trucks', ua: 'Підвіски' }, value: 'trucks' },
+  { title: { eng: 'Wheels', ua: 'Колеса' }, value: 'wheels' },
+  { title: { eng: 'Other', ua: 'Інше' }, value: 'other' },
+  { title: { eng: 'Completes', ua: 'Компліти' }, value: 'completes' },
+  { title: { eng: 'Leather', ua: 'Шкіра' }, value: 'leather' },
+  { title: { eng: 'Seude', ua: 'Замша' }, value: 'seude' },
+  { title: { eng: 'Canvas', ua: 'Текстиль' }, value: 'canvas' },
+  { title: { eng: 'Shoes', ua: 'Взуття' }, value: 'shoes' },
+  { title: { eng: 'Barely used', ua: 'Мало вживаний' }, value: 'barely' },
+  { title: { eng: 'New', ua: 'Новий' }, value: 'new' },
+  { title: { eng: 'Roughly used', ua: 'Сильно вживаний' }, value: 'roughly' },
+  { title: { eng: 'Skates', ua: 'Скейти' }, value: 'skateboards' },
 ];
 const BRANDS = [
   'Baker',
@@ -117,4 +118,14 @@ const BRANDS = [
   'Vans',
   'Volcom',
 ];
-export { CATEGORIES_PARSER, BRANDS };
+
+const conditions: Option[] = [
+  { title: 'New', value: 'new' },
+  { title: 'Barely used', value: 'barely' },
+  { title: 'Roughly used', value: 'roughly' },
+];
+const priceSortOptions: SortOption[] = [
+  { title: 'Highest price', value: -1 },
+  { title: 'Lowest price', value: 1 },
+];
+export { CATEGORIES_PARSER, BRANDS, conditions, priceSortOptions };
