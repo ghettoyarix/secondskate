@@ -10,6 +10,7 @@ interface IProducts {
 
 const Home: NextPage<IProducts> = ({ products }) => {
   return (
+
     <div className=" ">
       <DiscoverProvider>
         <Discover></Discover>

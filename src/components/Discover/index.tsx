@@ -16,12 +16,12 @@ import { useAppSelector } from 'hooks/redux';
 import { discoverSlice } from 'redux/slices/discoverSlice';
 import { fetchProducts } from 'redux/actionCreators/fetchProducts';
 const Discover = () => {
-  const {} = discoverSlice.actions;
+  const { } = discoverSlice.actions;
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.products);
 
   const { loading, currentUser } = useAuth();
-  const [productsLoading, setProductsLoading] = useState(false);
+
   const {
     categories,
     chosenPriceSorter,
@@ -42,15 +42,15 @@ const Discover = () => {
     chosenLikesSorter,
   };
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(queryProps));
   }, [chosenCategory, chosenPriceSorter]);
   const handleFilter = () => {
     setIsFilterShown((prev) => !prev);
   };
   return (
     <div className="wrapper py-12 ">
-      <h1 onClick={() => console.log(filteredProducts)} className="text-giant pb-10  font-bold">
-        Discover {}
+      <h1 className="text-giant pb-10  font-bold">
+        Discover { }
       </h1>
       <div className="flex items-center  justify-between border-b-2 pb-8 border-lightGray">
         <div className="flex gap-3 content-center  items-center">
@@ -81,11 +81,8 @@ const Discover = () => {
         </Button>
       </div>
       <FilterBlock></FilterBlock>
-      <BidsGrid>
-        {products.map((obj) => (
-          <Bid {...obj} key={obj._id}></Bid>
-        ))}
-      </BidsGrid>
+      <BidsGrid />
+
     </div>
   );
 };
