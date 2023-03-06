@@ -45,7 +45,7 @@ const Discover = () => {
   };
   useEffect(() => {
     dispatch(fetchProducts(queryProps));
-  }, [chosenCategory, chosenPriceSorter]);
+  }, [chosenCategory, chosenPriceSorter, chosenCondition]);
   const handleFilter = () => {
     setIsFilterShown((prev) => !prev);
   };

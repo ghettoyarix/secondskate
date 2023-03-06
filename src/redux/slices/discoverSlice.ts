@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { SortOption, DiscoverOption, Option } from 'types/models/FilterOptions';
 import { CONDITIONS, priceSortOptions } from 'constants/index';
 const discoverConditions: Option[] = [
-  ...CONDITIONS,
   { title: { eng: 'Any', ua: 'Будь-який' }, value: 'any' },
+  ...CONDITIONS,
 ];
 export interface DiscoverState {
+  discoverConditions: Option[];
+
   chosenPriceSorter: SortOption;
   chosenDateOption: SortOption;
   chosenCondition: Option;
@@ -28,9 +30,10 @@ const discoverCategories: DiscoverOption[] = [
 ];
 
 const initialState: DiscoverState = {
+  discoverConditions,
   chosenPriceSorter: priceSortOptions[0],
   chosenDateOption: {} as SortOption,
-  chosenCondition: CONDITIONS[0],
+  chosenCondition: discoverConditions[0],
   discoverSorter: 'Recently added',
   chosenCategory: discoverCategories[0],
   creatorSortOptions: ['Verified only', 'Any verification'],

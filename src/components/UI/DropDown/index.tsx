@@ -8,6 +8,21 @@ type DropDownProps = {
   searchable?: boolean;
 };
 const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, searchable }) => {
+  function getTitle(obj, chosenLanguage: 'ua' | 'eng') {
+    let result;
+
+    if (typeof obj.title === 'string') {
+      result = obj.title;
+    } else {
+      if (typeof obj === 'string') {
+        result = obj;
+      } else {
+        result = obj.title[chosenLanguage];
+      }
+    }
+
+    return result;
+  }
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -57,8 +72,12 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
           <input
             disabled={!searchable}
             ref={inputRef}
-            defaultValue={chosenOption?.title || chosenOption}
-            value={searchedValue?.title || searchedValue}
+            defaultValue={
+              typeof chosenOption?.title === 'string'
+                ? chosenOption.title
+                : chosenOption?.title?.[chosenLanguage]
+            }
+            value={searchedValue?.title?.[chosenLanguage] || searchedValue}
             onChange={(e) => {
               setSearchedValue(e.target.value);
               pickOption(e.target.value);
@@ -101,7 +120,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
                   key={obj}
                   onClick={() => onOptionClick(obj)}
                   className="w-full  text-center py-2   text-reg overflow-hidden text-black hover:bg-lightGray">
-                  {typeof obj.title === 'string' ? obj.title : obj.title?.eng}
+                  {getTitle(obj, chosenLanguage)}
                 </p>
               ))}
           </div>

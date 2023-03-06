@@ -14,6 +14,7 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
       category,
       type,
       uploadedBy,
+      condition,
     };
     const sorterProps: { [key: string]: any } = {
       price: priceSorter,

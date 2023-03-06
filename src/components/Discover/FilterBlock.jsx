@@ -1,18 +1,17 @@
 import React from 'react';
 import DropDown from 'components/UI/DropDown';
 import RangeSlider from 'components/UI/RangeSlider';
-import { CONDITIONS } from 'constants/index';
+import { CONDITIONS, priceSortOptions } from 'constants/index';
 import { useDiscover } from 'context/DiscoverContext';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
 import { setChosenCondition } from 'redux/slices/discoverSlice';
 const FilterBlock = () => {
-  const { chosenDateOption, chosenCondition, chosenPriceSorter } = useAppSelector(
-    (state) => state.discover,
-  );
+  const { chosenDateOption, chosenCondition, chosenPriceSorter, discoverConditions } =
+    useAppSelector((state) => state.discover);
+
   const dispatch = useAppDispatch();
   const {
-    priceSortOptions,
     setChosenPricSorter,
 
     chosenCreatorSorter,
@@ -36,7 +35,7 @@ const FilterBlock = () => {
           <p className="mb-3">CONDITION</p>
           <DropDown
             chosenOption={chosenCondition}
-            options={CONDITIONS}
+            options={discoverConditions}
             pickOption={(obj) => dispatch(setChosenCondition(obj))}></DropDown>
         </div>
         <div className="max-w-[256px]">

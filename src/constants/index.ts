@@ -120,12 +120,13 @@ const BRANDS = [
 ];
 
 const CONDITIONS: Option[] = [
-  { title: 'New', value: 'new' },
-  { title: 'Barely used', value: 'barely' },
-  { title: 'Roughly used', value: 'roughly' },
+  { title: { eng: 'New', ua: 'Новий' }, value: 'new' },
+  { title: { eng: 'Barely used', ua: 'Майже новий' }, value: 'barely' },
+  { title: { eng: 'Roughly used', ua: 'Зношений' }, value: 'roughly' },
 ];
 const priceSortOptions: SortOption[] = [
-  { title: 'Highest price', value: -1 },
-  { title: 'Lowest price', value: 1 },
+  { title: { eng: 'Highest price', ua: 'Найвища ціна' }, value: -1 },
+  { title: { eng: 'Lowest price', ua: 'Найнижча ціна' }, value: 1 },
 ];
+
 export { CATEGORIES_PARSER, BRANDS, CONDITIONS, priceSortOptions };
