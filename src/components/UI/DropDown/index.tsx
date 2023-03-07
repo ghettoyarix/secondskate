@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, FC } from 'react';
 import { Option } from 'types/models/FilterOptions';
 import { chosenLanguage } from 'helpers/parseTittle';
+import getTitle from 'helpers/getTitle';
 type DropDownProps = {
   options: Option[];
   chosenOption: Option;
@@ -8,36 +9,6 @@ type DropDownProps = {
   searchable?: boolean;
 };
 const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, searchable }) => {
-  function getTitle(obj, chosenLanguage: 'ua' | 'eng') {
-    let result;
-
-    if (typeof obj.title === 'string') {
-      result = obj.title;
-    } else {
-      if (typeof obj === 'string') {
-        result = obj;
-      } else {
-        result = obj.title[chosenLanguage];
-      }
-    }
-
-    return result;
-  }
-  function useOutsideAlerter(ref) {
-    useEffect(() => {
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setOpenFlag(false);
-        }
-      }
-
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [ref]);
-  }
   const [openFlag, setOpenFlag] = useState(false);
   const wrapperRef = useRef(null);
   const inputRef = useRef(null);
@@ -48,7 +19,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
     setSearchedValue(obj);
     setOpenFlag(false);
   };
-  useOutsideAlerter(wrapperRef);
+  useOutsideHandler(wrapperRef);
 
   return (
     <div ref={wrapperRef} className="relative min-w-[160px] w-full h-full inline-block text-left">
@@ -106,8 +77,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
           className="absolute right-0 z-10 max-h-[200px] overflow-auto	   w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
-          aria-labelledby="menu-button"
-          tabindex="-1">
+          aria-labelledby="menu-button">
           <div className=" " role="none">
             {options
               .filter((obj) =>
