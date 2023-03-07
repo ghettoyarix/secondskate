@@ -1,6 +1,6 @@
-import Product, { ProductsResponse } from "types/models/Product";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchProducts } from "../actionCreators/fetchProducts";
+import Product, { ProductsResponse } from 'types/models/Product';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchProducts } from '../actionCreators/fetchProducts';
 
 interface ProductsState {
   products: Product[];
@@ -12,32 +12,30 @@ interface ProductsState {
 const initialState: ProductsState = {
   products: [],
   isLoading: false,
-  error: "",
+  error: '',
   totalProducts: 0,
 };
 
-export const productslice = createSlice({
-  name: "products",
+export const productsSlice = createSlice({
+  name: 'products',
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchProducts.fulfilled.type]: (
-      state,
-      action: PayloadAction<ProductsResponse>
-    ) => {
-      state.isLoading = false;
-      state.error = "";
-      state.products = action.payload.products;
-      state.totalProducts = action.payload.totalProducts;
-    },
-    [fetchProducts.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchProducts.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = '';
+        state.products = action.payload.products;
+        state.totalProducts = action.payload.totalProducts;
+      })
+      .addCase(fetchProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 
-export default productslice.reducer;
+export default productsSlice.reducer;

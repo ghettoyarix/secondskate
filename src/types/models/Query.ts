@@ -7,8 +7,8 @@ import {
 } from './FilterOptions';
 
 type queryProps = {
-  type: DiscoverType['type'];
-  category: DiscoverCategory['category'];
+  type: DiscoverType['type'] | undefined;
+  category: DiscoverCategory['category'] | undefined;
   priceSorter: SortOption['value'];
   condition: Option['value'];
 };

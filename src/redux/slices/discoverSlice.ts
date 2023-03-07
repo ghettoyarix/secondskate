@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { SortOption, DiscoverOption, Option } from 'types/models/FilterOptions';
 import { CONDITIONS, priceSortOptions } from 'constants/index';
+import { discoverCategories } from 'constants/options';
 const discoverConditions: Option[] = [
   { title: { eng: 'Any', ua: 'Будь-який' }, value: 'any' },
   ...CONDITIONS,
@@ -18,16 +19,6 @@ export interface DiscoverState {
   likesSortOptions: string[];
   isFilterShown: boolean;
 }
-
-const discoverCategories: DiscoverOption[] = [
-  { title: 'All items', category: 'any' },
-  { title: 'Completes', type: 'completes' },
-  { title: 'Decks', type: 'decks' },
-  { title: 'Trucks', type: 'trucks' },
-  { title: 'Wheels', type: 'wheels' },
-  { title: 'Other', type: 'other' },
-  { title: 'Shoes', category: 'shoes' },
-];
 
 const initialState: DiscoverState = {
   discoverConditions,
@@ -59,8 +50,8 @@ export const discoverSlice = createSlice({
     setChosenCategory: (state, action: PayloadAction<DiscoverOption>) => {
       state.chosenCategory = action.payload;
     },
-    setIsFilterShown: (state, action: PayloadAction<boolean>) => {
-      state.isFilterShown = action.payload;
+    toggleFilter: (state) => {
+      state.isFilterShown = !state.isFilterShown;
     },
   },
 });
@@ -69,7 +60,7 @@ export const {
   setChosenPriceSorter,
   setDiscoverSorter,
   setChosenCategory,
-  setIsFilterShown,
+  toggleFilter,
   setChosenCondition,
 } = discoverSlice.actions;
 

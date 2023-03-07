@@ -1,63 +1,28 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import React from 'react';
 
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-const minDistance = 1;
-
-var rounded = function (number) {
-  return +number.toFixed(2);
-};
-
-export default function MinimumDistanceSlider() {
-  const inputRef1 = React.useRef();
-  const [calculatedValue, setCalculatedValue] = React.useState([]);
-  const [value1, setValue1] = React.useState([0, 100]);
-
-  const handleChange1 = (event, newValue, activeThumb) => {
-    console.log(value1);
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-
-    if (activeThumb === 0) {
-      setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
-    } else {
-      setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
-    }
-  };
-
+const PriceRangeInput = ({ min, max }) => {
   return (
-    <div>
-      <Slider
-        sx={{
-          width: 246,
-          color: '#3772FF',
-        }}
-        aria-valuetext={null}
-        step={0.1}
-        scale={(value) => value}
-        getAriaLabel={() => 'Minimum distance'}
-        value={value1}
-        onChange={handleChange1}
-        getAriaValueText={valuetext}
-        disableSwap
-      />
-      <div className="flex mt-4  justify-between mx-[-10px]">
-        <p>
-          <input
-            ref={inputRef1}
-            value={value1[0]}
-            onChange={(e) => setValue1([e.target.value, value1[1]])}
-            className="w-8 mr-2 focus:outline-primary focus:outline-2 outline-gray outline rounded-sm "
-          />
-          ETH
-        </p>
-        <p>{rounded(value1[1] / 1)} ETH</p>
+    <div className="flex justify-center    items-center space-x-4">
+      <div className=" flex flex-col h-full justify-between ">
+        <label className="text-gray-600 mb-3 uppercase ">Min Price:</label>
+        <input
+          placeholder={min}
+          className="  border-gray-300 border-2 h-12  w-20 rounded-md py-2 px-4"
+          type="number"
+          min={min}
+        />
+      </div>
+      <div className=" flex flex-col h-full justify-between ">
+        <label className="text-gray-600 mb-3  uppercase">Max Price:</label>
+        <input
+          placeholder={max}
+          className="  border-2 border-gray-300 h-12  w-20 rounded-md py-2 px-4"
+          type="number"
+          min={max}
+        />
       </div>
     </div>
   );
-}
+};
+
+export default PriceRangeInput;

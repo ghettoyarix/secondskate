@@ -1,12 +1,14 @@
-type DiscoverCategory = {
+interface DiscoverCategory {
   title: Title;
   category: string;
-};
-type DiscoverType = {
+}
+
+interface DiscoverType {
   title: Title;
   type: string;
-};
-type DiscoverOption = DiscoverCategory | DiscoverType;
+}
+
+interface DiscoverOption extends Partial<DiscoverCategory>, Partial<DiscoverType> {}
 type TranslatedTitle = {
   eng: string;
   ua: string;
