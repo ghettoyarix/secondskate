@@ -13,7 +13,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
   const [openFlag, setOpenFlag] = useState(false);
   const wrapperRef = useRef(null);
   const inputRef = useRef(null);
-  const [searchedValue, setSearchedValue] = useState();
+  const [searchedValue, setSearchedValue] = useState<Option>();
 
   const onOptionClick = (obj: Option) => {
     pickOption(obj);
@@ -49,7 +49,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
                 ? chosenOption.title
                 : chosenOption?.title?.[chosenLanguage]
             }
-            value={searchedValue?.title?.[chosenLanguage] || searchedValue}
+            value={getTitle(searchedValue, chosenLanguage) || searchedValue}
             onChange={(e) => {
               setSearchedValue(e.target.value);
               pickOption(e.target.value);
@@ -88,7 +88,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
               )
               .map((obj) => (
                 <p
-                  key={obj}
+                  key={obj?.value}
                   onClick={() => onOptionClick(obj)}
                   className="w-full  text-center py-2   text-reg overflow-hidden text-black hover:bg-lightGray">
                   {getTitle(obj, chosenLanguage)}

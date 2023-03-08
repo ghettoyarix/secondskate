@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import Label from '../Label';
 import Image from 'next/image';
 import cn from 'classnames';
@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { editBid, removeBid } from '../../../redux/slices/modalSlice';
-const Bid = (props) => {
+const Bid = forwardRef((props, ref) => {
   const {
     obj,
     username,
@@ -40,6 +40,7 @@ const Bid = (props) => {
 
   return (
     <div
+      ref={ref}
       className={cn(
         ' duration-150 outline-1 outline  rounded-[12px] outline-lightGray   bg-white w-[256px] mb-1	',
         {
@@ -113,6 +114,6 @@ const Bid = (props) => {
       </div>
     </div>
   );
-};
-
+});
+Bid.displayName = 'Bid';
 export default Bid;

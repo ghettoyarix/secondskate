@@ -3,36 +3,45 @@ import Bid from 'components/UI/Bid';
 import BidLoader from 'components/UI/loaders/BidLoader';
 import NothingFound from './NothingFound';
 import Grid from './Grid';
+
 type BidsGridProps = {
   productsLoading: boolean;
   filteredProducts: any[];
 };
 import { useAppSelector, useAppDispatch } from 'hooks/redux';
 import { fetchProducts } from 'redux/actionCreators/fetchProducts';
+import { useInView } from 'react-intersection-observer';
+import { nextPage } from 'redux/slices/productsSlice';
 
 const BidsGrid = ({}) => {
+  const dispatch = useAppDispatch();
+  const { ref, inView, entry } = useInView();
   const { error, isLoading, products, totalProducts } = useAppSelector((state) => state.products);
-  if (!isLoading && totalProducts === 0) {
-    return <NothingFound x={totalProducts} />;
-  }
+  const lastProduct = products[products.length - 1];
 
-  if (isLoading) {
-    return (
-      <Grid>
-        <BidLoader />
-        <BidLoader />
-        <BidLoader />
-        <BidLoader />
-      </Grid>
-    );
-  }
+  useEffect(() => {
+    if (inView) {
+      dispatch(nextPage());
+    }
+  }, [inView]);
+
+  const productList =
+    products && products.map((obj) => <Bid ref={lastProduct && ref} {...obj} key={obj._id}></Bid>);
 
   return (
-    <Grid>
-      {products.map((obj) => (
-        <Bid {...obj} key={obj._id}></Bid>
-      ))}
-    </Grid>
+    <>
+      {!isLoading && totalProducts === 0 && <NothingFound />}
+      <Grid>{productList}</Grid>
+      {isLoading && (
+        <Grid>
+          <BidLoader />
+          <BidLoader />
+          <BidLoader />
+          <BidLoader />
+        </Grid>
+      )}
+      {}
+    </>
   );
 };
 

@@ -17,31 +17,33 @@ const Discover = () => {
   const {} = discoverSlice.actions;
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.products);
-  const { chosenCategory } = useAppSelector((state) => state.discover);
+  const { chosenCategory, chosenCondition } = useAppSelector((state) => state.discover);
 
-  const { chosenCondition } = useAppSelector((state) => state.discover);
+  const { page } = useAppSelector((state) => state.products);
 
   const { loading, currentUser } = useAuth();
 
   const { chosenPriceSorter, isFilterShown, setIsFilterShown } = useDiscover();
 
   const queryProps: queryProps = {
+    page,
     type: chosenCategory.type,
     category: chosenCategory.category,
     priceSorter: chosenPriceSorter.value,
     condition: chosenCondition.value,
   };
+
   useEffect(() => {
     console.log('disc');
 
     dispatch(fetchProducts(queryProps));
-  }, [chosenCategory, chosenPriceSorter, chosenCondition, router]);
+  }, [chosenCategory, chosenPriceSorter, chosenCondition, router, page]);
   const handleFilter = () => {
     dispatch(toggleFilter());
   };
   return (
     <div className="wrapper py-12 flex flex-col justify-center ">
-      <h1 className="text-giant pb-10  font-bold">Discover {}</h1>
+      <h1 className="text-giant pb-10  font-bold">Discover</h1>
       <div className="flex items-center  justify-between border-b-2 pb-8 border-lightGray">
         <CategoryPicker></CategoryPicker>
         <div className="max-w-[180px]"></div>

@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import clientPromise from 'lib/mongodb';
 import clearProps from 'helpers/clearProps';
-
+import { PAGE_LIMIT } from 'constants/products';
 const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
     const client = await clientPromise;
     const db = client.db('secondskate');
     const { category, type, uploadedBy, condition, priceSorter } = req.query;
-    const limit = req.query.limit ? +req.query.limit : 8;
+    const limit = req.query.limit ? +req.query.limit : PAGE_LIMIT;
     const page = req.query.page ? +req.query.page : 1;
 
     const filterProps: { [key: string]: any } = {
