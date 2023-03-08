@@ -11,7 +11,9 @@ import { discoverSlice, toggleFilter } from 'redux/slices/discoverSlice';
 import { fetchProducts } from 'redux/actionCreators/fetchProducts';
 import { queryProps } from 'types/models/Query';
 import CategoryPicker from './CategoryPicker';
+import { useRouter } from 'next/router';
 const Discover = () => {
+  const router = useRouter();
   const {} = discoverSlice.actions;
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.products);
@@ -30,8 +32,10 @@ const Discover = () => {
     condition: chosenCondition.value,
   };
   useEffect(() => {
+    console.log('disc');
+
     dispatch(fetchProducts(queryProps));
-  }, [chosenCategory, chosenPriceSorter, chosenCondition]);
+  }, [chosenCategory, chosenPriceSorter, chosenCondition, router]);
   const handleFilter = () => {
     dispatch(toggleFilter());
   };

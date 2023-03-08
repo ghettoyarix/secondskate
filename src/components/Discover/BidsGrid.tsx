@@ -12,6 +12,10 @@ import { fetchProducts } from 'redux/actionCreators/fetchProducts';
 
 const BidsGrid = ({}) => {
   const { error, isLoading, products, totalProducts } = useAppSelector((state) => state.products);
+  if (!isLoading && totalProducts === 0) {
+    return <NothingFound x={totalProducts} />;
+  }
+
   if (isLoading) {
     return (
       <Grid>
@@ -21,9 +25,6 @@ const BidsGrid = ({}) => {
         <BidLoader />
       </Grid>
     );
-  }
-  if (totalProducts === 0) {
-    return <NothingFound />;
   }
 
   return (

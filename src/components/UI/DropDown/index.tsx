@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, FC } from 'react';
 import { Option } from 'types/models/FilterOptions';
 import { chosenLanguage } from 'helpers/parseTittle';
 import getTitle from 'helpers/getTitle';
+import useOutsideHandler from 'helpers/useOutsideHandler';
 type DropDownProps = {
   options: Option[];
   chosenOption: Option;
@@ -19,7 +20,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
     setSearchedValue(obj);
     setOpenFlag(false);
   };
-  useOutsideHandler(wrapperRef);
+  useOutsideHandler(wrapperRef, () => setOpenFlag(false));
 
   return (
     <div ref={wrapperRef} className="relative min-w-[160px] w-full h-full inline-block text-left">
