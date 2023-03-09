@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useCallback, useEffect } from 'react';
 import Bid from 'components/UI/Bid';
 import BidLoader from 'components/UI/loaders/BidLoader';
 import NothingFound from './NothingFound';
@@ -24,12 +24,12 @@ const BidsGrid = ({}) => {
 
   useEffect(() => {
     if (inView && productsFetched < totalProducts) {
-      fetchMore(page);
+      fetchMore(page + 1);
     }
   }, [inView]);
 
   const productList =
-    products && products.map((obj) => <Bid ref={lastProduct && ref} {...obj} key={obj._id}></Bid>);
+    products && products.map((obj, i) => <Bid ref={lastProduct && ref} {...obj} key={i}></Bid>);
 
   return (
     <>

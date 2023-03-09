@@ -13,6 +13,7 @@ const Discover = () => {
   const dispatch = useAppDispatch();
 
   const { isFilterShown } = useAppSelector((state) => state.discover);
+  const updatedPage = useAppSelector((state) => state.products.page);
 
   useEffect(() => {
     intitalFetch();

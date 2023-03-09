@@ -11,7 +11,7 @@ export const fetchProducts = createAsyncThunk(
   'prod/fetchAll',
 
   async ({ queryProps, page }: IFetchProducts, thunkAPI) => {
-    console.log(page + 'xx');
+    console.log(page + ' in action');
 
     try {
       const url = `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts`;

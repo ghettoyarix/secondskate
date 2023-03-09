@@ -1,7 +1,6 @@
 import Product, { ProductsResponse } from 'types/models/Product';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchProducts } from '../actionCreators/fetchProducts';
-import { PAGE_LIMIT } from 'constants/products';
 
 interface ProductsState {
   products: Product[];
@@ -27,11 +26,13 @@ export const productsSlice = createSlice({
   reducers: {
     nextPage: (state) => {
       state.page += 1;
+      console.log('nextPage worked and page ui' + state.page);
     },
     clearProducts: (state) => {
       state.products = [];
       state.page = 1;
       state.productsFetched = 0;
+      console.log('clear worket', state.page);
     },
   },
   extraReducers: (builder) => {

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 
 import { clearProducts, nextPage } from 'redux/slices/productsSlice';
 import { fetchProducts } from 'redux/actionCreators/fetchProducts';
@@ -12,7 +12,9 @@ const useFetchProducts = () => {
     (state) => state.discover,
   );
   const { page } = useAppSelector((state) => state.products);
-
+  useEffect(() => {
+    console.log('page in hook: ', page);
+  }, [page]);
   const queryProps: queryProps = useMemo(() => {
     return {
       type: chosenCategory.type,
@@ -24,15 +26,26 @@ const useFetchProducts = () => {
 
   const dispatch = useAppDispatch();
 
-  const intitalFetch = () => {
-    dispatch(clearProducts());
-    dispatch(fetchProducts({ queryProps, page }));
-  };
-  const fetchMore = (currentPage: number) => {
-    dispatch(nextPage());
-    console.log(currentPage);
-    dispatch(fetchProducts({ queryProps, page: currentPage + 1 }));
-  };
+  const intitalFetch = useCallback(
+    () => {
+      dispatch(clearProducts());
+      console.log(page + 'in init hook');
+
+      dispatch(fetchProducts({ queryProps, page: 1 }));
+    },
+    [dispatch, queryProps, page], // include page here
+  );
+
+  const fetchMore = useCallback(
+    (updatedPage: number) => {
+      console.log(updatedPage + 'in fmore');
+      dispatch(nextPage());
+
+      dispatch(fetchProducts({ queryProps, page: updatedPage }));
+    },
+    [dispatch, queryProps, page], // include page here
+  );
+
   return { queryProps, intitalFetch, fetchMore };
 };
 
