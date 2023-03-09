@@ -7,7 +7,6 @@ import {
 } from './FilterOptions';
 
 type queryProps = {
-  page: number;
   type: DiscoverType['type'] | undefined;
   category: DiscoverCategory['category'] | undefined;
   priceSorter: SortOption['value'];

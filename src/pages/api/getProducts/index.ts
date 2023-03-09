@@ -18,6 +18,7 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
     };
     const sorterProps: { [key: string]: any } = {
       price: priceSorter,
+      _id: 1,
     };
 
     clearProps(filterProps);

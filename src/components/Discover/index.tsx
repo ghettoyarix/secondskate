@@ -1,43 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
-import cn from 'classnames';
-import { useAuth } from 'context/AuthContext';
+import React, { useEffect } from 'react';
 import Button from '../UI/Button';
 import FilterBlock from './FilterBlock';
-import { useDiscover } from 'context/DiscoverContext';
 import BidsGrid from './BidsGrid';
-import { useAppDispatch } from 'hooks/redux';
-import { useAppSelector } from 'hooks/redux';
-import { discoverSlice, toggleFilter } from 'redux/slices/discoverSlice';
-import { fetchProducts } from 'redux/actionCreators/fetchProducts';
-import { queryProps } from 'types/models/Query';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { toggleFilter } from 'redux/slices/discoverSlice';
 import CategoryPicker from './CategoryPicker';
 import { useRouter } from 'next/router';
+import useFetchProducts from 'hooks/useFetchProducts';
 const Discover = () => {
+  const { intitalFetch, queryProps } = useFetchProducts();
   const router = useRouter();
-  const {} = discoverSlice.actions;
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state) => state.products);
-  const { chosenCategory, chosenCondition } = useAppSelector((state) => state.discover);
 
-  const { page } = useAppSelector((state) => state.products);
-
-  const { loading, currentUser } = useAuth();
-
-  const { chosenPriceSorter, isFilterShown, setIsFilterShown } = useDiscover();
-
-  const queryProps: queryProps = {
-    page,
-    type: chosenCategory.type,
-    category: chosenCategory.category,
-    priceSorter: chosenPriceSorter.value,
-    condition: chosenCondition.value,
-  };
+  const { isFilterShown } = useAppSelector((state) => state.discover);
 
   useEffect(() => {
-    console.log('disc');
-
-    dispatch(fetchProducts(queryProps));
-  }, [chosenCategory, chosenPriceSorter, chosenCondition, router, page]);
+    intitalFetch();
+  }, [queryProps, router]);
   const handleFilter = () => {
     dispatch(toggleFilter());
   };

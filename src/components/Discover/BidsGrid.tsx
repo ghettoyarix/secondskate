@@ -12,16 +12,19 @@ import { useAppSelector, useAppDispatch } from 'hooks/redux';
 import { fetchProducts } from 'redux/actionCreators/fetchProducts';
 import { useInView } from 'react-intersection-observer';
 import { nextPage } from 'redux/slices/productsSlice';
-
+import useFetchProducts from 'hooks/useFetchProducts';
 const BidsGrid = ({}) => {
+  const { fetchMore } = useFetchProducts();
   const dispatch = useAppDispatch();
   const { ref, inView, entry } = useInView();
-  const { error, isLoading, products, totalProducts } = useAppSelector((state) => state.products);
+  const { error, isLoading, products, totalProducts, page, productsFetched } = useAppSelector(
+    (state) => state.products,
+  );
   const lastProduct = products[products.length - 1];
 
   useEffect(() => {
-    if (inView) {
-      dispatch(nextPage());
+    if (inView && productsFetched < totalProducts) {
+      fetchMore(page);
     }
   }, [inView]);
 

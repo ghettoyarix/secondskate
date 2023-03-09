@@ -26,12 +26,12 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     nextPage: (state) => {
-      if (state.totalProducts > state.productsFetched) {
-        state.page += 1;
-      }
+      state.page += 1;
     },
     clearProducts: (state) => {
       state.products = [];
+      state.page = 1;
+      state.productsFetched = 0;
     },
   },
   extraReducers: (builder) => {
@@ -52,5 +52,5 @@ export const productsSlice = createSlice({
       });
   },
 });
-export const { nextPage } = productsSlice.actions;
+export const { nextPage, clearProducts } = productsSlice.actions;
 export default productsSlice.reducer;
