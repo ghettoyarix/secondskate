@@ -29,11 +29,9 @@ export const useClearProducts = () => {
 
   useEffect(() => {
     clear();
-    console.log(322);
   }, [clear]);
 
   const fetch = useCallback(() => {
-    console.log('fetching');
     dispatch(fetchProducts({ queryProps, page }));
   }, [page, queryProps]);
 

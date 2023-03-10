@@ -7,21 +7,18 @@ import { toggleFilter } from 'redux/slices/discoverSlice';
 import CategoryPicker from './CategoryPicker';
 import { useRouter } from 'next/router';
 import useFetchProducts from 'hooks/useFetchProducts';
-import { useClearProducts } from 'hooks/useClearProducts';
+
 const Discover = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const { isFilterShown } = useAppSelector((state) => state.discover);
-  const updatedPage = useAppSelector((state) => state.products.page);
+  const { intitalFetch, queryProps } = useFetchProducts();
 
-  const { fetch, queryProps } = useClearProducts();
-  useCallback(() => {
-    fetch();
-    console.log('Gec');
+  useEffect(() => {
+    intitalFetch(queryProps);
   }, [queryProps]);
 
-  console.log('renders');
   const handleFilter = () => {
     dispatch(toggleFilter());
   };

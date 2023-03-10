@@ -6,7 +6,7 @@ import { fetchProducts } from 'redux/actionCreators/fetchProducts';
 import type { queryProps } from 'types/models/Query';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from './redux';
-
+import useClock from 'helpers/useClock';
 const useFetchProducts = () => {
   const { chosenCategory, chosenCondition, chosenPriceSorter } = useAppSelector(
     (state) => state.discover,
@@ -25,21 +25,18 @@ const useFetchProducts = () => {
   const dispatch = useAppDispatch();
 
   const intitalFetch = useCallback(
-    () => {
+    (queryProps: queryProps) => {
       dispatch(clearProducts());
-      console.log(page + 'in init hook');
 
-      dispatch(fetchProducts({ queryProps, page: page }));
+      dispatch(fetchProducts({ queryProps, page: 1 }));
     },
     [dispatch, page], // include page here
   );
 
   const fetchMore = useCallback(
-    (updatedPage: number) => {
-      console.log(updatedPage + 'in fmore');
+    (queryProps: queryProps, page: number) => {
       dispatch(nextPage());
-
-      dispatch(fetchProducts({ queryProps, page: updatedPage }));
+      dispatch(fetchProducts({ queryProps, page: page + 1 }));
     },
     [dispatch, queryProps], // include page here
   );
@@ -47,4 +44,4 @@ const useFetchProducts = () => {
   return { queryProps, intitalFetch, fetchMore };
 };
 
-export default { useFetchProducts };
+export default useFetchProducts;
