@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import Button from '../UI/Button';
 import FilterBlock from './FilterBlock';
 import BidsGrid from './BidsGrid';
@@ -7,17 +7,21 @@ import { toggleFilter } from 'redux/slices/discoverSlice';
 import CategoryPicker from './CategoryPicker';
 import { useRouter } from 'next/router';
 import useFetchProducts from 'hooks/useFetchProducts';
+import { useClearProducts } from 'hooks/useClearProducts';
 const Discover = () => {
-  const { intitalFetch, queryProps } = useFetchProducts();
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const { isFilterShown } = useAppSelector((state) => state.discover);
   const updatedPage = useAppSelector((state) => state.products.page);
 
-  useEffect(() => {
-    intitalFetch();
-  }, [queryProps, router]);
+  const { fetch, queryProps } = useClearProducts();
+  useCallback(() => {
+    fetch();
+    console.log('Gec');
+  }, [queryProps]);
+
+  console.log('renders');
   const handleFilter = () => {
     dispatch(toggleFilter());
   };

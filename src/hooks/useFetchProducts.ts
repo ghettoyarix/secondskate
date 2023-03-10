@@ -12,9 +12,7 @@ const useFetchProducts = () => {
     (state) => state.discover,
   );
   const { page } = useAppSelector((state) => state.products);
-  useEffect(() => {
-    console.log('page in hook: ', page);
-  }, [page]);
+
   const queryProps: queryProps = useMemo(() => {
     return {
       type: chosenCategory.type,
@@ -31,9 +29,9 @@ const useFetchProducts = () => {
       dispatch(clearProducts());
       console.log(page + 'in init hook');
 
-      dispatch(fetchProducts({ queryProps, page: 1 }));
+      dispatch(fetchProducts({ queryProps, page: page }));
     },
-    [dispatch, queryProps, page], // include page here
+    [dispatch, page], // include page here
   );
 
   const fetchMore = useCallback(
@@ -43,10 +41,10 @@ const useFetchProducts = () => {
 
       dispatch(fetchProducts({ queryProps, page: updatedPage }));
     },
-    [dispatch, queryProps, page], // include page here
+    [dispatch, queryProps], // include page here
   );
 
   return { queryProps, intitalFetch, fetchMore };
 };
 
-export default useFetchProducts;
+export default { useFetchProducts };

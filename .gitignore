@@ -14,7 +14,7 @@
 /components/coming
 # production
 /build
-
+/functions/
 # misc
 .DS_Store
 *.pem
