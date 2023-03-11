@@ -21,7 +21,7 @@ const BidsGrid = ({}) => {
   const { fetchMore, queryProps } = useFetchProducts();
   const dispatch = useAppDispatch();
   const { ref, inView, entry } = useInView();
-  const [time, setTime] = useState(Date.now());
+  const [nothingFound, setNothingFound] = useState(false);
   const intervalPassed = useClock();
   const { error, isLoading, products, totalProducts, page, productsFetched } = useAppSelector(
     (state) => state.products,
@@ -30,19 +30,14 @@ const BidsGrid = ({}) => {
 
   useEffect(() => {
     if (inView && totalProducts > productsFetched) {
-      const interval = setInterval(() => setTime(Date.now()), 1000);
-
       console.log(inView);
       fetchMore(queryProps, page);
-
-      return () => {
-        clearInterval(interval);
-      };
     }
   }, [inView, intervalPassed]);
 
   const productList =
     products && products.map((obj, i) => <Bid ref={lastProduct && ref} {...obj} key={i}></Bid>);
+
   const countLoaders = (productsFetched: number) => {
     if (productsFetched < PAGE_LIMIT) {
       return PAGE_LIMIT - productsFetched;
@@ -51,8 +46,13 @@ const BidsGrid = ({}) => {
   };
   const loaderAmount = countLoaders(productsFetched);
 
-  {
-    !isLoading && totalProducts === 0 && <NothingFound />;
+  useEffect(() => {
+    setNothingFound(!isLoading && totalProducts === 0);
+    console.log('nothingFound :', totalProducts);
+  }, [isLoading, totalProducts]);
+
+  if (nothingFound) {
+    return <NothingFound />;
   }
   return (
     <>
