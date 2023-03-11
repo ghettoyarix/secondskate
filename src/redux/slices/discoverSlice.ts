@@ -8,7 +8,6 @@ const discoverConditions: Option[] = [
 ];
 export interface DiscoverState {
   discoverConditions: Option[];
-
   chosenPriceSorter: SortOption;
   chosenDateOption: SortOption;
   chosenCondition: Option;
@@ -18,6 +17,8 @@ export interface DiscoverState {
   discoverSortOptions: string[];
   likesSortOptions: string[];
   isFilterShown: boolean;
+  minPrice: number | null;
+  maxPrice: number | null;
 }
 
 const initialState: DiscoverState = {
@@ -31,6 +32,8 @@ const initialState: DiscoverState = {
   discoverSortOptions: ['Recently added', 'Asnything'],
   likesSortOptions: ['Most liked', 'Least liked'],
   isFilterShown: false,
+  minPrice: 0,
+  maxPrice: 99999,
 };
 
 export const discoverSlice = createSlice({

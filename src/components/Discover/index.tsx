@@ -24,7 +24,7 @@ const Discover = () => {
   };
   return (
     <div className="wrapper py-12 flex flex-col justify-center ">
-      <h1 className="text-giant pb-10  font-bold">Discover</h1>
+      <h1 className="text-giant pb-10 ml-4 font-bold">Discover</h1>
       <div className="flex items-center  justify-between border-b-2 pb-8 border-lightGray">
         <CategoryPicker></CategoryPicker>
         <div className="max-w-[180px]"></div>

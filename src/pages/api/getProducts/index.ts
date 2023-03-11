@@ -6,7 +6,8 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
   try {
     const client = await clientPromise;
     const db = client.db('secondskate');
-    const { category, type, uploadedBy, condition, priceSorter } = req.query;
+    const { category, type, uploadedBy, condition, priceSorter, minPrice, maxPrice } =
+      req.query as { [key: string]: any };
     const limit = req.query.limit ? +req.query.limit : PAGE_LIMIT;
     const page = req.query.page ? +req.query.page : 1;
 
@@ -23,7 +24,17 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
 
     clearProps(filterProps);
     clearProps(sorterProps);
+    if (minPrice) {
+      filterProps.price = { $gte: parseInt(minPrice) };
+    }
 
+    if (maxPrice) {
+      if (filterProps.price) {
+        filterProps.price.$lte = parseInt(maxPrice);
+      } else {
+        filterProps.price = { $lte: parseInt(maxPrice) };
+      }
+    }
     const skip = (page - 1) * limit;
     const totalProducts = await db.collection('products').count(filterProps);
 

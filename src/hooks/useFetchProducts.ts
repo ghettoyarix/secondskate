@@ -11,6 +11,8 @@ const useFetchProducts = () => {
   const { chosenCategory, chosenCondition, chosenPriceSorter } = useAppSelector(
     (state) => state.discover,
   );
+  const { maxPrice, minPrice } = useAppSelector((state) => state.range);
+
   const { page } = useAppSelector((state) => state.products);
 
   const queryProps: queryProps = useMemo(() => {
@@ -19,8 +21,10 @@ const useFetchProducts = () => {
       category: chosenCategory.category,
       priceSorter: chosenPriceSorter.value,
       condition: chosenCondition.value,
+      maxPrice,
+      minPrice,
     };
-  }, [chosenCategory, chosenPriceSorter, chosenCondition]);
+  }, [chosenCategory, chosenPriceSorter, chosenCondition, maxPrice, minPrice]);
 
   const dispatch = useAppDispatch();
 

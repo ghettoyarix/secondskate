@@ -1,2 +1,2 @@
-const PAGE_LIMIT = 2;
+const PAGE_LIMIT = 4;
 export { PAGE_LIMIT };

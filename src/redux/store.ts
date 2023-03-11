@@ -4,12 +4,14 @@ import modalSlice from './slices/modalSlice';
 import discoverSlice from './slices/discoverSlice';
 import uploadSlice from './slices/uploadSlice';
 import productsSlice from './slices/productsSlice';
+import rangeSlice from './slices/rangeSlice';
 const rootReducer = combineReducers({
-  products : productsSlice,
+  products: productsSlice,
   header: headerSlice,
   upload: uploadSlice,
   modal: modalSlice,
   discover: discoverSlice,
+  range: rangeSlice,
 });
 
 export const setupStore = () => {
