@@ -17,7 +17,7 @@ const Discover = () => {
 
   useEffect(() => {
     intitalFetch(queryProps);
-  }, [queryProps]);
+  }, [queryProps, router]);
 
   const handleFilter = () => {
     dispatch(toggleFilter());

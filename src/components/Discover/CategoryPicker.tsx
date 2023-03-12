@@ -7,7 +7,7 @@ const CategoryPicker = () => {
   const { chosenCategory } = useAppSelector((state) => state.discover);
   const dispatch = useAppDispatch();
   return (
-    <div className="grid grid-cols-3 min:grid-cols-4 gap-3 ">
+    <div className="flex flex-wrap min-w-[300px] gap-3 ">
       {discoverCategories.map((obj, i) => (
         <p
           key={i}
