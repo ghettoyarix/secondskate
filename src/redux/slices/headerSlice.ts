@@ -7,7 +7,7 @@ interface Account {
 }
 
 interface HeaderState {
-  searchedValue: string;
+  searchedValue: string | null;
   accountsFound: Account[];
   productsFound: Product[];
 }
