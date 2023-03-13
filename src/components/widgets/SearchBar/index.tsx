@@ -3,8 +3,9 @@ import SearchWindow from './SearchWindow';
 import { useHeader } from 'context/HeaderContext';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
-import { setSearchedValue, setOpenFlag } from 'redux/slices/headerSlice';
+import { setSearchedValue, setOpenFlag, forceLoading } from 'redux/slices/headerSlice';
 import { debounce } from 'lodash';
+import { clearProducts } from 'redux/slices/productsSlice';
 const SearchBar = () => {
   const [innerSearchValue, setInnerSearchValue] = useState('');
   const { searchedValue } = useAppSelector((state) => state.header);
@@ -22,8 +23,10 @@ const SearchBar = () => {
       setInnerSearchValue(value);
       changeSearchedValue(value);
       dispatch(setOpenFlag(true));
+      dispatch(forceLoading());
     } else {
       dispatch(setOpenFlag(false));
+      dispatch(clearProducts());
     }
   };
 

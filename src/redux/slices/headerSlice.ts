@@ -31,6 +31,12 @@ const headerSlice = createSlice({
     setOpenFlag(state, action: PayloadAction<boolean>) {
       state.openFlag = action.payload;
     },
+    clearProducts(state) {
+      state.productsFound = [];
+    },
+    forceLoading(state) {
+      state.isLoading = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -42,7 +48,7 @@ const headerSlice = createSlice({
       })
       .addCase(searchProducts.pending, (state) => {
         state.isLoading = true;
-        state.productsFound = [];
+        state.totalProducts = 0;
       })
       .addCase(searchProducts.rejected, (state, action) => {
         state.isLoading = false;
@@ -51,6 +57,6 @@ const headerSlice = createSlice({
   },
 });
 
-export const { setSearchedValue, setOpenFlag } = headerSlice.actions;
+export const { setSearchedValue, setOpenFlag, forceLoading, clearProducts } = headerSlice.actions;
 
 export default headerSlice.reducer;

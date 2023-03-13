@@ -22,13 +22,7 @@ const Header = () => {
                 <p className=" mr-8 text-mid ">secondskate </p>
               </div>
             </Link>
-            <div className="  gap-8 hidden tab:flex   ">
-              <p>Discover</p>
-              <p onClick={() => console.log(currentUser)} className="text-gray">
-                {' '}
-                How it works
-              </p>
-            </div>
+            <div className="  gap-8 hidden tab:flex   "></div>
           </div>
           <div className=" hidden  xs:block">
             <SearchBar></SearchBar>

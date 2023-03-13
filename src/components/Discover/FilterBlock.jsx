@@ -5,7 +5,7 @@ import { CONDITIONS, priceSortOptions } from 'constants/index';
 import { useDiscover } from 'context/DiscoverContext';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
-import { setChosenCondition } from 'redux/slices/discoverSlice';
+import { setChosenCondition, setChosenPriceSorter } from 'redux/slices/discoverSlice';
 const FilterBlock = () => {
   const {
     chosenDateOption,
@@ -20,7 +20,6 @@ const FilterBlock = () => {
     setChosenPricSorter,
 
     chosenCreatorSorter,
-    setChosenCreatorSorter,
 
     creatorSortOptions,
   } = useDiscover();
@@ -34,7 +33,7 @@ const FilterBlock = () => {
         <DropDown
           chosenOption={chosenPriceSorter}
           options={priceSortOptions}
-          pickOption={(obj) => setChosenPricSorter(obj)}></DropDown>
+          pickOption={(obj) => dispatch(setChosenPriceSorter(obj))}></DropDown>
       </div>
       <div className="max-w-[192px]">
         <p className="mb-3">CONDITION</p>

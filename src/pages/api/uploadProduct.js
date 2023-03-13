@@ -23,6 +23,7 @@ const uploadUproduct = async (req, res) => {
       ...req.body,
       productId: newId,
       price: parseInt(req.body.price),
+      uploadDate: { $currentDate: { $type: 'date' } },
     });
 
     res.json(newId);
