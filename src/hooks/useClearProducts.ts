@@ -3,7 +3,7 @@ import useFetchProducts from './useFetchProducts';
 import { useAppDispatch, useAppSelector } from './redux';
 import { clearProducts } from 'redux/slices/productsSlice';
 import { useRouter } from 'next/router';
-import { fetchProducts } from 'redux/actionCreators/fetchProducts';
+import { fetchProducts } from 'redux/actionCreators/products';
 import type { queryProps } from 'types/models/Query';
 export const useClearProducts = () => {
   const { chosenCategory, chosenCondition, chosenPriceSorter } = useAppSelector(

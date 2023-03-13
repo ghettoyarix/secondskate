@@ -66,5 +66,5 @@ export const {
   toggleFilter,
   setChosenCondition,
 } = discoverSlice.actions;
-
+export const ACTION_TYPE = 'prod/fetchAll';
 export default discoverSlice.reducer;

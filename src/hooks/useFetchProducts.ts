@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useCallback } from 'react';
 
 import { clearProducts, nextPage } from 'redux/slices/productsSlice';
-import { fetchProducts } from 'redux/actionCreators/fetchProducts';
+import { fetchProducts } from 'redux/actionCreators/products';
 
 import type { queryProps } from 'types/models/Query';
 import { useRouter } from 'next/router';

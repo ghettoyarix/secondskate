@@ -1,16 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import SearchWindow from './SearchWindow';
 import { useHeader } from 'context/HeaderContext';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
-import { setSearchedValue } from 'redux/slices/headerSlice';
-import { after, debounce } from 'lodash';
+import { setSearchedValue, setOpenFlag } from 'redux/slices/headerSlice';
+import { debounce } from 'lodash';
 const SearchBar = () => {
   const [innerSearchValue, setInnerSearchValue] = useState('');
+  const { searchedValue } = useAppSelector((state) => state.header);
   const searchRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const changeSearchedValue = React.useCallback(
-    debounce((value) => {
+    debounce((value: string) => {
       dispatch(setSearchedValue(value));
     }, 500),
     [],
@@ -20,6 +21,9 @@ const SearchBar = () => {
       const value = searchRef.current.value.trim();
       setInnerSearchValue(value);
       changeSearchedValue(value);
+      dispatch(setOpenFlag(true));
+    } else {
+      dispatch(setOpenFlag(false));
     }
   };
 

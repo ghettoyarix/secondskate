@@ -9,7 +9,7 @@ type BidsGridProps = {
   filteredProducts: any[];
 };
 import { useAppSelector, useAppDispatch } from 'hooks/redux';
-import { fetchProducts } from 'redux/actionCreators/fetchProducts';
+import { fetchProducts } from 'redux/actionCreators/products';
 import { useInView } from 'react-intersection-observer';
 import { nextPage } from 'redux/slices/productsSlice';
 import useFetchProducts from 'hooks/useFetchProducts';

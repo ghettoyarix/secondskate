@@ -13,5 +13,7 @@ type queryProps = {
   condition?: Option['value'];
   minPrice?: number | null;
   maxPrice?: number | null;
+  title?: string | null;
+  limit?: number;
 };
 export type { queryProps };

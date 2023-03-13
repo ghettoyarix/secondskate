@@ -13,7 +13,7 @@ const CategoryPicker = () => {
           key={i}
           onClick={() => dispatch(setChosenCategory(obj))}
           className={cn(
-            '  rounded-2xl cursor-pointer  whitespace-nowrap	 py-[6px] px-3  my-auto   font-bold text-reg ',
+            '  rounded-2xl cursor-pointer  whitespace-nowrap hover:bg-lightGray	 py-[6px] px-3  my-auto   font-bold text-reg ',
             {
               'bg-black text-white': obj.title === chosenCategory.title,
             },
