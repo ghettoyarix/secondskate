@@ -3,6 +3,7 @@ import React from 'react';
 import Loader from 'components/widgets/SearchBar/SearchWindow/Loader';
 import Image from 'next/image';
 import Label from 'components/UI/Label';
+import Link from 'next/link';
 const ProductsBlock = () => {
   const { productsFound, isLoading, totalProducts, searchedValue } = useAppSelector(
     (state) => state.header,
@@ -16,26 +17,27 @@ const ProductsBlock = () => {
   if (productsFound) {
     return (
       <div className="flex flex-col  gap-3 ">
-        {productsFound.map(({ title, photoURLs, username, _id, price }) => (
-          <div
-            key={_id}
-            className="flex gap-4 justify-between cursor-pointer hover:bg-lightGray
-             border-2 rounded-xl w-[290px] bg-white px-4 border-lightGray py-4">
-            <div className=" relative">
-              <Image
-                className="rounded-full aspect-square"
-                height={50}
-                width={50}
-                alt="profile"
-                src={photoURLs[0]}></Image>
-            </div>
-            <div className="flex flex-col justify-between">
-              <p className="font-[500]">{title}</p>
+        {productsFound.map(({ title, photoURLs, username, _id, price, productId }) => (
+          <Link key={_id} href={`/product/${productId}`}>
+            <div
+              className="flex gap-4 justify-between cursor-pointer hover:bg-lightGray
+           border-2 rounded-xl w-[290px] bg-white px-4 border-lightGray py-4">
+              <div className=" relative">
+                <Image
+                  className="rounded-full aspect-square"
+                  height={50}
+                  width={50}
+                  alt="profile"
+                  src={photoURLs[0]}></Image>
+              </div>
+              <div className="flex flex-col justify-between">
+                <p className="font-[500]">{title}</p>
 
-              <p className="text-gray">{username}</p>
+                <p className="text-gray">{username}</p>
+              </div>
+              <Label>{price + ' UAH'}</Label>
             </div>
-            <Label>{price + ' UAH'}</Label>
-          </div>
+          </Link>
         ))}{' '}
         {totalProducts > 3 && (
           <div
