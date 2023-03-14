@@ -37,6 +37,11 @@ const Bid = forwardRef((props, ref) => {
   const removeCall = () => {
     dispatch(removeBid(obj));
   };
+  const handleClick = (e) => {
+    if (editable | still) {
+      e.preventDefault();
+    }
+  };
 
   return (
     <div
@@ -47,14 +52,13 @@ const Bid = forwardRef((props, ref) => {
           'hover:scale-[1.07]': !still,
         },
       )}>
-      <Link href={`/product/${productId}`}>
-        <div
-          className={`h-[256px]  w-[256px]	 ${
-            !editable && !still && 'cursor-pointer'
-          }    mb-3 relative `}>
+      <Link onClick={handleClick} href={`/product/${productId}`}>
+        <div className={`h-[256px]  w-[256px]	     mb-3 relative `}>
           {previewImage || (photoURLs && photoURLs[0]) ? (
             <Image
-              className=" 0 rounded-[12px] object-cover "
+              className={` 0 rounded-[12px] object-cover ${
+                !editable ? 'cursor-pointer' : 'cursor-default'
+              } `}
               alt="mainpic"
               fill
               sizes="(max-width: 256px) 100vw,50vw,

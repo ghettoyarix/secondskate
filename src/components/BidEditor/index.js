@@ -131,7 +131,7 @@ const BidEditor = (props) => {
     } else {
       return setError('All fields are required.');
     }
-  };
+  }; /// CONVERT TO ZOD ASAP!
 
   const filterFiles = (obj) => {
     const filteredFiles = files.filter((file) => file !== obj);
@@ -151,7 +151,7 @@ const BidEditor = (props) => {
                 console.log(defaultValues);
               }}
               className="text-giant font-bold">
-              Upload your bulshit!!
+              Upload your stuff!
             </h1>
 
             <h2 className="Upload file">Drag or choose your file to upload</h2>
@@ -262,22 +262,22 @@ const BidEditor = (props) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
-            <ToggleBlock
-              title={'Put on sale'}
-              description={'You’ll receive bids on this item'}
-              isToggleg={auctionFlag}
-              onToggle={() => {
-                setAuctionFlag(!auctionFlag);
-              }}></ToggleBlock>
-            <ToggleBlock
-              title={'Instant sale price'}
-              description={'Enter the price for which the item will be instantly sold'}
-              isToggleg={instantPriceFlag}
-              onToggle={() => {
-                setInstantPriceFlag(!auctionFlag);
-              }}></ToggleBlock>
-          </div>
+          {/* <div className="flex flex-col gap-4">
+          <ToggleBlock
+            title={'Put on sale'}
+            description={'You’ll receive bids on this item'}
+            isToggleg={auctionFlag}
+            onToggle={() => {
+              setAuctionFlag(!auctionFlag);
+            }}></ToggleBlock>
+          <ToggleBlock
+            title={'Instant sale price'}
+            description={'Enter the price for which the item will be instantly sold'}
+            isToggleg={instantPriceFlag}
+            onToggle={() => {
+              setInstantPriceFlag(!auctionFlag);
+            }}></ToggleBlock>
+        </div> */}
           <Button onClick={uploadCall} className="mt-8 w-[168px]" primary>
             Create item {uploading && <CircleLoader></CircleLoader>}
           </Button>
