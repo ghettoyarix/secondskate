@@ -1,16 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useRef } from 'react';
 import Button from '../../components/UI/Button';
 import InputBlock from '../../components/UI/InputBlock';
 import { updateProfileInfo } from '../../utils/updateProfileInfo';
 import { useAuth } from '../../context/AuthContext';
-import Dropzone from 'react-dropzone';
-import updateProfilePhoto from '../../utils/updateProfilePhoto';
 import ProfilePhotoUploader from '../../components/ProfilePhotoUploader';
-import { useRouter } from 'next/router';
 const Edit = ({}) => {
-  const { profile, currentUser } = useAuth();
-
+  const { profile } = useAuth();
   const usernameRef = useRef();
   const titleRef = useRef();
   const instaRef = useRef();

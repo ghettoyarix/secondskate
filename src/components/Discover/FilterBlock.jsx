@@ -1,28 +1,20 @@
 import React from 'react';
 import DropDown from 'components/UI/DropDown';
 import RangeSlider from 'components/UI/RangeSlider';
-import { CONDITIONS, priceSortOptions } from 'constants/index';
-import { useDiscover } from 'context/DiscoverContext';
+import { PRICE_SORT_OPTIONS, DISCOVER_CONDITIONS, DATE_SORT_OPTIONS } from 'constants/index';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
-import { setChosenCondition, setChosenPriceSorter } from 'redux/slices/discoverSlice';
+import {
+  setChosenCondition,
+  setChosenDateSorter,
+  setChosenPriceSorter,
+} from 'redux/slices/discoverSlice';
 const FilterBlock = () => {
-  const {
-    chosenDateOption,
-    chosenCondition,
-    chosenPriceSorter,
-    discoverConditions,
-    isFilterShown,
-  } = useAppSelector((state) => state.discover);
+  const { chosenDateSorter, chosenCondition, chosenPriceSorter, isFilterShown } = useAppSelector(
+    (state) => state.discover,
+  );
 
   const dispatch = useAppDispatch();
-  const {
-    setChosenPricSorter,
-
-    chosenCreatorSorter,
-
-    creatorSortOptions,
-  } = useDiscover();
 
   return isFilterShown ? (
     <div
@@ -32,22 +24,22 @@ const FilterBlock = () => {
         <p className="mb-3">PRICE</p>
         <DropDown
           chosenOption={chosenPriceSorter}
-          options={priceSortOptions}
+          options={PRICE_SORT_OPTIONS}
           pickOption={(obj) => dispatch(setChosenPriceSorter(obj))}></DropDown>
       </div>
       <div className="max-w-[192px]">
         <p className="mb-3">CONDITION</p>
         <DropDown
           chosenOption={chosenCondition}
-          options={discoverConditions}
+          options={DISCOVER_CONDITIONS}
           pickOption={(obj) => dispatch(setChosenCondition(obj))}></DropDown>
       </div>
       <div className="max-w-[192px]">
-        <p className="mb-3">CREATOR</p>
+        <p className="mb-3">DATE</p>
         <DropDown
-          chosenOption={chosenCreatorSorter}
-          options={creatorSortOptions}
-          pickOption={(obj) => setChosenCreatorSorter(obj)}></DropDown>
+          chosenOption={chosenDateSorter}
+          options={DATE_SORT_OPTIONS}
+          pickOption={(obj) => dispatch(setChosenDateSorter(obj))}></DropDown>
       </div>
       <div className="max-w-[192px] ">
         <RangeSlider

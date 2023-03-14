@@ -16,21 +16,18 @@ const Bid = forwardRef((props, ref) => {
     productId,
     title,
     still,
-    owner,
     category,
     type,
     price,
     size,
     condition,
-    description,
     brand,
-    fileNames,
     previewImage,
     photoURLs,
     editable,
   } = props;
   const dispatch = useDispatch();
-  const router = useRouter();
+
   const editCall = () => {
     dispatch(editBid(obj));
   };

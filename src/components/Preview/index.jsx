@@ -18,8 +18,8 @@ const Preview = () => {
     categories,
     setChosenCategory,
   } = useUpload();
-  const valueRef = useRef();
-  const { currentUser, profile } = useAuth();
+
+  const { profile } = useAuth();
 
   const setPickerByValue = (searchedCategory, searchedType) => {
     searchedCategory = 'skateboards';
@@ -48,10 +48,8 @@ const Preview = () => {
         previewImage={mainPhoto}
         title={title}
         still></Bid>
+
       <input type="text" />
-      <button onClick={setPickerByValue} className="bg-primary">
-        sas
-      </button>
     </div>
   );
 };
