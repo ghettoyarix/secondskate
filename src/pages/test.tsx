@@ -11,7 +11,22 @@ type TestProps = { children: JSX.Element | JSX.Element[] };
 const Test = (props: TestProps) => {
   const { products, isLoading, error } = useAppSelector((state) => state.products);
   const dispatch = useAppDispatch();
-  const click = async () => {};
+  const click = async () => {
+    try {
+      let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/uploadProduct`, {
+        method: 'POST',
+        body: JSON.stringify({ x: 22 }),
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+      });
+      response = await response.json();
+      console.log('posted');
+    } catch (errorMessage) {
+      console.log(errorMessage);
+    }
+  };
 
   return (
     <div className="wrapper py-32">

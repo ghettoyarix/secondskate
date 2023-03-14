@@ -15,5 +15,6 @@ type queryProps = {
   maxPrice?: number | null;
   title?: string | null;
   limit?: number;
+  dateSorter?: SortOption['value'];
 };
 export type { queryProps };

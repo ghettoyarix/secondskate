@@ -1,4 +1,5 @@
 import type { Option, SortOption } from 'types/models/FilterOptions';
+
 const CATEGORIES_PARSER: Option[] = [
   { title: { eng: 'Decks', ua: 'Дошки' }, value: 'decks' },
   { title: { eng: 'Trucks', ua: 'Підвіски' }, value: 'trucks' },
@@ -124,9 +125,24 @@ const CONDITIONS: Option[] = [
   { title: { eng: 'Barely used', ua: 'Майже новий' }, value: 'barely' },
   { title: { eng: 'Roughly used', ua: 'Зношений' }, value: 'roughly' },
 ];
-const priceSortOptions: SortOption[] = [
+const PRICE_SORT_OPTIONS: SortOption[] = [
   { title: { eng: 'Highest price', ua: 'Найвища ціна' }, value: -1 },
   { title: { eng: 'Lowest price', ua: 'Найнижча ціна' }, value: 1 },
 ];
+const DATE_SORT_OPTIONS: SortOption[] = [
+  { title: { eng: 'The newest', ua: 'Найновіші' }, value: -1 },
+  { title: { eng: 'The oldes', ua: 'Найстаріші' }, value: 1 },
+];
+const DISCOVER_CONDITIONS: Option[] = [
+  { title: { eng: 'Any', ua: 'Будь-який' }, value: 'any' },
+  ...CONDITIONS,
+];
 
-export { CATEGORIES_PARSER, BRANDS, CONDITIONS, priceSortOptions };
+export {
+  CATEGORIES_PARSER,
+  BRANDS,
+  CONDITIONS,
+  PRICE_SORT_OPTIONS,
+  DATE_SORT_OPTIONS,
+  DISCOVER_CONDITIONS,
+};

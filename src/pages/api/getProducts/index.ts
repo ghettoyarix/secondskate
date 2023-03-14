@@ -6,8 +6,19 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
   try {
     const client = await clientPromise;
     const db = client.db('secondskate');
-    const { category, type, uploadedBy, condition, priceSorter, minPrice, maxPrice, title } =
-      req.query as { [key: string]: any };
+    const {
+      category,
+      type,
+      uploadedBy,
+      condition,
+      priceSorter,
+      minPrice,
+      maxPrice,
+      title,
+      dateSorter,
+    } = req.query as { [key: string]: any };
+    console.log(req.query.dateSorter);
+
     const limit = req.query.limit ? +req.query.limit : PAGE_LIMIT;
     const page = req.query.page ? +req.query.page : 1;
     const titleProp = title ? { $regex: new RegExp('\\b' + title, 'i') } : null;
@@ -20,10 +31,10 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
       title: titleProp,
     };
     const sorterProps: { [key: string]: any } = {
+      uploadDate: dateSorter,
       price: priceSorter,
       _id: 1,
     };
-
     clearProps(filterProps);
     clearProps(sorterProps);
     if (minPrice) {

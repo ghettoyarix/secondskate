@@ -16,7 +16,7 @@ export function DiscoverProvider({ children }) {
     { title: 'Other', type: 'other' },
     { title: 'Shoes', category: 'shoes' },
   ];
-  const priceSortOptions = [
+  const PRICE_SORT_OPTIONS = [
     { title: 'Highest price', value: -1 },
     { title: 'Lowest price', value: 1 },
   ];
@@ -24,7 +24,7 @@ export function DiscoverProvider({ children }) {
   const creatorSortOptions = ['Verified only', 'Any verification'];
   const discoverSortOptions = ['Recently added', 'Asnything'];
 
-  const [chosenPriceSorter, setChosenPricSorter] = useState(priceSortOptions[0]);
+  const [chosenPriceSorter, setChosenPricSorter] = useState(PRICE_SORT_OPTIONS[0]);
   const [chosenLikesSorter, setChosenLikesSorter] = useState(likesSortOptions[0]);
   const [chosenCreatorSorter, setChosenCreatorSorter] = useState(creatorSortOptions[0]);
   const [discoverSorter, setDiscoverSorter] = useState(discoverSortOptions[0]);
@@ -33,7 +33,7 @@ export function DiscoverProvider({ children }) {
 
   const value = {
     categories,
-    priceSortOptions,
+    PRICE_SORT_OPTIONS,
     chosenPriceSorter,
     setChosenPricSorter,
     chosenLikesSorter,

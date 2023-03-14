@@ -26,6 +26,14 @@ const uploadUproduct = async (req, res) => {
       uploadDate: { $currentDate: { $type: 'date' } },
     });
 
+    await db.collection('products').updateOne(
+      { _id: post.insertedId },
+      {
+        $currentDate: {
+          uploadDate: true,
+        },
+      },
+    );
     res.json(newId);
   } catch (e) {
     console.error(e);
