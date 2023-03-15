@@ -6,14 +6,14 @@ import useOutsideHandler from 'helpers/useOutsideHandler';
 type DropDownProps = {
   options: Option[];
   chosenOption: Option;
-  pickOption: (option: Option) => void;
+  pickOption: (option: Option | string) => void;
   searchable?: boolean;
 };
 const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, searchable }) => {
   const [openFlag, setOpenFlag] = useState(false);
   const wrapperRef = useRef(null);
   const inputRef = useRef(null);
-  const [searchedValue, setSearchedValue] = useState<Option>();
+  const [searchedValue, setSearchedValue] = useState<Option | string>();
 
   const onOptionClick = (obj: Option) => {
     pickOption(obj);
@@ -83,7 +83,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
             {options
               .filter((obj) =>
                 searchable && searchedValue
-                  ? obj.toLowerCase().includes(searchedValue?.toLowerCase())
+                  ? obj.toString().toLowerCase().includes(searchedValue?.toString().toLowerCase())
                   : obj,
               )
               .map((obj) => (
