@@ -6,7 +6,7 @@ import cn from 'classnames';
 import HyperLink from 'components/widgets/HyperLink';
 import { parseBidTitle } from 'helpers/parseTittle';
 import { useRouter } from 'next/router';
-import getProfile from 'utils/getProfile';
+import getProfile from 'lib/firebase/utils/getProfile';
 import { GetServerSidePropsContext } from 'next';
 import Product from 'types/models/Product';
 import type Profile from 'types/models/Profile';

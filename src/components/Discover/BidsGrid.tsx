@@ -13,7 +13,6 @@ import { fetchProducts } from 'redux/actionCreators/products';
 import { useInView } from 'react-intersection-observer';
 import { nextPage } from 'redux/slices/productsSlice';
 import useFetchProducts from 'hooks/useFetchProducts';
-import { useClearProducts } from 'hooks/useClearProducts';
 import useClock from 'helpers/useClock';
 import { after } from 'node:test';
 import { PAGE_LIMIT } from 'constants/products';

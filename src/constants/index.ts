@@ -1,5 +1,4 @@
 import type { Option, SortOption } from 'types/models/FilterOptions';
-
 const CATEGORIES_PARSER: Option[] = [
   { title: { eng: 'Decks', ua: 'Дошки' }, value: 'decks' },
   { title: { eng: 'Trucks', ua: 'Підвіски' }, value: 'trucks' },
@@ -126,13 +125,14 @@ const CONDITIONS: Option[] = [
   { title: { eng: 'Roughly used', ua: 'Зношений' }, value: 'roughly' },
 ];
 const PRICE_SORT_OPTIONS: SortOption[] = [
-  { title: { eng: 'Highest price', ua: 'Найвища ціна' }, value: -1 },
-  { title: { eng: 'Lowest price', ua: 'Найнижча ціна' }, value: 1 },
+  { title: { eng: 'Highest price', ua: 'Найвища ціна' }, prop: 'price', direction: -1 },
+  { title: { eng: 'Lowest price', ua: 'Найнижча ціна' }, prop: 'price', direction: 1 },
 ];
 const DATE_SORT_OPTIONS: SortOption[] = [
-  { title: { eng: 'The newest', ua: 'Найновіші' }, value: -1 },
-  { title: { eng: 'The oldes', ua: 'Найстаріші' }, value: 1 },
+  { title: { eng: 'The newest', ua: 'Найновіші' }, prop: 'uploadDate', direction: -1 },
+  { title: { eng: 'The oldest', ua: 'Найстаріші' }, prop: 'uploadDate', direction: 1 },
 ];
+export const SORT_OPTIONS = DATE_SORT_OPTIONS.concat(PRICE_SORT_OPTIONS);
 const DISCOVER_CONDITIONS: Option[] = [
   { title: { eng: 'Any', ua: 'Будь-який' }, value: 'any' },
   ...CONDITIONS,

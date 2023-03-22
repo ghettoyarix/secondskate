@@ -9,12 +9,12 @@ import {
 type queryProps = {
   type?: DiscoverType['type'] | undefined;
   category?: DiscoverCategory['category'] | undefined;
-  priceSorter?: SortOption['value'];
   condition?: Option['value'];
   minPrice?: number | null;
   maxPrice?: number | null;
   title?: string | null;
   limit?: number;
-  dateSorter?: SortOption['value'];
+  sortBy?: string;
+  sortDirection?: number;
 };
 export type { queryProps };

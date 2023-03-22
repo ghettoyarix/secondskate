@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect, FC } from 'react';
-import { Option } from 'types/models/FilterOptions';
+import { Option, SortOption } from 'types/models/FilterOptions';
 import { chosenLanguage } from 'helpers/parseTittle';
 import getTitle from 'helpers/getTitle';
 import useOutsideHandler from 'helpers/useOutsideHandler';
+type DropDownOption = Option[] | SortOption[] | string[];
 type DropDownProps = {
-  options: Option[];
-  chosenOption: Option;
-  pickOption: (option: Option | string) => void;
+  options: any;
+  chosenOption: Option | SortOption;
+  pickOption: (option: Option | string | SortOption) => void;
   searchable?: boolean;
 };
 const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, searchable }) => {
@@ -81,14 +82,14 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
           aria-labelledby="menu-button">
           <div className=" " role="none">
             {options
-              .filter((obj) =>
+              .filter((obj: DropDownOption) =>
                 searchable && searchedValue
                   ? obj.toString().toLowerCase().includes(searchedValue?.toString().toLowerCase())
                   : obj,
               )
-              .map((obj) => (
+              .map((obj: Option, i: number) => (
                 <p
-                  key={obj?.value}
+                  key={i}
                   onClick={() => onOptionClick(obj)}
                   className="w-full  text-center py-2   text-reg overflow-hidden text-black hover:bg-lightGray">
                   {getTitle(obj, chosenLanguage)}

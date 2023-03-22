@@ -23,7 +23,8 @@ type Option = {
 
 type SortOption = {
   title: Title;
-  value: number;
+  prop: string;
+  direction: -1 | 1;
 };
 
 export type {

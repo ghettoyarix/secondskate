@@ -23,7 +23,6 @@ const SearchBar = () => {
       setInnerSearchValue(value);
       changeSearchedValue(value);
       dispatch(setOpenFlag(true));
-      dispatch(forceLoading());
     } else {
       dispatch(setOpenFlag(false));
       dispatch(clearProducts());

@@ -11,16 +11,17 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
       type,
       uploadedBy,
       condition,
-      priceSorter,
       minPrice,
       maxPrice,
       title,
-      dateSorter,
+      sortBy,
+      sortDirection,
     } = req.query as { [key: string]: any };
     console.log(req.query.dateSorter);
 
     const limit = req.query.limit ? +req.query.limit : PAGE_LIMIT;
     const page = req.query.page ? +req.query.page : 1;
+    const sortDir = req.query.sortDirection ? +req.query.sortDirection : 1;
     const titleProp = title ? { $regex: new RegExp('\\b' + title, 'i') } : null;
 
     const filterProps: { [key: string]: any } = {
@@ -30,13 +31,16 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
       condition,
       title: titleProp,
     };
-    const sorterProps: { [key: string]: any } = {
-      uploadDate: dateSorter,
-      price: priceSorter,
-      _id: 1,
-    };
+    const sorterProps: { [key: string]: any } = {};
+    if (sortBy === 'uploadDate') {
+      sorterProps.uploadDate = sortDir;
+    } else if (sortBy === 'price') {
+      sorterProps.price = sortDir;
+    }
+
     clearProps(filterProps);
-    clearProps(sorterProps);
+
+    console.log(sorterProps);
     if (minPrice) {
       filterProps.price = { $gte: parseInt(minPrice) };
     }
@@ -54,7 +58,7 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
     const products = await db
       .collection('products')
       .find({ ...filterProps })
-      .sort({ ...sorterProps })
+      .sort({ ...sorterProps, _id: 1 })
       .skip(skip)
       .limit(limit)
       .toArray();

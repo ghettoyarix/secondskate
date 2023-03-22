@@ -11,17 +11,17 @@ const ProductsBlock = () => {
   if (isLoading) {
     return <Loader></Loader>;
   }
-  if (!isLoading && totalProducts === 0 && searchedValue) {
+  if (!isLoading && totalProducts === 0) {
     return <p>Unfortunately, there is nothing found.</p>;
   }
   if (productsFound) {
     return (
       <div className="flex flex-col  gap-3 ">
-        {productsFound.map(({ title, photoURLs, username, _id, price, productId }) => (
+        {productsFound.map(({ title, photoURLs, _id, price, productId }) => (
           <Link key={_id} href={`/product/${productId}`}>
             <div
-              className="flex gap-4 justify-between cursor-pointer hover:bg-lightGray
-           border-2 rounded-xl w-[290px] bg-white px-4 border-lightGray py-4">
+              className="flex gap-4 items-center justify-between cursor-pointer hover:bg-lightGray
+           border-2 rounded-xl w-[290px] h-[90px]  bg-white px-4 border-lightGray py-4">
               <div className=" relative">
                 <Image
                   className="rounded-full aspect-square"
@@ -31,9 +31,7 @@ const ProductsBlock = () => {
                   src={photoURLs[0]}></Image>
               </div>
               <div className="flex flex-col justify-between">
-                <p className="font-[500]">{title}</p>
-
-                <p className="text-gray">{username}</p>
+                <p className="font-[500]  ">{title}</p>
               </div>
               <Label>{price + ' UAH'}</Label>
             </div>

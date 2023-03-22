@@ -6,7 +6,7 @@ import { searchProducts } from 'redux/actionCreators/products';
 import useFetchProducts from 'hooks/useFetchProducts';
 import Label from 'components/UI/Label';
 import useOutsideHandler from 'helpers/useOutsideHandler';
-import { setOpenFlag } from 'redux/slices/headerSlice';
+import { forceLoading, setOpenFlag, setSearchedValue } from 'redux/slices/headerSlice';
 import Loader from './Loader';
 import NothingFound from 'components/Discover/NothingFound';
 import ProductsBlock from './ProductsBlock';
@@ -20,7 +20,12 @@ const SearchWindow = ({ searched }: { searched: string | null }) => {
   useEffect(() => {
     if (searchedValue) {
       dispatch(searchProducts({ queryProps: { title: searchedValue, limit: 3 }, page: 1 }));
+      dispatch(forceLoading());
     }
+
+    return () => {
+      dispatch(setSearchedValue(''));
+    };
   }, [searchedValue]);
 
   useOutsideHandler(searchRef, () => dispatch(setOpenFlag(false)));

@@ -4,7 +4,7 @@ import { hide } from 'redux/slices/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/UI/Button';
 import Bid from 'components/UI/Bid';
-import deleteProduct from 'utils/deleteProduct';
+import deleteProduct from 'lib/firebase/utils/deleteProduct';
 import { UploadProvider } from 'context/UploadContext';
 import CheckmarkLoader from 'components/widgets/CheckmarkLoader';
 import Image from 'next/image';

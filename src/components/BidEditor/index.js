@@ -9,11 +9,11 @@ import Dragger from 'components/widgets/Dragger';
 import { useRouter } from 'next/router';
 import { useAuth } from 'context/AuthContext';
 import InputBlock from 'components/UI/InputBlock';
-import uploadPhotos from 'utils/uploadPhotos';
+import uploadPhotos from 'lib/firebase/utils/uploadPhotos';
 
 import CategoryPicker from 'components/UI/CategoryPicker';
 import CircleLoader from 'components/widgets/CircleLoader';
-import addURL from 'utils/addURL';
+import addURL from 'lib/firebase/utils/addURL';
 import { BRANDS } from '../../constants';
 import { useUpload } from 'context/UploadContext';
 const BidEditor = (props) => {

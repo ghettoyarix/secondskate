@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from './redux';
 import useClock from 'helpers/useClock';
 const useFetchProducts = () => {
-  const { chosenCategory, chosenCondition, chosenPriceSorter, chosenDateSorter } = useAppSelector(
+  const { chosenCategory, chosenCondition, chosenSorter } = useAppSelector(
     (state) => state.discover,
   );
   const { maxPrice, minPrice } = useAppSelector((state) => state.range);
@@ -19,13 +19,13 @@ const useFetchProducts = () => {
     return {
       type: chosenCategory.type,
       category: chosenCategory.category,
-      priceSorter: chosenPriceSorter.value,
       condition: chosenCondition.value,
       maxPrice,
       minPrice,
-      dateSorter: chosenDateSorter.value,
+      sortBy: chosenSorter.prop,
+      sortDirection: chosenSorter.direction,
     };
-  }, [chosenCategory, chosenPriceSorter, chosenCondition, maxPrice, minPrice, chosenDateSorter]);
+  }, [chosenCategory, chosenCondition, maxPrice, minPrice, chosenSorter]);
 
   const dispatch = useAppDispatch();
 
