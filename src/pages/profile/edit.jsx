@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Button from '../../components/UI/Button';
 import InputBlock from '../../components/UI/InputBlock';
-import { updateProfileInfo } from '../../utils/updateProfileInfo';
+import { updateProfileInfo } from 'lib/firebase/utils/updateProfileInfo';
 import { useAuth } from '../../context/AuthContext';
 import ProfilePhotoUploader from '../../components/ProfilePhotoUploader';
 const Edit = ({}) => {

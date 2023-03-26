@@ -2,28 +2,29 @@ import React from 'react';
 import { debounce } from 'lodash';
 import { useAppDispatch } from 'hooks/redux';
 import { useAppSelector } from 'hooks/redux';
-import { setMaxPrice, setMinPrice } from 'redux/slices/rangeSlice';
+import { setPriceRange } from 'redux/slices/discoverSlice';
 const PriceRangeInput = () => {
-  const { maxPrice, minPrice } = useAppSelector((state) => state.range);
+  const { priceRange } = useAppSelector((state) => state.discover);
   const dispatch = useAppDispatch();
-  const setMin = React.useCallback(
-    debounce((min) => {
-      dispatch(setMinPrice(min));
+  const setPriceRangeHandler = React.useCallback(
+    debounce((priceRange) => {
+      dispatch(setPriceRange(priceRange));
     }, 1000),
     [],
   );
-  const setMax = React.useCallback(
-    debounce((max) => {
-      dispatch(setMaxPrice(max));
-    }, 1000),
-    [],
-  );
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const priceRangeUnit = { [e.target.name]: e.target.value };
+    console.log(priceRangeUnit);
+    setPriceRangeHandler({ ...priceRange, ...priceRangeUnit });
+  };
   return (
     <div className="flex justify-center items-center space-x-4">
       <div className="flex flex-col h-full justify-between">
         <label className="text-gray-600 mb-3 uppercase">Min Price:</label>
         <input
-          onChange={(e) => setMin(e.target.value)}
+          name="min"
+          onChange={handleChange}
           placeholder={'0'}
           className="inline-flex w-full  h-12  justify-center rounded-xl outline-gray 
           outline-2 outline  bg-whie px-4 items-center  text-sm font-medium text-indigo-500 shadow-sm 
@@ -35,7 +36,8 @@ const PriceRangeInput = () => {
       <div className="flex flex-col h-full justify-between">
         <label className="text-gray-600 mb-3 uppercase">Max Price:</label>
         <input
-          onChange={(e) => setMax(e.target.value)}
+          name="max"
+          onChange={handleChange}
           placeholder={'99999'}
           className="inline-flex w-full  h-12  justify-center rounded-xl outline-gray 
           outline-2 outline  bg-whie px-4 items-center  text-sm font-medium text-indigo-500  shadow-sm 

@@ -2,14 +2,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { SortOption, DiscoverOption, Option } from 'types/models/FilterOptions';
 import { SORT_OPTIONS, DISCOVER_CONDITIONS } from 'constants/index';
 import { discoverCategories } from 'constants/options';
-
+type PriceRange = {
+  min: number | null;
+  max: number | null;
+};
 export interface DiscoverState {
   chosenSorter: SortOption;
   chosenCondition: Option;
   chosenCategory: DiscoverOption;
   isFilterShown: boolean;
-  minPrice: number | null;
-  maxPrice: number | null;
+  priceRange: PriceRange;
+  uploadedBy: string | null;
 }
 
 const initialState: DiscoverState = {
@@ -17,8 +20,8 @@ const initialState: DiscoverState = {
   chosenCondition: DISCOVER_CONDITIONS[0],
   chosenCategory: discoverCategories[0],
   isFilterShown: false,
-  minPrice: 0,
-  maxPrice: 99999,
+  priceRange: { max: null, min: null },
+  uploadedBy: null,
 };
 
 export const discoverSlice = createSlice({
@@ -38,11 +41,23 @@ export const discoverSlice = createSlice({
     setChosenSorter: (state, action: PayloadAction<SortOption>) => {
       state.chosenSorter = action.payload;
     },
+    setPriceRange: (state, action: PayloadAction<PriceRange>) => {
+      state.priceRange = action.payload;
+    },
+    setUploader: (state, action: PayloadAction<string>) => {
+      state.uploadedBy = action.payload;
+    },
   },
 });
 
-export const { setChosenCategory, toggleFilter, setChosenCondition, setChosenSorter } =
-  discoverSlice.actions;
+export const {
+  setChosenCategory,
+  toggleFilter,
+  setChosenCondition,
+  setChosenSorter,
+  setPriceRange,
+  setUploader,
+} = discoverSlice.actions;
 
 export const ACTION_TYPE = 'prod/fetchAll';
 export default discoverSlice.reducer;

@@ -72,7 +72,6 @@ export function AuthProvider({ children }) {
 
   function logout() {
     return signOut(auth);
-    console.log('log out');
   }
 
   function resetPassword(email) {
@@ -117,7 +116,6 @@ export function AuthProvider({ children }) {
     profile,
     loading,
     setUsername,
-    test: 'test2',
     currentUser,
     login,
     signup,

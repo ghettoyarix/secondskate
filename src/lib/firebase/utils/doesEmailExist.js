@@ -1,7 +1,7 @@
 import { auth } from 'lib/firebase';
 import { fetchSignInMethodsForEmail } from 'firebase/auth';
 
-const checkEmail = async (email) => {
+const doesEmailExist = async (email) => {
   var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (email.match(validRegex)) {
     return new Promise((resolve) => {
@@ -14,4 +14,4 @@ const checkEmail = async (email) => {
   }
 };
 
-export default checkEmail;
+export default doesEmailExist;

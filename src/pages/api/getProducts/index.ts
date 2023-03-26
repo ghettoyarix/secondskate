@@ -42,16 +42,13 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse): Promise<v
 
     console.log(sorterProps);
     if (minPrice) {
-      filterProps.price = { $gte: parseInt(minPrice) };
+      filterProps.price = { ...filterProps.price, $gte: parseInt(minPrice) };
     }
 
     if (maxPrice) {
-      if (filterProps.price) {
-        filterProps.price.$lte = parseInt(maxPrice);
-      } else {
-        filterProps.price = { $lte: parseInt(maxPrice) };
-      }
+      filterProps.price = { ...filterProps.price, $lte: parseInt(maxPrice) };
     }
+
     const skip = (page - 1) * limit;
     const totalProducts = await db.collection('products').count(filterProps);
 

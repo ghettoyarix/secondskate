@@ -16,7 +16,7 @@ import useFetchProducts from 'hooks/useFetchProducts';
 import useClock from 'helpers/useClock';
 import { after } from 'node:test';
 import { PAGE_LIMIT } from 'constants/products';
-const BidsGrid = ({}) => {
+const BidsGrid = ({ uploadedBy }: { uploadedBy?: string }) => {
   const { fetchMore, queryProps } = useFetchProducts();
   const dispatch = useAppDispatch();
   const { ref, inView, entry } = useInView();
@@ -30,7 +30,7 @@ const BidsGrid = ({}) => {
   useEffect(() => {
     if (inView && totalProducts > productsFetched) {
       console.log(inView);
-      fetchMore(queryProps, page);
+      fetchMore({ ...queryProps }, page);
     }
   }, [inView, intervalPassed]);
 

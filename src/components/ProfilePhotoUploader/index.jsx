@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Dropzone from 'react-dropzone';
 import Button from '../UI/Button';
 import { useAuth } from '../../context/AuthContext';
-import updateProfilePhoto from '../../utils/updateProfilePhoto';
+import updateProfilePhoto from 'lib/firebase/utils/updateProfilePhoto';
 import CircleLoader from '../widgets/CircleLoader';
 
 const ProfilePhotoUploader = () => {

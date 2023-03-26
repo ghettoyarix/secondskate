@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from './redux';
 import useClock from 'helpers/useClock';
 const useFetchProducts = () => {
-  const { chosenCategory, chosenCondition, chosenSorter } = useAppSelector(
+  const { chosenCategory, chosenCondition, chosenSorter, uploadedBy } = useAppSelector(
     (state) => state.discover,
   );
   const { maxPrice, minPrice } = useAppSelector((state) => state.range);
@@ -24,18 +24,20 @@ const useFetchProducts = () => {
       minPrice,
       sortBy: chosenSorter.prop,
       sortDirection: chosenSorter.direction,
+      uploadedBy: uploadedBy,
     };
-  }, [chosenCategory, chosenCondition, maxPrice, minPrice, chosenSorter]);
+  }, [chosenCategory, chosenCondition, maxPrice, minPrice, chosenSorter, uploadedBy]);
 
   const dispatch = useAppDispatch();
 
   const intitalFetch = useCallback(
     (queryProps: queryProps) => {
       dispatch(clearProducts());
+      console.log(queryProps);
 
       dispatch(fetchProducts({ queryProps, page: 1 }));
     },
-    [dispatch, page], // include page here
+    [dispatch, page],
   );
 
   const fetchMore = useCallback(
@@ -43,7 +45,7 @@ const useFetchProducts = () => {
       dispatch(nextPage());
       dispatch(fetchProducts({ queryProps, page: page + 1 }));
     },
-    [dispatch, queryProps], // include page here
+    [dispatch, queryProps],
   );
 
   return { queryProps, intitalFetch, fetchMore };

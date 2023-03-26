@@ -5,6 +5,7 @@ import discoverSlice from './slices/discoverSlice';
 import uploadSlice from './slices/uploadSlice';
 import productsSlice from './slices/productsSlice';
 import rangeSlice from './slices/rangeSlice';
+import loginSlice from './slices/loginSlice';
 const rootReducer = combineReducers({
   products: productsSlice,
   header: headerSlice,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   modal: modalSlice,
   discover: discoverSlice,
   range: rangeSlice,
+  login: loginSlice,
 });
 
 export const setupStore = () => {

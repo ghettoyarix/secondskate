@@ -3,6 +3,7 @@ type Profile = {
   telegram: string;
   title: string;
   uid: string;
-  username: string;
+  username?: string;
+  instagram?: string;
 };
 export default Profile;

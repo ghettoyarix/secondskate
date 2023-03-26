@@ -16,5 +16,6 @@ type queryProps = {
   limit?: number;
   sortBy?: string;
   sortDirection?: number;
+  uploadedBy?: string | null;
 };
 export type { queryProps };

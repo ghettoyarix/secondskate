@@ -1,59 +1,72 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Button from 'components/UI/Button';
 import { useAuth } from 'context/AuthContext';
-import getProfile from 'utils/getProfile';
-
+import getProfile from 'lib/firebase/utils/getProfile';
 import Bid from 'components/UI/Bid';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import EditBidModal from 'components/modals/EditBidModal';
 import RemoveBidModal from 'components/modals/RemoveBidModal';
-export const getServerSideProps = async (context) => {
+import { NextPageContext } from 'next';
+import Profile from 'types/models/Profile';
+import Product from 'types/models/Product';
+import BidsGrid from 'components/Discover/BidsGrid';
+import useFetchProducts from 'hooks/useFetchProducts';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { setUploader } from 'redux/slices/discoverSlice';
+type ProfilePageProps = {
+  isYourOwnAccount: boolean;
+  anotherAccount: Profile;
+};
+export const getServerSideProps = async (context: NextPageContext) => {
   const { username } = context.query;
 
   const isYourOwnAccount = username === 'you';
+  let anotherAccount;
 
-  const anotherAccount = await getProfile(username);
+  try {
+    if (username) {
+      anotherAccount = await getProfile(username as string);
+    }
+  } catch (error) {
+    console.error(`Error getting profile for username ${username}: ${error}`);
+    return {
+      notFound: true,
+    };
+  }
 
   if (anotherAccount === 'nothing' && username !== 'you') {
     return {
       notFound: true,
     };
   }
+
   return {
-    props: { isYourOwnAccount, anotherAccount }, // will be passed to the page component as props
+    props: { isYourOwnAccount, anotherAccount },
   };
 };
 
-const Profile = ({ isYourOwnAccount, anotherAccount }) => {
+const Profile = ({ isYourOwnAccount, anotherAccount }: ProfilePageProps) => {
+  const dispatch = useAppDispatch();
+  const { intitalFetch, queryProps } = useFetchProducts();
   const router = useRouter();
-  const { username } = router.query;
   const { currentUser, profile } = useAuth();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [info, setInfo] = useState(null);
-
+  const [info, setInfo] = useState<Profile>({} as Profile);
+  useLayoutEffect(() => {
+    setInfo(anotherAccount);
+    dispatch(setUploader(anotherAccount.uid));
+  }, []);
   useEffect(() => {
     const fetchProducts = async () => {
-      if (isYourOwnAccount) {
-        setInfo(profile);
-      } else {
-        setInfo(anotherAccount);
-      }
-      if (info) {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/getProducts?uploadedBy=${info?.uid}`,
-        );
-        const json = await res.json();
-        setProducts(json.products);
+      if (info?.uid) {
+        intitalFetch({ ...queryProps });
       }
     };
 
     fetchProducts();
-    setLoading(false);
-  }, [anotherAccount, currentUser, isYourOwnAccount, profile, info]);
+  }, [info]);
   return (
     <div className="wrapper  xs:items-start items-center first-letter:   xs:flex-row flex-col flex py-16">
       <div
@@ -78,7 +91,7 @@ const Profile = ({ isYourOwnAccount, anotherAccount }) => {
                 width={20}
                 height={20}
                 src="/svg/insta.svg"></Image>
-              <p>{info?.instagram || 'not specified'}</p>
+              <p>{info.instagram || 'not specified'}</p>
             </div>
             <div className="flex gap-2">
               <Image
@@ -94,7 +107,9 @@ const Profile = ({ isYourOwnAccount, anotherAccount }) => {
           {isYourOwnAccount && (
             <Link href="/profile/edit">
               <div>
-                <Button className="mb-4">Edit profile</Button>
+                <Button onClick={() => {}} className="mb-4">
+                  Edit profile
+                </Button>
               </div>
             </Link>
           )}
@@ -104,11 +119,7 @@ const Profile = ({ isYourOwnAccount, anotherAccount }) => {
         </p>
       </div>
       <div className="flex justify-center">
-        <div className="grid items-center  grid-cols-1 mob:mr-12  w-full mob:grid-cols-3 gap-4">
-          {products?.map((obj) => (
-            <Bid editable={isYourOwnAccount} obj={obj} still key={obj._id} {...obj}></Bid>
-          ))}
-        </div>
+        <BidsGrid></BidsGrid>
       </div>
       <EditBidModal></EditBidModal>
       <RemoveBidModal></RemoveBidModal>
