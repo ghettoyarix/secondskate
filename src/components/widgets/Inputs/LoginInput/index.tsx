@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Validator from './Validator';
 type LoginInputProps = {
   name: string;
-  handleChange: (value: string, name: string) => void;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
   value: string;
   isValidated?: boolean | null;
   title: string;
@@ -16,7 +16,7 @@ type LoginInputProps = {
 };
 
 const LoginInput = ({
-  handleChange,
+  onChange,
   isChecking,
   title,
   isValidated,
@@ -36,7 +36,7 @@ const LoginInput = ({
       <div className="flex flex-col items-start">
         <input
           value={value}
-          onChange={(event) => handleChange(event.target.value, event.target.name)}
+          onChange={onChange}
           type={type}
           name={name}
           className="outline-gray outline-2 outline focus:outline-primary block w-full mt-1 border-lightGray rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

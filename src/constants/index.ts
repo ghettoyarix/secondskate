@@ -14,7 +14,8 @@ const CATEGORIES_PARSER: Option[] = [
   { title: { eng: 'Roughly used', ua: 'Сильно вживаний' }, value: 'roughly' },
   { title: { eng: 'Skates', ua: 'Скейти' }, value: 'skateboards' },
 ];
-const BRANDS = [
+
+const BRANDS_NAMES = [
   'Baker',
   '5Boro',
   'Alien Workshop',
@@ -118,6 +119,10 @@ const BRANDS = [
   'Vans',
   'Volcom',
 ];
+const BRANDS = BRANDS_NAMES.map((brand) => ({
+  title: brand,
+  value: brand.toLowerCase().replace(/\s+/g, '_'),
+}));
 
 const CONDITIONS: Option[] = [
   { title: { eng: 'New', ua: 'Новий' }, value: 'new' },

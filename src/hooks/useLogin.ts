@@ -51,7 +51,7 @@ export const useLogin = () => {
     await signUp(data.email, data.email);
     await setUsername(data.username);
   };
-  const ModActions = {
+  const ModDeps = {
     SIGN_UP: { scheme: signUpScheme, action: signUpCall },
     SIGN_IN: { scheme: signInScheme, action: loginCall },
   };
@@ -60,14 +60,16 @@ export const useLogin = () => {
   type SignInScheme = z.infer<typeof signInScheme>;
 
   const handleSubmit = async () => {
-    const scheme = ModActions[mod].scheme;
+    const scheme = ModDeps[mod].scheme;
     const result = scheme.safeParse(data);
     if (!result.success) {
       const errors = result.error.flatten().fieldErrors;
       setErrors(errors);
     }
     validatePasswordConfirmation(data);
-    await ModActions[mod].action();
+    if (result.success) {
+      ModDeps[mod].action();
+    }
   };
 
   function validatePasswordConfirmation(data: SignUpScheme) {

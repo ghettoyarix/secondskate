@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Image from 'next/image';
 
-function App({ providedArray, updateArray, removeItem }) {
+function Dragger({ providedArray, updateArray, removeItem }) {
   function handleOnDragEnd(result) {
     if (!result.destination) return;
 
@@ -12,7 +12,6 @@ function App({ providedArray, updateArray, removeItem }) {
 
     updateArray(items);
   }
-
   return (
     <div>
       <header>
@@ -62,5 +61,5 @@ function App({ providedArray, updateArray, removeItem }) {
     </div>
   );
 }
-
-export default App;
+const memoDragger = memo(Dragger);
+export default memoDragger;

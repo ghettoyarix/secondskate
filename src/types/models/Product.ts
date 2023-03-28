@@ -1,10 +1,10 @@
 type Product = {
   _id: string;
   title: string;
-  price: number;
+  price: string;
   description: string;
   brand: string;
-  size: string;
+  size?: string;
   condition: string;
   fileNames: string[];
   category: string;

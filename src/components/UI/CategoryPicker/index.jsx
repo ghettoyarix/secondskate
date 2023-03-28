@@ -44,12 +44,12 @@ const Uploader = () => {
   };
   return (
     <div className="flex justify-center flex-col  max-w-[700px] gap-5">
-      <div class="main flex border-2 border-gray rounded-xl items-center overflow-hidden select-none">
+      <div className="main flex border-2 border-gray rounded-xl items-center overflow-hidden select-none">
         <div
           onClick={() => {
             console.log('first', chosenCategory.title, chosenType.title);
           }}
-          class="bg-primary title h-full py-2   px-3  text-white text-sm font-semibold mr-3">
+          className="bg-primary title h-full py-2   px-3  text-white text-sm font-semibold mr-3">
           Категорія
         </div>
 
@@ -66,13 +66,13 @@ const Uploader = () => {
                 type="radio"
                 name="categoriesds"
               />
-              <div class="title px-2">{obj.title}</div>
+              <div className="title px-2">{obj.title}</div>
             </label>
           ))}
         </div>
       </div>
-      <div class="main flex border-2 border-gray rounded-xl overflow-hidden select-none">
-        <div class="bg-primary title py-3 my-auto px-5  text-white text-sm font-semibold mr-3">
+      <div className="main flex border-2 border-gray rounded-xl overflow-hidden select-none">
+        <div className="bg-primary title py-3 my-auto px-5  text-white text-sm font-semibold mr-3">
           Тип
         </div>
 
@@ -86,7 +86,7 @@ const Uploader = () => {
               type="radio"
               name="types"
             />
-            <div class="title px-2">{obj.title}</div>
+            <div className="title px-2">{obj.title}</div>
           </label>
         ))}
       </div>

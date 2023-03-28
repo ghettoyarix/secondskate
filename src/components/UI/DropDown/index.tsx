@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, FC } from 'react';
+import React, { useState, useRef, useEffect, FC, Dispatch, SetStateAction } from 'react';
 import { Option, SortOption } from 'types/models/FilterOptions';
 import { chosenLanguage } from 'helpers/parseTittle';
 import getTitle from 'helpers/getTitle';
@@ -7,7 +7,7 @@ type DropDownOption = Option[] | SortOption[] | string[];
 type DropDownProps = {
   options: any;
   chosenOption: Option | SortOption;
-  pickOption: (option: Option | string | SortOption) => void;
+  pickOption: (...args: any) => any; /// FIX ASAP!
   searchable?: boolean;
 };
 const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, searchable }) => {
@@ -52,6 +52,7 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
             }
             value={getTitle(searchedValue, chosenLanguage) || searchedValue}
             onChange={(e) => {
+              console.log(e.target.value);
               setSearchedValue(e.target.value);
               pickOption(e.target.value);
             }}
@@ -82,9 +83,12 @@ const DropDown: FC<DropDownProps> = ({ options, pickOption, chosenOption, search
           aria-labelledby="menu-button">
           <div className=" " role="none">
             {options
-              .filter((obj: DropDownOption) =>
+              .filter((obj: Option) =>
                 searchable && searchedValue
-                  ? obj.toString().toLowerCase().includes(searchedValue?.toString().toLowerCase())
+                  ? obj.title
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchedValue?.toString().toLowerCase())
                   : obj,
               )
               .map((obj: Option, i: number) => (

@@ -6,13 +6,14 @@ import LoginInput from 'components/widgets/Inputs/LoginInput';
 import { useLogin } from 'hooks/useLogin';
 import { useAppSelector } from 'hooks/redux';
 import useUpdateEffect from 'hooks/useUpdateEffect';
+import formChangeHandler from 'helpers/formChangeHandler';
 export default function Registration() {
   const { doesUsernameExistDebounce, data, setData, mod, changeMod, handleSubmit, errors } =
     useLogin();
   const { doesUsernameExist, usernameIsChecking } = useAppSelector((state) => state.login);
 
-  const handleFormChange = (value: string, name: string) => {
-    setData({ ...data, [name]: value });
+  const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    formChangeHandler(event, data, setData);
   };
 
   useUpdateEffect(() => {
@@ -35,7 +36,7 @@ export default function Registration() {
                   isValidated={doesUsernameExist}
                   title="Username"
                   name="username"
-                  handleChange={handleFormChange}
+                  onChange={handleFormChange}
                   value={data.username}
                   errors={errors.username}
                 />
@@ -44,14 +45,14 @@ export default function Registration() {
               <LoginInput
                 title="Email"
                 name="email"
-                handleChange={handleFormChange}
+                onChange={handleFormChange}
                 errors={errors.email}
                 value={data.email}
               />
               <LoginInput
                 title="Password"
                 name="password"
-                handleChange={handleFormChange}
+                onChange={handleFormChange}
                 value={data.password}
                 type="password"
                 errors={errors.password}
@@ -60,7 +61,7 @@ export default function Registration() {
                 <LoginInput
                   title="Confirm password"
                   name="confirmPassword"
-                  handleChange={handleFormChange}
+                  onChange={handleFormChange}
                   value={data.confirmPassword}
                   type="password"
                   errors={errors.confirmPassword}

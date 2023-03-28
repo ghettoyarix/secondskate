@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Product from 'types/models/Product';
 interface IState {
   editModalFlag: boolean;
-  defaultValues: Partial<IDefaultValues>;
+  defaultValues: Partial<Product>;
   removeModalFlag: boolean;
 }
 interface IDefaultValues {

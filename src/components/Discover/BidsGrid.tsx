@@ -16,26 +16,35 @@ import useFetchProducts from 'hooks/useFetchProducts';
 import useClock from 'helpers/useClock';
 import { after } from 'node:test';
 import { PAGE_LIMIT } from 'constants/products';
-const BidsGrid = ({ uploadedBy }: { uploadedBy?: string }) => {
+import { useRouter } from 'next/router';
+const BidsGrid = ({ still }: { still?: boolean }) => {
+  const router = useRouter();
   const { fetchMore, queryProps } = useFetchProducts();
   const dispatch = useAppDispatch();
   const { ref, inView, entry } = useInView();
   const [nothingFound, setNothingFound] = useState(false);
   const intervalPassed = useClock();
-  const { error, isLoading, products, totalProducts, page, productsFetched } = useAppSelector(
+  const { isLoading, products, totalProducts, page, productsFetched } = useAppSelector(
     (state) => state.products,
   );
   const lastProduct = products[products.length - 1];
 
   useEffect(() => {
     if (inView && totalProducts > productsFetched) {
-      console.log(inView);
       fetchMore({ ...queryProps }, page);
     }
   }, [inView, intervalPassed]);
 
   const productList =
-    products && products.map((obj, i) => <Bid ref={lastProduct && ref} {...obj} key={i}></Bid>);
+    products &&
+    products.map((obj, i) => (
+      <Bid
+        editable={router.asPath.includes('profile/you')}
+        still={still}
+        ref={lastProduct && ref}
+        {...obj}
+        key={i}></Bid>
+    ));
 
   const countLoaders = (productsFetched: number) => {
     if (productsFetched < PAGE_LIMIT) {
@@ -47,7 +56,6 @@ const BidsGrid = ({ uploadedBy }: { uploadedBy?: string }) => {
 
   useEffect(() => {
     setNothingFound(!isLoading && totalProducts === 0);
-    console.log('nothingFound :', totalProducts);
   }, [isLoading, totalProducts]);
 
   if (nothingFound) {

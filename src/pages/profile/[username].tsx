@@ -22,7 +22,6 @@ type ProfilePageProps = {
 };
 export const getServerSideProps = async (context: NextPageContext) => {
   const { username } = context.query;
-
   const isYourOwnAccount = username === 'you';
   let anotherAccount;
 
@@ -49,24 +48,28 @@ export const getServerSideProps = async (context: NextPageContext) => {
 };
 
 const Profile = ({ isYourOwnAccount, anotherAccount }: ProfilePageProps) => {
+  const { profile } = useAuth();
   const dispatch = useAppDispatch();
   const { intitalFetch, queryProps } = useFetchProducts();
   const router = useRouter();
-  const { currentUser, profile } = useAuth();
   const [info, setInfo] = useState<Profile>({} as Profile);
   useLayoutEffect(() => {
-    setInfo(anotherAccount);
-    dispatch(setUploader(anotherAccount.uid));
-  }, []);
+    if (!isYourOwnAccount) {
+      setInfo(anotherAccount);
+    } else setInfo(profile);
+
+    dispatch(setUploader(info?.uid));
+  }, [info, profile]);
   useEffect(() => {
     const fetchProducts = async () => {
       if (info?.uid) {
-        intitalFetch({ ...queryProps });
+        console.log(info.uid);
+        intitalFetch({ ...queryProps, uploadedBy: info.uid });
       }
     };
 
     fetchProducts();
-  }, [info]);
+  }, [info, router]);
   return (
     <div className="wrapper  xs:items-start items-center first-letter:   xs:flex-row flex-col flex py-16">
       <div
@@ -91,7 +94,7 @@ const Profile = ({ isYourOwnAccount, anotherAccount }: ProfilePageProps) => {
                 width={20}
                 height={20}
                 src="/svg/insta.svg"></Image>
-              <p>{info.instagram || 'not specified'}</p>
+              <p>{info?.instagram || 'not specified'}</p>
             </div>
             <div className="flex gap-2">
               <Image
@@ -115,11 +118,11 @@ const Profile = ({ isYourOwnAccount, anotherAccount }: ProfilePageProps) => {
           )}
         </div>
         <p onClick={() => console.log(info)} className="mt-4 text-gray text-small">
-          Member since Mar 15, 2021
+          Member since -- --
         </p>
       </div>
       <div className="flex justify-center">
-        <BidsGrid></BidsGrid>
+        <BidsGrid still></BidsGrid>
       </div>
       <EditBidModal></EditBidModal>
       <RemoveBidModal></RemoveBidModal>

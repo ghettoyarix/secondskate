@@ -30,7 +30,6 @@ const PriceRangeInput = () => {
           outline-2 outline  bg-whie px-4 items-center  text-sm font-medium text-indigo-500 shadow-sm 
           hover:bg-gray-50 focus:outline-none 
           focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-          type="number"
         />
       </div>
       <div className="flex flex-col h-full justify-between">
@@ -43,7 +42,6 @@ const PriceRangeInput = () => {
           outline-2 outline  bg-whie px-4 items-center  text-sm font-medium text-indigo-500  shadow-sm 
           hover:bg-gray-50 focus:outline-none 
           focus:ring-2 focus:ring-indigo-500     focus:ring-offset-2 focus:ring-offset-gray-100"
-          type="number"
         />
       </div>
     </div>

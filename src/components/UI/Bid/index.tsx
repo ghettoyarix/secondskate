@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, ForwardedRef } from 'react';
 import Label from '../Label';
 import Image from 'next/image';
 import cn from 'classnames';
@@ -9,7 +9,14 @@ import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { editBid, removeBid } from '../../../redux/slices/modalSlice';
-const Bid = forwardRef((props, ref) => {
+import Product from 'types/models/Product';
+interface BidsProps extends Product {
+  obj?: Product;
+  still?: boolean;
+  previewImage?: string;
+  editable?: boolean;
+}
+const Bid = forwardRef((props: BidsProps, ref: ForwardedRef<HTMLDivElement>) => {
   const {
     obj,
     username,
@@ -34,8 +41,8 @@ const Bid = forwardRef((props, ref) => {
   const removeCall = () => {
     dispatch(removeBid(obj));
   };
-  const handleClick = (e) => {
-    if (editable | still) {
+  const handleClick = (e: MouseEvent) => {
+    if (editable || still) {
       e.preventDefault();
     }
   };
@@ -44,7 +51,7 @@ const Bid = forwardRef((props, ref) => {
     <div
       ref={ref}
       className={cn(
-        ' duration-150 outline-1 outline  rounded-[12px] outline-lightGray   bg-white w-[256px] mb-1	',
+        ' duration-150 outline-1 outline h-[433px] flex flex-col justify-between rounded-[12px] outline-lightGray   bg-white w-[256px] mb-1	',
         {
           'hover:scale-[1.07]': !still,
         },
@@ -86,7 +93,7 @@ const Bid = forwardRef((props, ref) => {
         </div>
       </Link>
       <div className="px-2">
-        <div className="flex justify-between  w-full mb-3">
+        <div className="flex justify-between w-full mb-3">
           <HyperLink path={`/product/${productId}`}>{title}</HyperLink>
           <Label>{price || '--'} UAH</Label>
         </div>
@@ -108,7 +115,7 @@ const Bid = forwardRef((props, ref) => {
             alt="1"
             height={24}
             width={24}
-            src={`/profile.png`}></Image>
+            src={`/svg/no-profile-picture.svg`}></Image>
 
           <HyperLink path={`/profile/${username}`}>{username}</HyperLink>
         </div>
